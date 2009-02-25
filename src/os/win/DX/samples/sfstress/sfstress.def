@@ -1,0 +1,44 @@
+;===========================================================================;
+;
+;   This material has been supplied as part of the Sonic Foundry Plug-In
+;   Development Kit (PIDK). Under copyright laws, this material may not be
+;   duplicated in whole or in part, except for personal use, without the
+;   express written consent of Sonic Foundry, Inc. Refer to the license
+;   agreement contained with the PIDK before using any part of this material.
+; 
+;   THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+;   KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+;   IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
+;   PURPOSE.
+;
+;   Web:    www.sonicfoundry.com
+;   Email:  pidk@sonicfoundry.com
+;
+;   Copyright (C) 1996-1999 Sonic Foundry, Inc. All Rights Reserved.
+;   Portions Copyright (C) 1992-1999 Microsoft Corporation.
+;
+;---------------------------------------------------------------------------;
+;
+;   This is the module definition file. This file is required for proper
+;   undecorated exporting of the following functions:
+;
+;       DllGetClassObject
+;       DllCanUnloadNow
+;       DllRegisterServer
+;       DllUnregisterServer
+;
+;   Use "link -dump -exports <module>" to verify that these functions are
+;   exported completely undecorated. If they are not, self registration,
+;   COM object creation and efficient unloading will fail.
+;
+;===========================================================================;
+
+LIBRARY
+
+DESCRIPTION 'Sonic Foundry Example ActiveMovie Audio Plug-In'
+
+EXPORTS
+            DllGetClassObject       PRIVATE
+            DllCanUnloadNow         PRIVATE
+            DllRegisterServer       PRIVATE
+            DllUnregisterServer     PRIVATE

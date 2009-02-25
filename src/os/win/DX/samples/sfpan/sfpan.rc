@@ -1,0 +1,200 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "sfpan.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PROPPAGE_1 DIALOG DISCARDABLE  0, 0, 219, 136
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "Gain",IDC_SFPAN_LBL_OUT_GAIN,7,88,30,8
+    CONTROL         "",IDC_SFPAN_FDR_OUT_GAIN,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_TABSTOP,8,16,28,
+                    72
+    CTEXT           "",IDC_SFPAN_TXT_OUT_GAIN,7,7,30,8
+    LTEXT           "Pan mode for stereo input:",IDC_SFPAN_LBL_MODE,46,7,85,
+                    8
+    CONTROL         "Preserve stereo separation",
+                    IDC_SFPAN_RAD_MODE_PRESERVE_SEP,"Button",
+                    BS_AUTORADIOBUTTON,56,17,110,10
+    CONTROL         "Mix channels before panning",
+                    IDC_SFPAN_RAD_MODE_MIX_BEFORE,"Button",
+                    BS_AUTORADIOBUTTON,56,27,110,10
+    LTEXT           "Pan position:",IDC_SFPAN_LBL_PAN_LR,42,53,43,8
+    CONTROL         "",IDC_SFPAN_TRK_PAN_LR,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_TOP | WS_TABSTOP,42,63,120,22
+    RTEXT           "",IDC_SFPAN_TXT_PAN_LR,112,53,50,8
+    CONTROL         100,IDC_STATIC,"Static",SS_BITMAP,167,41,45,54
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME | SS_SUNKEN,7,100,
+                    205,1
+    LTEXT           "",IDC_SONIC_FOUNDRY_BLURB,7,105,205,24
+END
+
+IDD_PROPPAGE_2 DIALOG DISCARDABLE  0, 0, 185, 95
+STYLE DS_3DLOOK | WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "This page intentionally left blank...",IDC_STATIC,7,22,
+                    171,8
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""sfpan.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_SONIC_FOUNDRY       BITMAP  DISCARDABLE     "sfoundry.bmp"
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,0,0,5
+ PRODUCTVERSION 2,0,0,5
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "ActiveMovie", "Filter dll\0"
+            VALUE "CompanyName", "Sonic Foundry, Inc.\0"
+            VALUE "FileDescription", "Sonic Foundry Example DirectX Audio Plug-In\0"
+            VALUE "FileVersion", "2, 0, 0, 5\0"
+            VALUE "InternalName", "sfpan\0"
+            VALUE "LegalCopyright", "Copyright © 1996-1999 Sonic Foundry, Inc.\0"
+            VALUE "OLESelfRegister", "AM20\0"
+            VALUE "OriginalFilename", "sfpan.dll\0"
+            VALUE "ProductName", "Sonic Foundry Plug-In Development Kit\0"
+            VALUE "ProductVersion", "2, 0, 0, 5\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_PROPPAGE_1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 212
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 129
+    END
+
+    IDD_PROPPAGE_2, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 178
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROPPAGE_1          "Pan"
+    IDS_PROPPAGE_2          "Page 2"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
