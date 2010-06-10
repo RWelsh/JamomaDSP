@@ -26,7 +26,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "bang", "bang", "", "int" ],
-					"patching_rect" : [ 32.0, 278.19873, 374.0, 16.0 ]
+					"patching_rect" : [ 32.0, 278.19873, 414.0, 17.0 ]
 				}
 
 			}
@@ -41,8 +41,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 29.877563, 302.5, 417.0, 29.0 ],
-					"text" : ";\rmax launchbrowser http://github.com/Nilson/ViMiC-and-friends/archives/master"
+					"patching_rect" : [ 29.877563, 302.5, 435.0, 29.0 ],
+					"text" : ";\rmax launchbrowser http://github.com/Nilson/ViMiC-and-friends/archives/v0.5.1RC8"
 				}
 
 			}
@@ -55,8 +55,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 29.0, 275.0, 473.0, 21.0 ],
-					"text" : "http://github.com/Nilson/ViMiC-and-friends/archives/master",
+					"patching_rect" : [ 31.0, 275.0, 473.0, 21.0 ],
+					"text" : "http://github.com/Nilson/ViMiC-and-friends/archives/v0.5.1RC8",
 					"textcolor" : [ 0.152941, 0.254902, 0.658824, 1.0 ],
 					"underline" : 1
 				}
