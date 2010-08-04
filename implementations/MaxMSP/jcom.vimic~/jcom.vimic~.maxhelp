@@ -42,7 +42,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 29.877563, 302.5, 435.0, 29.0 ],
-					"text" : ";\rmax launchbrowser http://github.com/Nilson/ViMiC-and-friends/archives/v0.5.1RC8"
+					"text" : ";\rmax launchbrowser http://github.com/Nilson/ViMiC-and-friends/archives/v0.5.1RC9"
 				}
 
 			}
@@ -56,7 +56,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 31.0, 275.0, 473.0, 21.0 ],
-					"text" : "http://github.com/Nilson/ViMiC-and-friends/archives/v0.5.1RC8",
+					"text" : "http://github.com/Nilson/ViMiC-and-friends/archives/v0.5.1RC9",
 					"textcolor" : [ 0.152941, 0.254902, 0.658824, 1.0 ],
 					"underline" : 1
 				}
