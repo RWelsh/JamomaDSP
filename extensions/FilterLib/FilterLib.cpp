@@ -45,6 +45,7 @@
 #include "TTLowpassLinkwitzRiley2.h"
 #include "TTLowpassLinkwitzRiley4.h"
 
+#include "TTDaubechies.h"
 #include "TTDCBlock.h"
 #include "TTHighMidLowShelf.h"
 #include "TTLowpassOnePole.h"
@@ -83,6 +84,7 @@ extern "C" TT_EXTENSION_EXPORT TTErr loadTTExtension(void)
 
 	TTBandpassButterworth2::registerClass();
 	TTBandRejectButterworth2::registerClass();
+	TTDaubechies::registerClass();
 	TTDCBlock::registerClass();
 	TTHighMidLowShelf::registerClass();
 	
