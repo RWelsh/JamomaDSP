@@ -14,6 +14,7 @@
 #include "TTLimiter.h"
 #include "TTOverdrive.h"
 #include "TTPulseSub.h"
+#include "TTWah.h"
 
 
 extern "C" TT_EXTENSION_EXPORT TTErr loadTTExtension(void)
@@ -26,6 +27,7 @@ extern "C" TT_EXTENSION_EXPORT TTErr loadTTExtension(void)
 	TTLimiter::registerClass();	
 	TTOverdrive::registerClass();	
 	TTPulseSub::registerClass();	
+	TTWah::registerClass();
 	
 	return kTTErrNone;
 }
