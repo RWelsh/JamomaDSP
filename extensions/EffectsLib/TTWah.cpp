@@ -14,8 +14,8 @@
 
 
 TT_AUDIO_CONSTRUCTOR,
-mRadial(0.0010000000000000009 * kTTTwoPi / sr),
-mFrequencyRad(mRadial * 200.0)
+mRadial(kTTTwoPi / sr),
+mFrequencyRad(0.0010000000000000009 * 200.0)
 {  		
 	// register attributes
 	addAttributeWithSetter(Frequency,	kTypeFloat64);
@@ -65,7 +65,7 @@ TTErr TTWah::updateMaxNumChannels(const TTValue& oldMaxNumChannels)
 
 TTErr TTWah::updateSampleRate(const TTValue& oldSampleRate)
 {
-	mRadial = (0.0010000000000000009 * kTTTwoPi / sr);
+	mRadial = (kTTTwoPi / sr);
 	TTValue	v(mFrequency);
 	return setFrequency(v);
 }
@@ -92,20 +92,19 @@ TTErr TTWah::clear()
 TTErr TTWah::setFrequency(const TTValue& newValue)
 {
 	mFrequency = newValue;
-	mFrequencyRad = mRadial * mFrequency;
+	mFrequencyRad = 0.0010000000000000009 *  mFrequency;
 	return kTTErrNone;
 }	
 
 
 inline TTErr TTWah::calculateValue(const TTFloat64& x, TTFloat64& y, TTPtrSizedInt channel)
 {
-	
-	// control smoothing, this doesn't work surprisingly ...
 	fRec10[channel] = (mFrequencyRad + (0.999 * fRec11[channel]));
+	TTFloat64 fTemp0 = mRadial * fRec10[channel];
+	TTFloat64 fTemp1 = 1.0 - fTemp0;
+	//// up to this point, tis doens't have to be computed for each channel, because mFrequencyRad is the same
+	
 	// audio processing
-	//TTFloat64 fTemp0 = mFrequencyRad; // should be TTFloat64 fTemp0 = fRec10[channel];
-	TTFloat64 fTemp0 = fRec10[channel];
-	TTFloat64 fTemp1 = (1.0 - fTemp0);
 	TTFloat64 fTemp2 = x;
 	fRec50[channel] = (((fTemp2) + (fTemp1 * fRec51[channel])) - (3.2 * fRec01[channel]));
 	fRec40[channel] = (fRec50[channel] + (fTemp1 * fRec41[channel]));
@@ -144,20 +143,20 @@ TTErr TTWah::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPtr ou
  #endif  
  
  typedef long double quad;
- // link with  
+ // link with  //
 #include <math.h>
 
 class mydsp : public dsp{
 private:
 	FAUSTFLOAT 	fslider0;
-	float 	fRec1[2];
-	float 	fConst0;
+	double 	fRec1[2];
+	double 	fConst0;
 	FAUSTFLOAT 	fcheckbox0;
-	float 	fRec5[2];
-	float 	fRec4[2];
-	float 	fRec3[2];
-	float 	fRec2[2];
-	float 	fRec0[2];
+	double 	fRec5[2];
+	double 	fRec4[2];
+	double 	fRec3[2];
+	double 	fRec2[2];
+	double 	fRec0[2];
 public:
 	static void metadata(Meta* m) 	{ 
 		m->declare("thisTTClass", "TTWah");
@@ -181,9 +180,9 @@ public:
 	}
 	virtual void instanceInit(int samplingFreq) {
 		fSamplingFreq = samplingFreq;
-		fslider0 = 2e+02f;
+		fslider0 = 2e+02;
 		for (int i=0; i<2; i++) fRec1[i] = 0;
-		fConst0 = (6.283185307179586f / fSamplingFreq);
+		fConst0 = (6.283185307179586 / fSamplingFreq);
 		fcheckbox0 = 0.0;
 		for (int i=0; i<2; i++) fRec5[i] = 0;
 		for (int i=0; i<2; i++) fRec4[i] = 0;
@@ -202,24 +201,24 @@ public:
 		interface->addCheckButton("Bypass", &fcheckbox0);
 		interface->declare(&fslider0, "1", "");
 		interface->declare(&fslider0, "tooltip", "wah resonance frequency in Hz");
-		interface->addHorizontalSlider("Resonance Frequency", &fslider0, 2e+02f, 1e+02f, 2e+03f, 1.0f);
+		interface->addHorizontalSlider("Resonance Frequency", &fslider0, 2e+02, 1e+02, 2e+03, 1.0);
 		interface->closeBox();
 	}
 	virtual void compute (int count, FAUSTFLOAT** input, FAUSTFLOAT** output) {
-		float 	fSlow0 = (0.0010000000000000009f * fslider0);
+		double 	fSlow0 = (0.0010000000000000009 * fslider0);
 		int 	iSlow1 = int(fcheckbox0);
 		FAUSTFLOAT* input0 = input[0];
 		FAUSTFLOAT* output0 = output[0];
 		for (int i=0; i<count; i++) {
-			fRec1[0] = (fSlow0 + (0.999f * fRec1[1]));
-			float fTemp0 = (fConst0 * fRec1[0]);
-			float fTemp1 = (1.0f - fTemp0);
-			float fTemp2 = (float)input0[i];
-			fRec5[0] = ((((iSlow1)?0:fTemp2) + (fTemp1 * fRec5[1])) - (3.2f * fRec0[1]));
+			fRec1[0] = (fSlow0 + (0.999 * fRec1[1]));
+			double fTemp0 = (fConst0 * fRec1[0]);
+			double fTemp1 = (1.0 - fTemp0);
+			double fTemp2 = (double)input0[i];
+			fRec5[0] = ((((iSlow1)?0:fTemp2) + (fTemp1 * fRec5[1])) - (3.2 * fRec0[1]));
 			fRec4[0] = (fRec5[0] + (fTemp1 * fRec4[1]));
 			fRec3[0] = (fRec4[0] + (fTemp1 * fRec3[1]));
 			fRec2[0] = (fRec3[0] + (fTemp1 * fRec2[1]));
-			fRec0[0] = (fRec2[0] * powf(fTemp0,4.0f));
+			fRec0[0] = (fRec2[0] * pow(fTemp0,4.0));
 			output0[i] = (FAUSTFLOAT)((iSlow1)?fTemp2:(4 * fRec0[0]));
 			// post processing
 			fRec0[1] = fRec0[0];
@@ -231,7 +230,9 @@ public:
 		}
 	}
 };
- 
+
+
+
  
  */
 

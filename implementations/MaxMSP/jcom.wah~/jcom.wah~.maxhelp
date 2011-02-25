@@ -61,6 +61,7 @@
 					"floatoutput" : 1,
 					"id" : "obj-9",
 					"maxclass" : "slider",
+					"min" : 20.0,
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
