@@ -49,9 +49,7 @@ class TTWah : TTAudioObject {
 	TTErr updateMaxNumChannels(const TTValue& oldMaxNumChannels);
 	TTErr updateSampleRate(const TTValue& oldSampleRate);
 	TTErr clear();
-	
-	void calculateCoefficients();
-	
+		
     /**	Standard single value calculate method as used by DSP objects. */
 	inline TTErr calculateValue(const TTFloat64& x, TTFloat64& y, TTPtrSizedInt channel);
 	

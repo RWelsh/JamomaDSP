@@ -13,7 +13,9 @@
 #define thisTTClassTags		"audio, processor, filter, wahwah"
 
 
-TT_AUDIO_CONSTRUCTOR
+TT_AUDIO_CONSTRUCTOR,
+mRadial(0.0010000000000000009 * kTTTwoPi / sr),
+mFrequencyRad(mRadial * 200.0)
 {  		
 	// register attributes
 	addAttributeWithSetter(Frequency,	kTypeFloat64);
@@ -63,16 +65,16 @@ TTErr TTWah::updateMaxNumChannels(const TTValue& oldMaxNumChannels)
 
 TTErr TTWah::updateSampleRate(const TTValue& oldSampleRate)
 {
+	mRadial = (0.0010000000000000009 * kTTTwoPi / sr);
 	TTValue	v(mFrequency);
-	calculateCoefficients();
 	return setFrequency(v);
 }
 
 
 TTErr TTWah::clear()
 {
-	fRec10.assign(maxNumChannels, mFrequency);
-	fRec11.assign(maxNumChannels, mFrequency);	
+	fRec10.assign(maxNumChannels, 0.0);
+	fRec11.assign(maxNumChannels, 0.0);	
 	fRec01.assign(maxNumChannels, 0.0);
 	fRec00.assign(maxNumChannels, 0.0);
 	fRec21.assign(maxNumChannels, 0.0);
@@ -92,12 +94,6 @@ TTErr TTWah::setFrequency(const TTValue& newValue)
 	mFrequency = newValue;
 	mFrequencyRad = mRadial * mFrequency;
 	return kTTErrNone;
-}
-
-
-void TTWah::calculateCoefficients()
-{
-	mRadial = (kTTTwoPi / sr);
 }	
 
 
@@ -107,7 +103,8 @@ inline TTErr TTWah::calculateValue(const TTFloat64& x, TTFloat64& y, TTPtrSizedI
 	// control smoothing, this doesn't work surprisingly ...
 	fRec10[channel] = (mFrequencyRad + (0.999 * fRec11[channel]));
 	// audio processing
-	TTFloat64 fTemp0 = mFrequencyRad; // should be TTFloat64 fTemp0 = fRec10[channel];
+	//TTFloat64 fTemp0 = mFrequencyRad; // should be TTFloat64 fTemp0 = fRec10[channel];
+	TTFloat64 fTemp0 = fRec10[channel];
 	TTFloat64 fTemp1 = (1.0 - fTemp0);
 	TTFloat64 fTemp2 = x;
 	fRec50[channel] = (((fTemp2) + (fTemp1 * fRec51[channel])) - (3.2 * fRec01[channel]));
