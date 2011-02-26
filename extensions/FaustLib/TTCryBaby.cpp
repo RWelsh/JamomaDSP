@@ -10,7 +10,7 @@
 
 #define thisTTClass			TTCryBaby
 #define thisTTClassName		"cryBaby"
-#define thisTTClassTags		"audio, processor, filter, guitar, crybaby"
+#define thisTTClassTags		"audio, processor, filter, guitar, crybaby, faust"
 
 
 TT_AUDIO_CONSTRUCTOR,

@@ -7,45 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2286FCDB12FC51B2005310B8 /* TTGainTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2286FCDA12FC51B2005310B8 /* TTGainTest.cpp */; };
 		22FA622E11E21BE20097F43B /* JamomaDSP.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA622D11E21BE20097F43B /* JamomaDSP.dylib */; };
 		22FA623311E21BE60097F43B /* JamomaFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA623211E21BE60097F43B /* JamomaFoundation.dylib */; };
-		22FD45E411E245C8007BBF7E /* EffectsLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FD45E311E245C8007BBF7E /* EffectsLib.cpp */; };
-		22FD45F311E245D0007BBF7E /* TTBalance.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FD45E511E245D0007BBF7E /* TTBalance.h */; };
-		22FD45F411E245D0007BBF7E /* TTBalance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FD45E611E245D0007BBF7E /* TTBalance.cpp */; };
-		22FD45F511E245D0007BBF7E /* TTDegrade.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FD45E711E245D0007BBF7E /* TTDegrade.h */; };
-		22FD45F611E245D0007BBF7E /* TTDegrade.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FD45E811E245D0007BBF7E /* TTDegrade.cpp */; };
-		22FD45F911E245D0007BBF7E /* TTGain.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FD45EB11E245D0007BBF7E /* TTGain.h */; };
-		22FD45FA11E245D0007BBF7E /* TTGain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FD45EC11E245D0007BBF7E /* TTGain.cpp */; };
-		22FD45FB11E245D0007BBF7E /* TTLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FD45ED11E245D0007BBF7E /* TTLimiter.h */; };
-		22FD45FC11E245D0007BBF7E /* TTLimiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FD45EE11E245D0007BBF7E /* TTLimiter.cpp */; };
-		22FD45FD11E245D0007BBF7E /* TTOverdrive.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FD45EF11E245D0007BBF7E /* TTOverdrive.h */; };
-		22FD45FE11E245D0007BBF7E /* TTOverdrive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FD45F011E245D0007BBF7E /* TTOverdrive.cpp */; };
-		22FD45FF11E245D0007BBF7E /* TTPulseSub.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FD45F111E245D0007BBF7E /* TTPulseSub.h */; };
-		22FD460011E245D0007BBF7E /* TTPulseSub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FD45F211E245D0007BBF7E /* TTPulseSub.cpp */; };
+		666054E413189A6900F488B4 /* FaustLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666054DF13189A6900F488B4 /* FaustLib.cpp */; };
+		666054E513189A6900F488B4 /* TTCryBaby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666054E013189A6900F488B4 /* TTCryBaby.cpp */; };
+		666054E613189A6900F488B4 /* TTCryBaby.h in Headers */ = {isa = PBXBuildFile; fileRef = 666054E113189A6900F488B4 /* TTCryBaby.h */; };
+		666054E713189A6900F488B4 /* TTWah.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666054E213189A6900F488B4 /* TTWah.cpp */; };
+		666054E813189A6900F488B4 /* TTWah.h in Headers */ = {isa = PBXBuildFile; fileRef = 666054E313189A6900F488B4 /* TTWah.h */; };
 		D2AAC0B105546B7500DB518D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB77AAFE841565C02AAC07 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		08FB77AAFE841565C02AAC07 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
-		2286FCDA12FC51B2005310B8 /* TTGainTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTGainTest.cpp; sourceTree = "<group>"; };
 		22FA622D11E21BE20097F43B /* JamomaDSP.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = JamomaDSP.dylib; path = ../../library/build/UninstalledProducts/JamomaDSP.dylib; sourceTree = SOURCE_ROOT; };
 		22FA623211E21BE60097F43B /* JamomaFoundation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = JamomaFoundation.dylib; path = ../../../Foundation/library/build/UninstalledProducts/JamomaFoundation.dylib; sourceTree = SOURCE_ROOT; };
 		22FA632311E230D10097F43B /* JamomaDSPExtensions.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = JamomaDSPExtensions.xcconfig; path = ../JamomaDSPExtensions.xcconfig; sourceTree = SOURCE_ROOT; };
-		22FD45E311E245C8007BBF7E /* EffectsLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EffectsLib.cpp; sourceTree = "<group>"; };
-		22FD45E511E245D0007BBF7E /* TTBalance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTBalance.h; sourceTree = "<group>"; };
-		22FD45E611E245D0007BBF7E /* TTBalance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTBalance.cpp; sourceTree = "<group>"; };
-		22FD45E711E245D0007BBF7E /* TTDegrade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDegrade.h; sourceTree = "<group>"; };
-		22FD45E811E245D0007BBF7E /* TTDegrade.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTDegrade.cpp; sourceTree = "<group>"; };
-		22FD45EB11E245D0007BBF7E /* TTGain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTGain.h; sourceTree = "<group>"; };
-		22FD45EC11E245D0007BBF7E /* TTGain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTGain.cpp; sourceTree = "<group>"; };
-		22FD45ED11E245D0007BBF7E /* TTLimiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTLimiter.h; sourceTree = "<group>"; };
-		22FD45EE11E245D0007BBF7E /* TTLimiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTLimiter.cpp; sourceTree = "<group>"; };
-		22FD45EF11E245D0007BBF7E /* TTOverdrive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTOverdrive.h; sourceTree = "<group>"; };
-		22FD45F011E245D0007BBF7E /* TTOverdrive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTOverdrive.cpp; sourceTree = "<group>"; };
-		22FD45F111E245D0007BBF7E /* TTPulseSub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPulseSub.h; sourceTree = "<group>"; };
-		22FD45F211E245D0007BBF7E /* TTPulseSub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTPulseSub.cpp; sourceTree = "<group>"; };
-		D2AAC09D05546B4700DB518D /* EffectsLib.ttdylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = EffectsLib.ttdylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		666054DF13189A6900F488B4 /* FaustLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FaustLib.cpp; sourceTree = "<group>"; };
+		666054E013189A6900F488B4 /* TTCryBaby.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTCryBaby.cpp; sourceTree = "<group>"; };
+		666054E113189A6900F488B4 /* TTCryBaby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCryBaby.h; sourceTree = "<group>"; };
+		666054E213189A6900F488B4 /* TTWah.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTWah.cpp; sourceTree = "<group>"; };
+		666054E313189A6900F488B4 /* TTWah.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTWah.h; sourceTree = "<group>"; };
+		D2AAC09D05546B4700DB518D /* FaustLib.ttdylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = FaustLib.ttdylib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +47,7 @@
 		034768DDFF38A45A11DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC09D05546B4700DB518D /* EffectsLib.ttdylib */,
+				D2AAC09D05546B4700DB518D /* FaustLib.ttdylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,30 +76,13 @@
 		08FB77ACFE841707C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				22FD45E311E245C8007BBF7E /* EffectsLib.cpp */,
-				2217FAAA0E4F284D00806778 /* Classes */,
+				666054DF13189A6900F488B4 /* FaustLib.cpp */,
+				666054E013189A6900F488B4 /* TTCryBaby.cpp */,
+				666054E113189A6900F488B4 /* TTCryBaby.h */,
+				666054E213189A6900F488B4 /* TTWah.cpp */,
+				666054E313189A6900F488B4 /* TTWah.h */,
 			);
 			name = Source;
-			sourceTree = "<group>";
-		};
-		2217FAAA0E4F284D00806778 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				22FD45E511E245D0007BBF7E /* TTBalance.h */,
-				22FD45E611E245D0007BBF7E /* TTBalance.cpp */,
-				22FD45E711E245D0007BBF7E /* TTDegrade.h */,
-				22FD45E811E245D0007BBF7E /* TTDegrade.cpp */,
-				22FD45EB11E245D0007BBF7E /* TTGain.h */,
-				22FD45EC11E245D0007BBF7E /* TTGain.cpp */,
-				2286FCDA12FC51B2005310B8 /* TTGainTest.cpp */,
-				22FD45ED11E245D0007BBF7E /* TTLimiter.h */,
-				22FD45EE11E245D0007BBF7E /* TTLimiter.cpp */,
-				22FD45EF11E245D0007BBF7E /* TTOverdrive.h */,
-				22FD45F011E245D0007BBF7E /* TTOverdrive.cpp */,
-				22FD45F111E245D0007BBF7E /* TTPulseSub.h */,
-				22FD45F211E245D0007BBF7E /* TTPulseSub.cpp */,
-			);
-			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,12 +92,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22FD45F311E245D0007BBF7E /* TTBalance.h in Headers */,
-				22FD45F511E245D0007BBF7E /* TTDegrade.h in Headers */,
-				22FD45F911E245D0007BBF7E /* TTGain.h in Headers */,
-				22FD45FB11E245D0007BBF7E /* TTLimiter.h in Headers */,
-				22FD45FD11E245D0007BBF7E /* TTOverdrive.h in Headers */,
-				22FD45FF11E245D0007BBF7E /* TTPulseSub.h in Headers */,
+				666054E613189A6900F488B4 /* TTCryBaby.h in Headers */,
+				666054E813189A6900F488B4 /* TTWah.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +115,7 @@
 			);
 			name = JamomaExtension;
 			productName = TTFunctionLib;
-			productReference = D2AAC09D05546B4700DB518D /* EffectsLib.ttdylib */;
+			productReference = D2AAC09D05546B4700DB518D /* FaustLib.ttdylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -162,7 +123,7 @@
 /* Begin PBXProject section */
 		0867D690FE84028FC02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 1DEB916408733D950010E9CD /* Build configuration list for PBXProject "EffectsLib" */;
+			buildConfigurationList = 1DEB916408733D950010E9CD /* Build configuration list for PBXProject "FaustLib" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -203,14 +164,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22FD45E411E245C8007BBF7E /* EffectsLib.cpp in Sources */,
-				22FD45F411E245D0007BBF7E /* TTBalance.cpp in Sources */,
-				22FD45F611E245D0007BBF7E /* TTDegrade.cpp in Sources */,
-				22FD45FA11E245D0007BBF7E /* TTGain.cpp in Sources */,
-				22FD45FC11E245D0007BBF7E /* TTLimiter.cpp in Sources */,
-				22FD45FE11E245D0007BBF7E /* TTOverdrive.cpp in Sources */,
-				22FD460011E245D0007BBF7E /* TTPulseSub.cpp in Sources */,
-				2286FCDB12FC51B2005310B8 /* TTGainTest.cpp in Sources */,
+				666054E413189A6900F488B4 /* FaustLib.cpp in Sources */,
+				666054E513189A6900F488B4 /* TTCryBaby.cpp in Sources */,
+				666054E713189A6900F488B4 /* TTWah.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +186,6 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = TT_EFFECTS_LIB;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -250,7 +205,6 @@
 				);
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = TT_EFFECTS_LIB;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-Wno-deprecated",
@@ -296,7 +250,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Deployment;
 		};
-		1DEB916408733D950010E9CD /* Build configuration list for PBXProject "EffectsLib" */ = {
+		1DEB916408733D950010E9CD /* Build configuration list for PBXProject "FaustLib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB916508733D950010E9CD /* Development */,

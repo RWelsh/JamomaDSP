@@ -10,7 +10,7 @@
 
 #define thisTTClass			TTWah
 #define thisTTClassName		"wah"
-#define thisTTClassTags		"audio, processor, filter, wahwah, guitar"
+#define thisTTClassTags		"audio, processor, filter, wahwah, guitar, faust"
 
 
 TT_AUDIO_CONSTRUCTOR,
