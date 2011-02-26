@@ -23,6 +23,8 @@
 		22FD45FE11E245D0007BBF7E /* TTOverdrive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FD45F011E245D0007BBF7E /* TTOverdrive.cpp */; };
 		22FD45FF11E245D0007BBF7E /* TTPulseSub.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FD45F111E245D0007BBF7E /* TTPulseSub.h */; };
 		22FD460011E245D0007BBF7E /* TTPulseSub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FD45F211E245D0007BBF7E /* TTPulseSub.cpp */; };
+		666054331318856300F488B4 /* TTCryBaby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666054311318856300F488B4 /* TTCryBaby.cpp */; };
+		666054341318856300F488B4 /* TTCryBaby.h in Headers */ = {isa = PBXBuildFile; fileRef = 666054321318856300F488B4 /* TTCryBaby.h */; };
 		66BFDF01131622B900FF4897 /* TTWah.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66BFDF00131622B900FF4897 /* TTWah.cpp */; };
 		66BFDF091316259300FF4897 /* TTWah.h in Headers */ = {isa = PBXBuildFile; fileRef = 66BFDF081316259300FF4897 /* TTWah.h */; };
 		D2AAC0B105546B7500DB518D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB77AAFE841565C02AAC07 /* Carbon.framework */; };
@@ -47,6 +49,8 @@
 		22FD45F011E245D0007BBF7E /* TTOverdrive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTOverdrive.cpp; sourceTree = "<group>"; };
 		22FD45F111E245D0007BBF7E /* TTPulseSub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPulseSub.h; sourceTree = "<group>"; };
 		22FD45F211E245D0007BBF7E /* TTPulseSub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTPulseSub.cpp; sourceTree = "<group>"; };
+		666054311318856300F488B4 /* TTCryBaby.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTCryBaby.cpp; sourceTree = "<group>"; };
+		666054321318856300F488B4 /* TTCryBaby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCryBaby.h; sourceTree = "<group>"; };
 		66BFDF00131622B900FF4897 /* TTWah.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTWah.cpp; sourceTree = "<group>"; };
 		66BFDF081316259300FF4897 /* TTWah.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTWah.h; sourceTree = "<group>"; };
 		D2AAC09D05546B4700DB518D /* EffectsLib.ttdylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = EffectsLib.ttdylib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +113,8 @@
 			children = (
 				22FD45E511E245D0007BBF7E /* TTBalance.h */,
 				22FD45E611E245D0007BBF7E /* TTBalance.cpp */,
+				666054321318856300F488B4 /* TTCryBaby.h */,
+				666054311318856300F488B4 /* TTCryBaby.cpp */,
 				22FD45E711E245D0007BBF7E /* TTDegrade.h */,
 				22FD45E811E245D0007BBF7E /* TTDegrade.cpp */,
 				22FD45EB11E245D0007BBF7E /* TTGain.h */,
@@ -140,6 +146,7 @@
 				22FD45FD11E245D0007BBF7E /* TTOverdrive.h in Headers */,
 				22FD45FF11E245D0007BBF7E /* TTPulseSub.h in Headers */,
 				66BFDF091316259300FF4897 /* TTWah.h in Headers */,
+				666054341318856300F488B4 /* TTCryBaby.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +226,7 @@
 				22FD460011E245D0007BBF7E /* TTPulseSub.cpp in Sources */,
 				2286FCDB12FC51B2005310B8 /* TTGainTest.cpp in Sources */,
 				66BFDF01131622B900FF4897 /* TTWah.cpp in Sources */,
+				666054331318856300F488B4 /* TTCryBaby.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
