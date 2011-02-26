@@ -14,6 +14,8 @@
 		666054E613189A6900F488B4 /* TTCryBaby.h in Headers */ = {isa = PBXBuildFile; fileRef = 666054E113189A6900F488B4 /* TTCryBaby.h */; };
 		666054E713189A6900F488B4 /* TTWah.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666054E213189A6900F488B4 /* TTWah.cpp */; };
 		666054E813189A6900F488B4 /* TTWah.h in Headers */ = {isa = PBXBuildFile; fileRef = 666054E313189A6900F488B4 /* TTWah.h */; };
+		66BFAB6D1318B77E008D6CC9 /* TTDistortion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66BFAB6B1318B77E008D6CC9 /* TTDistortion.cpp */; };
+		66BFAB6E1318B77E008D6CC9 /* TTDistortion.h in Headers */ = {isa = PBXBuildFile; fileRef = 66BFAB6C1318B77E008D6CC9 /* TTDistortion.h */; };
 		D2AAC0B105546B7500DB518D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB77AAFE841565C02AAC07 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		666054E113189A6900F488B4 /* TTCryBaby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCryBaby.h; sourceTree = "<group>"; };
 		666054E213189A6900F488B4 /* TTWah.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTWah.cpp; sourceTree = "<group>"; };
 		666054E313189A6900F488B4 /* TTWah.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTWah.h; sourceTree = "<group>"; };
+		66BFAB6B1318B77E008D6CC9 /* TTDistortion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTDistortion.cpp; sourceTree = "<group>"; };
+		66BFAB6C1318B77E008D6CC9 /* TTDistortion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDistortion.h; sourceTree = "<group>"; };
 		D2AAC09D05546B4700DB518D /* FaustLib.ttdylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = FaustLib.ttdylib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -77,8 +81,10 @@
 			isa = PBXGroup;
 			children = (
 				666054DF13189A6900F488B4 /* FaustLib.cpp */,
-				666054E013189A6900F488B4 /* TTCryBaby.cpp */,
 				666054E113189A6900F488B4 /* TTCryBaby.h */,
+				666054E013189A6900F488B4 /* TTCryBaby.cpp */,
+				66BFAB6C1318B77E008D6CC9 /* TTDistortion.h */,
+				66BFAB6B1318B77E008D6CC9 /* TTDistortion.cpp */,
 				666054E213189A6900F488B4 /* TTWah.cpp */,
 				666054E313189A6900F488B4 /* TTWah.h */,
 			);
@@ -94,6 +100,7 @@
 			files = (
 				666054E613189A6900F488B4 /* TTCryBaby.h in Headers */,
 				666054E813189A6900F488B4 /* TTWah.h in Headers */,
+				66BFAB6E1318B77E008D6CC9 /* TTDistortion.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +174,7 @@
 				666054E413189A6900F488B4 /* FaustLib.cpp in Sources */,
 				666054E513189A6900F488B4 /* TTCryBaby.cpp in Sources */,
 				666054E713189A6900F488B4 /* TTWah.cpp in Sources */,
+				66BFAB6D1318B77E008D6CC9 /* TTDistortion.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

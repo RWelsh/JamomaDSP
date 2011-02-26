@@ -15,7 +15,7 @@
 
 TT_AUDIO_CONSTRUCTOR,
 mRadial(kTTTwoPi / sr),
-mFrequencyRad(0.0010000000000000009 * 200.0)
+mFrequencyRad(mRadial * 0.0010000000000000009 * 200.0)
 {  		
 	// register attributes
 	addAttributeWithSetter(Frequency,	kTypeFloat64);
@@ -92,7 +92,7 @@ TTErr TTWah::clear()
 TTErr TTWah::setFrequency(const TTValue& newValue)
 {
 	mFrequency = newValue;
-	mFrequencyRad = 0.0010000000000000009 *  mFrequency;
+	mFrequencyRad = mRadial * 0.0010000000000000009 *  mFrequency;
 	return kTTErrNone;
 }	
 
@@ -100,7 +100,7 @@ TTErr TTWah::setFrequency(const TTValue& newValue)
 inline TTErr TTWah::calculateValue(const TTFloat64& x, TTFloat64& y, TTPtrSizedInt channel)
 {
 	fRec10[channel] = (mFrequencyRad + (0.999 * fRec11[channel]));
-	TTFloat64 fTemp0 = mRadial * fRec10[channel];
+	TTFloat64 fTemp0 = fRec10[channel];
 	TTFloat64 fTemp1 = 1.0 - fTemp0;
 	//// up to this point, tis doens't have to be computed for each channel, because mFrequencyRad is the same
 	

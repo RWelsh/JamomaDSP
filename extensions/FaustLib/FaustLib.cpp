@@ -10,6 +10,7 @@
 
 #include "TTDSP.h"
 #include "TTCryBaby.h"
+#include "TTDistortion.h"
 #include "TTWah.h"
 
 
@@ -18,6 +19,7 @@ extern "C" TT_EXTENSION_EXPORT TTErr loadTTExtension(void)
 	TTDSPInit();
 	
 	TTCryBaby::registerClass();
+	TTDistortion::registerClass();
 	TTWah::registerClass();
 	
 	return kTTErrNone;
