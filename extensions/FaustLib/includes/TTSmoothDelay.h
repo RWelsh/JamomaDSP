@@ -11,12 +11,13 @@
 #define __TT_SMOOTHDELAY_H__
 
 #include "TTDSP.h"
+#include "TTDelayBuffer.h"
 
 class TTSmoothDelay : TTAudioObject {
 	TTCLASS_SETUP(TTSmoothDelay)
 
 	TTFloat64			mInterpolation, mFeedback, mDelay, fSlow0, fSlow1, fSlow2, fSlow3, fSlow4, fSlow5, fSlow6, fConst0, fConst1;
-	TTSampleVector		IOTA; // is there a TTSampleVector for ints?
+	//TTSampleVector		IOTA; // is there a TTSampleVector for ints?
 	TTSampleVector		fRec11, fRec10;
 	TTSampleVector		fRec01;
 	TTSampleVector		fRec02;
@@ -27,11 +28,17 @@ class TTSmoothDelay : TTAudioObject {
 	TTSampleVector		fRec30;
 	TTSampleVector		fRec41;
 	TTSampleVector		fRec40;
+	TTUInt64			mDelayMaxInSamples;
+	TTDelayBufferVector	mBuffers;//IOTA;
 		
 	/**	Receives notifications when there are changes to the inherited 
 	 maxNumChannels attribute.  This allocates memory for the TTSampleVector variables 
 	 so that each channel's previous values are remembered.		*/
 	TTErr updateMaxNumChannels(const TTValue& oldMaxNumChannels);
+	// internal - set up the buffer memory
+	TTErr init(TTUInt64 newDelayMaxInSamples);	
+	// internal - position the buffer pointers
+	void reset();
 	TTErr updateSampleRate(const TTValue& oldSampleRate);
 	TTErr clear();
 	

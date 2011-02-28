@@ -15,7 +15,8 @@
 
 TT_AUDIO_CONSTRUCTOR,
 fConst0(1e+03 / sr),
-fConst1(0.001 * sr)
+fConst1(0.001 * sr),
+mDelayMaxInSamples(524288)
 {  		
 	// register attributes
 	addAttributeWithSetter(Delay,				kTypeFloat64);
@@ -44,22 +45,48 @@ TTSmoothDelay::~TTSmoothDelay()
 	;
 }
 
+TTErr TTSmoothDelay::init(TTUInt64 newDelayMaxInSamples)
+{
+	// This is called every time that:
+	// 1. maxNumChannels changes
+	
+	
+	if (newDelayMaxInSamples) {
+		mDelayMaxInSamples = newDelayMaxInSamples;
+		//mDelayMax = mDelayMaxInSamples / srMill;
+		
+		for (TTDelayBufferIter buffer = mBuffers.begin(); buffer != mBuffers.end(); ++buffer) {
+			buffer->resize(mDelayMaxInSamples);
+			buffer->clear();
+		}
+		reset();
+	}
+	return kTTErrNone;
+}
+
+void TTDelay::reset()
+{
+	for (TTDelayBufferIter buffer = mBuffers.begin(); buffer != mBuffers.end(); ++buffer)
+		buffer->setDelay(mDelayInSamples);
+}
 
 TTErr TTSmoothDelay::updateMaxNumChannels(const TTValue& oldMaxNumChannels)
 {
-	fRec00.assign(maxNumChannels, 0.0);
-	fRec01.assign(maxNumChannels, 0.0);
-	fRec02.assign(maxNumChannels, 0.0);
-	fRec10.assign(maxNumChannels, 0.0);
-	fRec11.assign(maxNumChannels, 0.0);
-	fRec21.assign(maxNumChannels, 0.0);
-	fRec20.assign(maxNumChannels, 0.0);
-	fRec31.assign(maxNumChannels, 0.0);
-	fRec30.assign(maxNumChannels, 0.0);
-	fRec41.assign(maxNumChannels, 0.0);
-	fRec40.assign(maxNumChannels, 0.0);
+	fRec00.resize(maxNumChannels);
+	fRec01.resize(maxNumChannels);
+	fRec02.resize(maxNumChannels);
+	fRec10.resize(maxNumChannels);
+	fRec11.resize(maxNumChannels);
+	fRec21.resize(maxNumChannels);
+	fRec20.resize(maxNumChannels);
+	fRec31.resize(maxNumChannels);
+	fRec30.resize(maxNumChannels);
+	fRec41.resize(maxNumChannels);
+	fRec40.resize(maxNumChannels);
+	mBuffers.resize(maxNumChannels);
+	
 	clear();
-	return kTTErrNone;
+	return init(mDelayMaxInSamples);
 }
 
 
@@ -86,13 +113,15 @@ TTErr TTSmoothDelay::clear()
 	fRec30.assign(maxNumChannels, 0.0);
 	fRec41.assign(maxNumChannels, 0.0);
 	fRec40.assign(maxNumChannels, 0.0);
+	for_each(mBuffers.begin(), mBuffers.end(), mem_fun_ref(&TTDelayBuffer::clear));
+	
 	return kTTErrNone;
 }
 
 
 TTErr TTSmoothDelay::setDelay(const TTValue& newValue)
 {
-	mDelay = newValue;
+	mDelay = newValue; //TODO: make sure value is in range 
 	//fslider2 = mPosition;
 	calculateCoefficients();
 	return kTTErrNone;
@@ -123,15 +152,18 @@ void TTSmoothDelay::calculateCoefficients()
 }
 
 inline TTErr TTSmoothDelay::calculateValue(const TTFloat64& input0, TTFloat64& output0, TTPtrSizedInt channel)
-{  	
+{  	/*
+	*buffer->mWritePointer++ = x;		// write the input into our buffer
+	y = *buffer->mReadPointer++;		// fetch the output from our buffer
+	*/
    	double fTemp0 = ((double)input0 + (fSlow0 * fRec01[channel]));
-	fVec0[IOTA&524287] = fTemp0;
+	buffer->mWritePointer++ = fTemp0;
 	double fTemp1 = ((int((fRec11[channel] != 0.0)))?((int(((fRec21[channel] > 0.0) & (fRec21[channel] < 1.0))))?fRec11[channel]:0):((int(((fRec21[channel] == 0.0) & (fSlow3 != fRec31[channel]))))?fSlow1:((int(((fRec21[channel] == 1.0) & (fSlow3 != fRec41[channel]))))?fSlow2:0)));
 	fRec10[channel] = fTemp1;
 	fRec20[channel] = max(0.0, min(1.0, (fRec21[channel] + fTemp1)));
 	fRec30[channel] = ((int(((fRec21[channel] >= 1.0) & (fRec41[channel] != fSlow3))))?fSlow3:fRec31[channel]);
 	fRec40[channel] = ((int(((fRec21[channel] <= 0.0) & (fRec31[channel] != fSlow3))))?fSlow3:fRec41[channel]);
-	fRec00[channel] = ((fRec20[]channel * fVec0[(IOTA[channel]-int((int(fRec40[channel]) & 524287)))&524287]) + ((1.0 - fRec20[channel]) * fVec0[(IOTA[channel]-int((int(fRec30[channel]) & 524287)))&524287]));
+	fRec00[channel] = ((fRec20[channel] * mBuffers[(IOTA[channel]-int((int(fRec40[channel]) & 524287)))&524287]) + ((1.0 - fRec20[channel]) * mBuffers[(IOTA[channel]-int((int(fRec30[channel]) & 524287)))&524287]));
 	output0 = fRec00[channel];
 	// post processing
 	fRec01[channel] = fRec00[channel];
@@ -139,7 +171,7 @@ inline TTErr TTSmoothDelay::calculateValue(const TTFloat64& input0, TTFloat64& o
 	fRec31[channel] = fRec30[channel];
 	fRec21[channel] = fRec20[channel];
 	fRec11[channel] = fRec10[channel];
-	IOTA[channel] = IOTA[channel]+1;
+	//IOTA[channel] = IOTA[channel]+1;
 	return kTTErrNone;
 }
 

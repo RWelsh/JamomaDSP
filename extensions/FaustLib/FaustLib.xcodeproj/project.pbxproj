@@ -84,17 +84,25 @@
 		08FB77ACFE841707C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				666CF7C1131B40120003D7E2 /* TTCryBaby.cpp */,
-				666CF7C2131B40120003D7E2 /* TTDistortion.cpp */,
-				666CF7C3131B40120003D7E2 /* TTSmoothDelay.cpp */,
-				666CF7C4131B40120003D7E2 /* TTWah.cpp */,
-				666CF7B9131B400A0003D7E2 /* TTCryBaby.h */,
-				666CF7BA131B400A0003D7E2 /* TTDistortion.h */,
-				666CF7BB131B400A0003D7E2 /* TTSmoothDelay.h */,
-				666CF7BC131B400A0003D7E2 /* TTWah.h */,
 				666054DF13189A6900F488B4 /* FaustLib.cpp */,
+				666CF8C5131B45D40003D7E2 /* Classes */,
 			);
 			name = Source;
+			sourceTree = "<group>";
+		};
+		666CF8C5131B45D40003D7E2 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				666CF7C4131B40120003D7E2 /* TTWah.cpp */,
+				666CF7BC131B400A0003D7E2 /* TTWah.h */,
+				666CF7C1131B40120003D7E2 /* TTCryBaby.cpp */,
+				666CF7B9131B400A0003D7E2 /* TTCryBaby.h */,
+				666CF7C2131B40120003D7E2 /* TTDistortion.cpp */,
+				666CF7BA131B400A0003D7E2 /* TTDistortion.h */,
+				666CF7C3131B40120003D7E2 /* TTSmoothDelay.cpp */,
+				666CF7BB131B400A0003D7E2 /* TTSmoothDelay.h */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
