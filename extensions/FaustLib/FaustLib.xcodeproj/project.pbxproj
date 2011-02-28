@@ -10,12 +10,14 @@
 		22FA622E11E21BE20097F43B /* JamomaDSP.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA622D11E21BE20097F43B /* JamomaDSP.dylib */; };
 		22FA623311E21BE60097F43B /* JamomaFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA623211E21BE60097F43B /* JamomaFoundation.dylib */; };
 		666054E413189A6900F488B4 /* FaustLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666054DF13189A6900F488B4 /* FaustLib.cpp */; };
-		666054E513189A6900F488B4 /* TTCryBaby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666054E013189A6900F488B4 /* TTCryBaby.cpp */; };
-		666054E613189A6900F488B4 /* TTCryBaby.h in Headers */ = {isa = PBXBuildFile; fileRef = 666054E113189A6900F488B4 /* TTCryBaby.h */; };
-		666054E713189A6900F488B4 /* TTWah.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666054E213189A6900F488B4 /* TTWah.cpp */; };
-		666054E813189A6900F488B4 /* TTWah.h in Headers */ = {isa = PBXBuildFile; fileRef = 666054E313189A6900F488B4 /* TTWah.h */; };
-		66BFAB6D1318B77E008D6CC9 /* TTDistortion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66BFAB6B1318B77E008D6CC9 /* TTDistortion.cpp */; };
-		66BFAB6E1318B77E008D6CC9 /* TTDistortion.h in Headers */ = {isa = PBXBuildFile; fileRef = 66BFAB6C1318B77E008D6CC9 /* TTDistortion.h */; };
+		666CF7BD131B400A0003D7E2 /* TTCryBaby.h in Headers */ = {isa = PBXBuildFile; fileRef = 666CF7B9131B400A0003D7E2 /* TTCryBaby.h */; };
+		666CF7BE131B400A0003D7E2 /* TTDistortion.h in Headers */ = {isa = PBXBuildFile; fileRef = 666CF7BA131B400A0003D7E2 /* TTDistortion.h */; };
+		666CF7BF131B400A0003D7E2 /* TTSmoothDelay.h in Headers */ = {isa = PBXBuildFile; fileRef = 666CF7BB131B400A0003D7E2 /* TTSmoothDelay.h */; };
+		666CF7C0131B400A0003D7E2 /* TTWah.h in Headers */ = {isa = PBXBuildFile; fileRef = 666CF7BC131B400A0003D7E2 /* TTWah.h */; };
+		666CF7C5131B40120003D7E2 /* TTCryBaby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666CF7C1131B40120003D7E2 /* TTCryBaby.cpp */; };
+		666CF7C6131B40120003D7E2 /* TTDistortion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666CF7C2131B40120003D7E2 /* TTDistortion.cpp */; };
+		666CF7C7131B40120003D7E2 /* TTSmoothDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666CF7C3131B40120003D7E2 /* TTSmoothDelay.cpp */; };
+		666CF7C8131B40120003D7E2 /* TTWah.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666CF7C4131B40120003D7E2 /* TTWah.cpp */; };
 		D2AAC0B105546B7500DB518D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB77AAFE841565C02AAC07 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,12 +27,14 @@
 		22FA623211E21BE60097F43B /* JamomaFoundation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = JamomaFoundation.dylib; path = ../../../Foundation/library/build/UninstalledProducts/JamomaFoundation.dylib; sourceTree = SOURCE_ROOT; };
 		22FA632311E230D10097F43B /* JamomaDSPExtensions.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = JamomaDSPExtensions.xcconfig; path = ../JamomaDSPExtensions.xcconfig; sourceTree = SOURCE_ROOT; };
 		666054DF13189A6900F488B4 /* FaustLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FaustLib.cpp; sourceTree = "<group>"; };
-		666054E013189A6900F488B4 /* TTCryBaby.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTCryBaby.cpp; sourceTree = "<group>"; };
-		666054E113189A6900F488B4 /* TTCryBaby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTCryBaby.h; sourceTree = "<group>"; };
-		666054E213189A6900F488B4 /* TTWah.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTWah.cpp; sourceTree = "<group>"; };
-		666054E313189A6900F488B4 /* TTWah.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTWah.h; sourceTree = "<group>"; };
-		66BFAB6B1318B77E008D6CC9 /* TTDistortion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTDistortion.cpp; sourceTree = "<group>"; };
-		66BFAB6C1318B77E008D6CC9 /* TTDistortion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDistortion.h; sourceTree = "<group>"; };
+		666CF7B9131B400A0003D7E2 /* TTCryBaby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTCryBaby.h; path = includes/TTCryBaby.h; sourceTree = "<group>"; };
+		666CF7BA131B400A0003D7E2 /* TTDistortion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTDistortion.h; path = includes/TTDistortion.h; sourceTree = "<group>"; };
+		666CF7BB131B400A0003D7E2 /* TTSmoothDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTSmoothDelay.h; path = includes/TTSmoothDelay.h; sourceTree = "<group>"; };
+		666CF7BC131B400A0003D7E2 /* TTWah.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTWah.h; path = includes/TTWah.h; sourceTree = "<group>"; };
+		666CF7C1131B40120003D7E2 /* TTCryBaby.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTCryBaby.cpp; path = source/TTCryBaby.cpp; sourceTree = "<group>"; };
+		666CF7C2131B40120003D7E2 /* TTDistortion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTDistortion.cpp; path = source/TTDistortion.cpp; sourceTree = "<group>"; };
+		666CF7C3131B40120003D7E2 /* TTSmoothDelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTSmoothDelay.cpp; path = source/TTSmoothDelay.cpp; sourceTree = "<group>"; };
+		666CF7C4131B40120003D7E2 /* TTWah.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTWah.cpp; path = source/TTWah.cpp; sourceTree = "<group>"; };
 		D2AAC09D05546B4700DB518D /* FaustLib.ttdylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = FaustLib.ttdylib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -80,13 +84,15 @@
 		08FB77ACFE841707C02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				666CF7C1131B40120003D7E2 /* TTCryBaby.cpp */,
+				666CF7C2131B40120003D7E2 /* TTDistortion.cpp */,
+				666CF7C3131B40120003D7E2 /* TTSmoothDelay.cpp */,
+				666CF7C4131B40120003D7E2 /* TTWah.cpp */,
+				666CF7B9131B400A0003D7E2 /* TTCryBaby.h */,
+				666CF7BA131B400A0003D7E2 /* TTDistortion.h */,
+				666CF7BB131B400A0003D7E2 /* TTSmoothDelay.h */,
+				666CF7BC131B400A0003D7E2 /* TTWah.h */,
 				666054DF13189A6900F488B4 /* FaustLib.cpp */,
-				666054E113189A6900F488B4 /* TTCryBaby.h */,
-				666054E013189A6900F488B4 /* TTCryBaby.cpp */,
-				66BFAB6C1318B77E008D6CC9 /* TTDistortion.h */,
-				66BFAB6B1318B77E008D6CC9 /* TTDistortion.cpp */,
-				666054E213189A6900F488B4 /* TTWah.cpp */,
-				666054E313189A6900F488B4 /* TTWah.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -98,9 +104,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				666054E613189A6900F488B4 /* TTCryBaby.h in Headers */,
-				666054E813189A6900F488B4 /* TTWah.h in Headers */,
-				66BFAB6E1318B77E008D6CC9 /* TTDistortion.h in Headers */,
+				666CF7BD131B400A0003D7E2 /* TTCryBaby.h in Headers */,
+				666CF7BE131B400A0003D7E2 /* TTDistortion.h in Headers */,
+				666CF7BF131B400A0003D7E2 /* TTSmoothDelay.h in Headers */,
+				666CF7C0131B400A0003D7E2 /* TTWah.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,9 +179,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				666054E413189A6900F488B4 /* FaustLib.cpp in Sources */,
-				666054E513189A6900F488B4 /* TTCryBaby.cpp in Sources */,
-				666054E713189A6900F488B4 /* TTWah.cpp in Sources */,
-				66BFAB6D1318B77E008D6CC9 /* TTDistortion.cpp in Sources */,
+				666CF7C5131B40120003D7E2 /* TTCryBaby.cpp in Sources */,
+				666CF7C6131B40120003D7E2 /* TTDistortion.cpp in Sources */,
+				666CF7C7131B40120003D7E2 /* TTSmoothDelay.cpp in Sources */,
+				666CF7C8131B40120003D7E2 /* TTWah.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

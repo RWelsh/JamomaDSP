@@ -12,7 +12,7 @@
 #include "TTCryBaby.h"
 #include "TTDistortion.h"
 #include "TTWah.h"
-
+#include "TTSmoothDelay.h"
 
 extern "C" TT_EXTENSION_EXPORT TTErr loadTTExtension(void)
 {
@@ -21,6 +21,7 @@ extern "C" TT_EXTENSION_EXPORT TTErr loadTTExtension(void)
 	TTCryBaby::registerClass();
 	TTDistortion::registerClass();
 	TTWah::registerClass();
+	TTSmoothDelay::registerClass();
 	
 	return kTTErrNone;
 }
