@@ -92,7 +92,7 @@ TTErr TTHighpassLinkwitzRiley4::setFrequency(const TTValue& newValue)
 void TTHighpassLinkwitzRiley4::calculateCoefficients() //TODO: with a little bit of thinking, this can be optimized
 {   
 	TTFloat64 temp;
-	temp = (4*pow(mRadians,2)*pow(mK,2)+2*kTTSqrt2*pow(mRadians,3)*mK+pow(mK,4)+2*kTTSqrt2*mRadians*pow(mK,3)+pow(mRadians,4));
+	temp = (4*pow(mRadians,2)*pow(mK,2)+kTTTwoSqrt2*pow(mRadians,3)*mK+pow(mK,4)+kTTTwoSqrt2*mRadians*pow(mK,3)+pow(mRadians,4));
 	
 	mA0 = pow(mK,4)/	temp;
 	mA1 = -4*pow(mK,4)/	temp;
@@ -103,7 +103,7 @@ void TTHighpassLinkwitzRiley4::calculateCoefficients() //TODO: with a little bit
 	mB1 = (4*pow(mRadians,4)+4*kTTSqrt2*pow(mRadians,3)*mK-4*pow(mK,4)-4*kTTSqrt2*mRadians*pow(mK,3))/							temp;
 	mB2 = (6*pow(mRadians,4)-8*pow(mRadians,2)*pow(mK,2)+6*pow(mK,4))/															temp;
 	mB3 = (-4*kTTSqrt2*pow(mRadians,3)*mK+4*pow(mRadians,4)+4*kTTSqrt2*mRadians*pow(mK,3)-4*pow(mK,4))/							temp;
-	mB4 = (pow(mK,4)-2*kTTSqrt2*pow(mRadians,3)*mK+pow(mRadians,4)-2*kTTSqrt2*mRadians*pow(mK,3)+4*pow(mRadians,2)*pow(mK,2))/	temp;		
+	mB4 = (pow(mK,4)-kTTTwoSqrt2*pow(mRadians,3)*mK+pow(mRadians,4)-kTTTwoSqrt2*mRadians*pow(mK,3)+4*pow(mRadians,2)*pow(mK,2))/	temp;		
 }
 
 
