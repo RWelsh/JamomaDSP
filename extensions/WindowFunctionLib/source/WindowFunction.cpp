@@ -49,18 +49,23 @@ TTErr WindowFunction::setFunction(const TTValue& function)
 }
 
 
-TTErr WindowFunction::setParameter(const TTValue& aParameterValueForTheFunction)
+TTErr WindowFunction::setParameter(TTValue& aParameterValueForTheFunction)
 {
+	TTErr err;
+	
 	if (aParameterValueForTheFunction.getSize() < 2)
-		return kTTErrWrongNumValues;
+		err = kTTErrWrongNumValues;
 	else {
 		TTSymbolPtr parameterName = aParameterValueForTheFunction;
 		TTValue		v;
 		
 		v.copyFrom(aParameterValueForTheFunction, 1);
-		return mFunctionObject->setAttributeValue(parameterName, v);
+		err = mFunctionObject->setAttributeValue(parameterName, v);
+		if (!err)
+			fill();
 	}
-
+	aParameterValueForTheFunction.clear();
+	return err;
 }
 
 
