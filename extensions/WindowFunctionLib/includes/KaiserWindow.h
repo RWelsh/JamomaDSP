@@ -21,9 +21,6 @@ class KaiserWindow : TTAudioObject {
 	TTFloat64	mBeta;				///< attribute: beta parameter for the Kaiser function
 	TTFloat64	mBesselIOofBeta;	///< calculated from the beta attribute
 	
-	/**	internal use: calculate zeroth-order bessel function of the first kind */
-	TTFloat64 BesselFunctionI0(TTFloat64 x);
-	
 	/**	attribute accessor */	
 	TTErr setBeta(const TTValue& newValue);
 	

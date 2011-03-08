@@ -21,6 +21,7 @@
 		22610D5C11DD8579000A3DA8 /* TTDSP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 228505CC102D001E004D74BC /* TTDSP.cpp */; };
 		22610D5D11DD8579000A3DA8 /* TTBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7E281046EE2E009771BC /* TTBuffer.cpp */; };
 		2287F72612DA7BB3006CE3AB /* libportaudio-jamoma.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2287F72512DA7BB3006CE3AB /* libportaudio-jamoma.a */; };
+		229E09791325E432009D2A7D /* TTBessel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229E09781325E432009D2A7D /* TTBessel.cpp */; };
 		22FA621511E217910097F43B /* JamomaFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA621411E217910097F43B /* JamomaFoundation.dylib */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,8 @@
 		228505CB102CFFFA004D74BC /* TTDSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTDSP.h; path = includes/TTDSP.h; sourceTree = "<group>"; };
 		228505CC102D001E004D74BC /* TTDSP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTDSP.cpp; path = source/TTDSP.cpp; sourceTree = "<group>"; };
 		2287F72512DA7BB3006CE3AB /* libportaudio-jamoma.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libportaudio-jamoma.a"; path = "portaudio/libportaudio-jamoma.a"; sourceTree = "<group>"; };
+		229E09781325E432009D2A7D /* TTBessel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTBessel.cpp; path = source/TTBessel.cpp; sourceTree = "<group>"; };
+		229E097A1325E447009D2A7D /* TTBessel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTBessel.h; path = includes/TTBessel.h; sourceTree = "<group>"; };
 		22A403830CAD7B9400E5299E /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		22BA7E281046EE2E009771BC /* TTBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTBuffer.cpp; path = source/TTBuffer.cpp; sourceTree = "<group>"; };
 		22BA7E2A1046EE35009771BC /* TTBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTBuffer.h; path = includes/TTBuffer.h; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 				228505CC102D001E004D74BC /* TTDSP.cpp */,
 				08FB77AEFE84172EC02AAC07 /* Source */,
 				221CA37A121C3A01003E2DC1 /* UnitGenerators */,
+				229E09711325E3D1009D2A7D /* SignalProcessingMathematics */,
 				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
 				034768DFFF38A50411DB9C8B /* Products */,
 			);
@@ -136,6 +140,15 @@
 				221CA37D121C3A23003E2DC1 /* TTDelay.cpp */,
 			);
 			name = UnitGenerators;
+			sourceTree = "<group>";
+		};
+		229E09711325E3D1009D2A7D /* SignalProcessingMathematics */ = {
+			isa = PBXGroup;
+			children = (
+				229E097A1325E447009D2A7D /* TTBessel.h */,
+				229E09781325E432009D2A7D /* TTBessel.cpp */,
+			);
+			name = SignalProcessingMathematics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +222,7 @@
 				22610D5D11DD8579000A3DA8 /* TTBuffer.cpp in Sources */,
 				221CA37E121C3A23003E2DC1 /* TTDelay.cpp in Sources */,
 				2230A2DD12FEBDB2007C5492 /* TTAudioObjectArray.cpp in Sources */,
+				229E09791325E432009D2A7D /* TTBessel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

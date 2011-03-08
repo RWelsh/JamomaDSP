@@ -31,29 +31,10 @@ KaiserWindow::~KaiserWindow()
 }
 
 
-TTFloat64 KaiserWindow::BesselFunctionI0(TTFloat64 x)
-{
-	double y = 1.0;
-	double u = 1.0;
-	double halfx = x * 0.5;
-	double temp;
-	long i = 1;
-	
-	while (u > kTTEpsilon) {
-		temp = halfx/(double)i;
-		temp *= temp;
-		u *= temp;
-		y += u;
-		i++;
-	}
-	return y;
-}
-
-
 TTErr KaiserWindow::setBeta(const TTValue& newValue)
 {
 	mBeta = newValue;
-	mBesselIOofBeta = BesselFunctionI0(mBeta);
+	mBesselIOofBeta = TTBesselFunctionI0(mBeta);
 	return kTTErrNone;
 }
 
@@ -64,7 +45,7 @@ TTErr KaiserWindow::calculateValue(const TTFloat64& x, TTFloat64& y, TTPtrSizedI
 	TTFloat64	temp = 1.0 - (two_x * two_x);
 	TTFloat64	temp2 = sqrt(temp);
 	TTFloat64	temp3 = mBeta * temp2;
-	TTFloat64	temp4 = BesselFunctionI0(temp3);
+	TTFloat64	temp4 = TTBesselFunctionI0(temp3);
 
 	y = temp4 / mBesselIOofBeta;	
 	return kTTErrNone;
