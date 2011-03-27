@@ -10,7 +10,7 @@
 #define __TT_DSP_MATHEMATICS_H__
 
 #include "TTDSP.h"
-
+#include <complex>
 
 
 //					kTTAntiDenormalValue	-- inherited
@@ -25,6 +25,8 @@ static const double	kTTQuarterPi			= kTTPi / 4.0;
 static const double	kTTHalfSqrt2			= kTTSqrt2 / 2.0;
 static const double	kTTTwoSqrt2				= 2.0 * kTTSqrt2;
 
+
+typedef std::complex<double>	TTComplex;
 
 
 #include "TTBessel.h"

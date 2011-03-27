@@ -21,6 +21,7 @@
 		22610D5C11DD8579000A3DA8 /* TTDSP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 228505CC102D001E004D74BC /* TTDSP.cpp */; };
 		22610D5D11DD8579000A3DA8 /* TTBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22BA7E281046EE2E009771BC /* TTBuffer.cpp */; };
 		2287F72612DA7BB3006CE3AB /* libportaudio-jamoma.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2287F72512DA7BB3006CE3AB /* libportaudio-jamoma.a */; };
+		2297E9F1132EB41B00828FCA /* TTJacobi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2297E9F0132EB41B00828FCA /* TTJacobi.cpp */; };
 		229E09791325E432009D2A7D /* TTBessel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229E09781325E432009D2A7D /* TTBessel.cpp */; };
 		229E099013266FDE009D2A7D /* TTPolynomial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229E098F13266FDE009D2A7D /* TTPolynomial.cpp */; };
 		22FA621511E217910097F43B /* JamomaFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA621411E217910097F43B /* JamomaFoundation.dylib */; };
@@ -42,6 +43,8 @@
 		228505CB102CFFFA004D74BC /* TTDSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTDSP.h; path = includes/TTDSP.h; sourceTree = "<group>"; };
 		228505CC102D001E004D74BC /* TTDSP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTDSP.cpp; path = source/TTDSP.cpp; sourceTree = "<group>"; };
 		2287F72512DA7BB3006CE3AB /* libportaudio-jamoma.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libportaudio-jamoma.a"; path = "portaudio/libportaudio-jamoma.a"; sourceTree = "<group>"; };
+		2297E9EF132EB40500828FCA /* TTJacobi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTJacobi.h; path = includes/TTJacobi.h; sourceTree = "<group>"; };
+		2297E9F0132EB41B00828FCA /* TTJacobi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTJacobi.cpp; path = source/TTJacobi.cpp; sourceTree = "<group>"; };
 		229E09781325E432009D2A7D /* TTBessel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTBessel.cpp; path = source/TTBessel.cpp; sourceTree = "<group>"; };
 		229E097A1325E447009D2A7D /* TTBessel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTBessel.h; path = includes/TTBessel.h; sourceTree = "<group>"; };
 		229E098E13266FCA009D2A7D /* TTPolynomial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTPolynomial.h; path = includes/TTPolynomial.h; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 				229E099113267024009D2A7D /* TTDSPMathematics.h */,
 				229E097A1325E447009D2A7D /* TTBessel.h */,
 				229E09781325E432009D2A7D /* TTBessel.cpp */,
+				2297E9EF132EB40500828FCA /* TTJacobi.h */,
+				2297E9F0132EB41B00828FCA /* TTJacobi.cpp */,
 				229E098E13266FCA009D2A7D /* TTPolynomial.h */,
 				229E098F13266FDE009D2A7D /* TTPolynomial.cpp */,
 			);
@@ -231,6 +236,7 @@
 				2230A2DD12FEBDB2007C5492 /* TTAudioObjectArray.cpp in Sources */,
 				229E09791325E432009D2A7D /* TTBessel.cpp in Sources */,
 				229E099013266FDE009D2A7D /* TTPolynomial.cpp in Sources */,
+				2297E9F1132EB41B00828FCA /* TTJacobi.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
