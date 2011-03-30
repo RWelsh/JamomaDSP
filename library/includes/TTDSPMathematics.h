@@ -19,11 +19,11 @@
 //					kTTHalfPi				-- inherited
 //					kTTPi					-- inherited
 //					kTTTwoPi				-- inherited
-static const double	kTTQuarterPi			= kTTPi / 4.0;
+//static const double	kTTQuarterPi			= kTTPi / 4.0;
 
 //					kTTSqrt2				= sqrt(2.0);
-static const double	kTTHalfSqrt2			= kTTSqrt2 / 2.0;
-static const double	kTTTwoSqrt2				= 2.0 * kTTSqrt2;
+//static const double	kTTHalfSqrt2			= kTTSqrt2 / 2.0;
+//static const double	kTTTwoSqrt2				= 2.0 * kTTSqrt2;
 
 
 
