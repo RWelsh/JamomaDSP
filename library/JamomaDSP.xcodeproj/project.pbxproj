@@ -25,6 +25,7 @@
 		229E09791325E432009D2A7D /* TTBessel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229E09781325E432009D2A7D /* TTBessel.cpp */; };
 		229E099013266FDE009D2A7D /* TTPolynomial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229E098F13266FDE009D2A7D /* TTPolynomial.cpp */; };
 		22FA621511E217910097F43B /* JamomaFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA621411E217910097F43B /* JamomaFoundation.dylib */; };
+		666A2328132EA3E4009F5CE1 /* TTDelay.test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666A2327132EA3E4009F5CE1 /* TTDelay.test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		22E385F510286BBE002000A9 /* TTAudioSignal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTAudioSignal.cpp; path = source/TTAudioSignal.cpp; sourceTree = "<group>"; };
 		22E385F610286BBE002000A9 /* TTAudioSignalArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTAudioSignalArray.cpp; path = source/TTAudioSignalArray.cpp; sourceTree = "<group>"; };
 		22FA621411E217910097F43B /* JamomaFoundation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = JamomaFoundation.dylib; path = ../../Foundation/library/build/UninstalledProducts/JamomaFoundation.dylib; sourceTree = SOURCE_ROOT; };
+		666A2327132EA3E4009F5CE1 /* TTDelay.test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTDelay.test.cpp; path = tests/TTDelay.test.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			children = (
 				221CA37C121C3A1B003E2DC1 /* TTDelay.h */,
 				221CA37D121C3A23003E2DC1 /* TTDelay.cpp */,
+				666A2327132EA3E4009F5CE1 /* TTDelay.test.cpp */,
 			);
 			name = UnitGenerators;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				229E09791325E432009D2A7D /* TTBessel.cpp in Sources */,
 				229E099013266FDE009D2A7D /* TTPolynomial.cpp in Sources */,
 				2297E9F1132EB41B00828FCA /* TTJacobi.cpp in Sources */,
+				666A2328132EA3E4009F5CE1 /* TTDelay.test.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
