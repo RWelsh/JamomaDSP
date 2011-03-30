@@ -26,7 +26,6 @@ static const double	kTTHalfSqrt2			= kTTSqrt2 / 2.0;
 static const double	kTTTwoSqrt2				= 2.0 * kTTSqrt2;
 
 
-typedef std::complex<double>	TTComplex;
 
 
 #include "TTBessel.h"
