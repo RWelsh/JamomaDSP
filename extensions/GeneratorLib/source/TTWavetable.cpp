@@ -119,7 +119,7 @@ TTErr TTWavetable::processAsLFO(TTAudioSignalArrayPtr, TTAudioSignalArrayPtr out
 	TTUInt16		numChannels = out.getNumChannelsAsInt();
 	TTUInt16		channel;
 	TTUInt32		p1 = (TTUInt32)mIndex;						// playback index
-	TTSampleValue*	contents = mWavetable->getContentsForChannel(0);
+	TTSampleValue*	contents = (TTSampleValue*)mWavetable->getLockedPointer();
 	
 	// Move the play head
 	mIndex += (mIndexDelta * vs);
@@ -139,6 +139,7 @@ TTErr TTWavetable::processAsLFO(TTAudioSignalArrayPtr, TTAudioSignalArrayPtr out
 			out.mSampleVectors[channel][i] = tempSample;
 		i++;
 	}
+	mWavetable->releaseLockedPointer();
 	return kTTErrNone;
 }
 
@@ -155,7 +156,7 @@ TTErr TTWavetable::processWithNoInterpolation(TTAudioSignalArrayPtr inputs, TTAu
 	TTUInt16			channel;
 	TTBoolean			hasModulation = true;
 	TTUInt32			p1 = (TTUInt32)mIndex;						// playback index
-	TTSampleValue*		contents = mWavetable->getContentsForChannel(0);
+	TTSampleValue*		contents = (TTSampleValue*)mWavetable->getLockedPointer();
 
 	// If the input and output signals are the same, then there really isn't an input signal
 	// In that case we don't modulate the oscillator with it
@@ -185,6 +186,7 @@ TTErr TTWavetable::processWithNoInterpolation(TTAudioSignalArrayPtr inputs, TTAu
 			out.mSampleVectors[channel][i] = tempSample;
 		i++;
 	}
+	mWavetable->releaseLockedPointer();
 	return kTTErrNone;
 }
 
@@ -202,7 +204,7 @@ TTErr TTWavetable::processWithLinearInterpolation(TTAudioSignalArrayPtr inputs, 
 	TTBoolean		hasModulation = true;
 	TTUInt32		p1, p2;									// two playback indices
 	TTFloat64		diff;
-	TTSampleValue*	contents = mWavetable->getContentsForChannel(0);
+	TTSampleValue*	contents = (TTSampleValue*)mWavetable->getLockedPointer();
 
 	// If the input and output signals are the same, then there really isn't an input signal
 	// In that case we don't modulate the oscillator with it
@@ -237,5 +239,6 @@ TTErr TTWavetable::processWithLinearInterpolation(TTAudioSignalArrayPtr inputs, 
 			out.mSampleVectors[channel][i] = tempSample;
 		i++;
 	}
+	mWavetable->releaseLockedPointer();
 	return kTTErrNone;
 }
