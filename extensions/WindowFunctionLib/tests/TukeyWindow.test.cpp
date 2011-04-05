@@ -7,7 +7,7 @@
  */
 
 #include "WindowFunction.h"
-#include "HammingWindow.h"
+#include "TukeyWindow.h"
 
 
 /*
@@ -58,7 +58,7 @@ TTErr TukeyWindow::test(TTValue& returnedTestInfo)
 	TTAudioSignalPtr	output = NULL;
 	int					N = 128;
 	TTValue				v;
-	TTValue				testAlpha = 0.5;
+	TTFloat64			testAlpha = 0.5;
 	
 	// setup windowObject
 	TTObjectInstantiate(TT("WindowFunction"), &windowObject, kTTVal1);
@@ -67,7 +67,7 @@ TTErr TukeyWindow::test(TTValue& returnedTestInfo)
 	
 	// set the value for alpha
 	windowObject->setAttributeValue(TT("alpha"), testAlpha);
-	TTTestLog("alpha was set to %.10f for test", testAlpha);
+	//TTTestLog("alpha was set to %.10f for test", testAlpha);
 	
 	// create 1 channel audio signal objects
 	TTObjectInstantiate(kTTSym_audiosignal, &input, 1);
@@ -89,7 +89,7 @@ TTErr TukeyWindow::test(TTValue& returnedTestInfo)
 	}
 	
 	TTTestAssertion("Produces correct window coefficients", 
-					badSampleCount == 0;
+					badSampleCount == 0,
 					testAssertionCount, 
 					errorCount);
 	if (badSampleCount)
