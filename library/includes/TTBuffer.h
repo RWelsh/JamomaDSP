@@ -60,6 +60,16 @@ public:
 	/** Set the contents of the buffer using a specified algorithm and, if appropriate, coefficients for that algorithm. */
 	TTErr	fill(const TTValue& value);
 
+	/**	Normalize the contents of a buffer.
+		If no arg is passed, then the buffer is normalized to 1.0.
+		Otherwise it is normalized to the passed value.
+	  */
+	TTErr normalize(const TTValue& aValue);
+
+	
+	/**	Unit testing */
+	virtual TTErr test(TTValue& returnedTestInfo);	
+
 };
 
 

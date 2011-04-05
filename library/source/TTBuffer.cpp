@@ -34,7 +34,7 @@ TTBuffer::TTBuffer(TTValue& arguments) :
 	addAttributeWithGetterAndSetter(LengthInSamples,	kTypeUInt64);
 	addAttribute(SampleRate,							kTypeFloat64);
 	
-	addMessage(clear);
+	addMessage(normalize);
 	addMessageWithArgument(fill);
 
 	addMessageWithArgument(getValueAtIndex);
@@ -204,3 +204,31 @@ TTErr TTBuffer::fill(const TTValue& value)
 	return kTTErrNone;
 }
 
+
+TTErr TTBuffer::normalize(const TTValue& aValue)
+{
+	TTFloat64			normalizeTo = 1.0;
+	TTRowID				m = mDimensions[0]; // mFrameLength
+	TTColumnID			n = mDimensions[1]; // mNumChannels
+	TTSampleValuePtr	samples = (TTSampleValuePtr)getLockedPointer();
+	TTFloat64			peakValue = 0.0;
+	TTFloat64			scalar;
+	
+	if (aValue.getSize() && TTFloat64(aValue) > 0.0)
+		normalizeTo = aValue;
+	
+	for (int k=0; k<m*n; k++) {
+		TTFloat64 magnitude = abs(samples[k]);
+		
+		if (magnitude > peakValue)
+			peakValue = magnitude;
+	}
+	
+	scalar = normalizeTo / peakValue;
+	
+	for (int k=0; k<m*n; k++)
+		samples[k] *= scalar;
+		
+	releaseLockedPointer();
+	return kTTErrNone;
+}
