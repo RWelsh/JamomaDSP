@@ -14,14 +14,22 @@
 
 /**	This implements a window function as described @
 	https://ccrma.stanford.edu/~jos/sasp/Kaiser_Window.html
+	http://en.wikipedia.org/wiki/Window_function#Kaiser_windows
  */
 class KaiserWindow : TTAudioObject {
 	TTCLASS_SETUP(KaiserWindow)
 	
+	/* 
+		alpha and beta atributes are linked to allow congruence with both references above.
+		setting one updates the other so that the following relationship is always true:
+		beta = alpha * pi
+	*/
+	TTFloat64	mAlpha;				///< attribute: alpha parameter for the Kaiser function
 	TTFloat64	mBeta;				///< attribute: beta parameter for the Kaiser function
 	TTFloat64	mBesselIOofBeta;	///< calculated from the beta attribute
 	
 	/**	attribute accessor */	
+	TTErr setAlpha(const TTValue& newValue);
 	TTErr setBeta(const TTValue& newValue);
 	
 	/** y = f(x) for a single value */
