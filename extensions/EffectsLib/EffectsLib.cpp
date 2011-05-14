@@ -14,9 +14,10 @@
 #include "TTLimiter.h"
 #include "TTOverdrive.h"
 #include "TTPulseSub.h"
+#include "TTThru.h"
 
 
-extern "C" TT_EXTENSION_EXPORT TTErr loadTTExtension(void)
+extern "C" TT_EXTENSION_EXPORT TTErr TTLoadJamomaExtension_EffectsLib(void)
 {
 	TTDSPInit();
 	
@@ -26,6 +27,7 @@ extern "C" TT_EXTENSION_EXPORT TTErr loadTTExtension(void)
 	TTLimiter::registerClass();	
 	TTOverdrive::registerClass();	
 	TTPulseSub::registerClass();	
+	TTThru::registerClass();	
 	
 	return kTTErrNone;
 }

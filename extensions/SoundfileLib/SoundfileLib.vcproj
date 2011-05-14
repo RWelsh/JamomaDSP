@@ -27,7 +27,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				CommandLine="IF NOT EXIST &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot; mkdir &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot;&#x0D;&#x0A;copy $(OutDir)\$(TargetFileName) &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot;&#x0D;&#x0A;copy $(OutDir)\$(TargetFileName) &quot;$(ProjectDir)..\..\..\..\Builds&quot;&#x0D;&#x0A;"
+				CommandLine="IF NOT EXIST &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot; mkdir &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot;&#x0D;&#x0A;copy $(OutDir)\$(TargetFileName) &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot;&#x0D;&#x0A;copy $(OutDir)\$(TargetFileName) &quot;$(ProjectDir)..\..\..\..\Builds&quot;&#x0D;&#x0A;copy $(ProjectDir)\libsndfile\libsndfile-1.dll &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot;&#x0D;&#x0A;copy $(ProjectDir)\libsndfile\libsndfile-1.dll &quot;$(ProjectDir)..\..\..\..\Builds&quot;&#x0D;&#x0A;"
 				Outputs="foo"
 			/>
 			<Tool
@@ -107,7 +107,7 @@
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
-				CommandLine="IF NOT EXIST &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot; mkdir &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot;&#x0D;&#x0A;copy $(OutDir)\$(TargetFileName) &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot;&#x0D;&#x0A;copy $(OutDir)\$(TargetFileName) &quot;$(ProjectDir)..\..\..\..\Builds&quot;&#x0D;&#x0A;"
+				CommandLine="IF NOT EXIST &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot; mkdir &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot;&#x0D;&#x0A;copy $(OutDir)\$(TargetFileName) &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot;&#x0D;&#x0A;copy $(OutDir)\$(TargetFileName) &quot;$(ProjectDir)..\..\..\..\Builds&quot;&#x0D;&#x0A;copy $(ProjectDir)\libsndfile\libsndfile-1.dll &quot;$(CommonProgramFiles)\Jamoma\Extensions&quot;&#x0D;&#x0A;copy $(ProjectDir)\libsndfile\libsndfile-1.dll &quot;$(ProjectDir)..\..\..\..\Builds&quot;"
 				Outputs="foo"
 			/>
 			<Tool

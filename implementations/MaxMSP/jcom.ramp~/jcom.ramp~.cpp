@@ -158,7 +158,7 @@ void ramp_int(t_ramp *x, long newCurrentValue)
 
 void ramp_float(t_ramp *x, double newCurrentValue)
 {
-	x->ramp->setAttributeValue(TT("currentValue"), newCurrentValue);
+	x->ramp->setAttributeValue(TT("startValue"), newCurrentValue);
 }
 
 void ramp_list(t_ramp *x, double endValue, double time)
@@ -176,7 +176,9 @@ t_int *ramp_perform(t_int *w)
 	if(!(x->obj.z_disabled))
 		x->ramp->process(*x->audioOut);
 
-	TTAUDIOSIGNAL_GETVECTOR32(x->audioOut, 0, x->vs, w[2]);
+	//TTAUDIOSIGNAL_GETVECTOR32(x->audioOut, 0, x->vs, w[2]);
+	x->audioOut->getVector(0, x->vs, (t_float *)(w[2]));
+
     return w+3;
 }
 
