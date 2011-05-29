@@ -92,10 +92,9 @@ TTErr TTBalance::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPt
 {
 	TTAudioSignal&	in = inputs->getSignal(0);
 	TTAudioSignal&	out = outputs->getSignal(0);
-	TTUInt16		vs;
-	TTSampleValue	*inSampleA,
-					*inSampleB,
-					*outSample;
+	TTUInt16		vs = in.getVectorSizeAsInt();
+//	TTSampleValue	inSampleA, inSampleB;
+	TTSampleValue	outSample;
 	TTFloat64		tempxA,
 					absTempxA,
 					tempxB,
@@ -111,18 +110,21 @@ TTErr TTBalance::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPt
 		numChannels = TTAudioSignal::getNumChannels(out);
 
 	// This outside loop works through each channel one at a time
-	for (channel=0; channel<numChannels; channel++) {
+	for (channel=1; channel<=numChannels; channel++) {
 		// We first expect all channels of inputSignalA, then all channels of inputSignalB
-		inSampleA = in.mSampleVectors[channel];
-		inSampleB = in.mSampleVectors[channel+numChannels];
-		outSample = out.mSampleVectors[channel];
-		vs = in.getVectorSizeAsInt();
+//		inSampleA = in.mSampleVectors[channel];
+//		inSampleB = in.mSampleVectors[channel+numChannels];
+//		outSample = out.mSampleVectors[channel];
+
 		
 		// This inner loop works through each sample within the channel one at a time
-		while (vs--) {
-			tempxA = *inSampleA++;
+		for (int i=1; i<=vs; i++) {
+			in.get2d(i, channel, tempxA);
+			in.get2d(i, channel+numChannels, tempxB);
+			
+//			tempxA = *inSampleA++;
 			absTempxA = fabs(tempxA);
-			tempxB = *inSampleB++;
+//			tempxB = *inSampleB++;
 			absTempxB = fabs(tempxB);
 			// Lopass filter left and right signals
 			tempyA = a0*absTempxA + a1*xm1A[channel] + a2*xm2A[channel] - b1*ym1A[channel] - b2*ym2A[channel];
@@ -131,9 +133,9 @@ TTErr TTBalance::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPt
 			TTZeroDenormal(tempyB); 
 			// Scale left input to produce output, avoid dividing by zero
 			if (tempyA)
-				*outSample++ = tempxA * (tempyB/tempyA);
+				outSample = tempxA * (tempyB/tempyA);
 			else
-				*outSample++ = 0.;
+				outSample = 0.;
 			// Update filter values
 			xm2A[channel] = xm1A[channel];
 			xm1A[channel] = absTempxA;
@@ -143,6 +145,8 @@ TTErr TTBalance::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPt
 			xm1B[channel] = absTempxB;
 			ym2B[channel] = ym1B[channel];
 			ym1B[channel] = tempyB;
+			
+			out.set2d(i, channel, outSample);
 		}
 	}
 	return kTTErrNone;

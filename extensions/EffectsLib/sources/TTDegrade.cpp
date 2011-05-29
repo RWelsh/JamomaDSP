@@ -63,31 +63,31 @@ TTErr TTDegrade::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPt
 {
 	TTAudioSignal&	in = inputs->getSignal(0);
 	TTAudioSignal&	out = outputs->getSignal(0);
-	TTUInt16		vs;
-	TTSampleValue	*inSample,
-					*outSample;
+	TTUInt16		vs = in.getVectorSizeAsInt();
+	TTSampleValue	inSample,
+					outSample;
 	TTUInt16		numchannels = TTAudioSignal::getMinChannelCount(in, out);
 	TTUInt16		channel;
 	long			l;
 
-	for (channel=0; channel<numchannels; channel++) {
-		inSample = in.mSampleVectors[channel];
-		outSample = out.mSampleVectors[channel];
-		vs = in.getVectorSizeAsInt();
-		
-		while (vs--) {
+	for (channel=1; channel<=numchannels; channel++) {
+		for (TTUInt32 i=1; i<=vs; i++) {
+			in.get2d(i, channel, inSample);
+			
 			// SampeRate Reduction
 			mAccumulator[channel] += mSrRatio;
 			if (mAccumulator[channel] >= 1.0) {
-				mOutput[channel] = *inSample++;
+				mOutput[channel] = inSample;
 				mAccumulator[channel] -= 1.0;
 			}
-		
+			
 			// BitDepth Reduction
 			l = (long)(mOutput[channel] * BIG_INT);			// change float to long int
 			l >>= mBitShift;									// shift away the least-significant bits
 			l <<= mBitShift;									// shift back to the correct registers
-			*outSample++ = (float) l * ONE_OVER_BIG_INT;	// back to float
+			outSample = (float) l * ONE_OVER_BIG_INT;	// back to float
+			
+			out.set2d(i, channel, outSample);
 		}
 	}
 	return kTTErrNone;

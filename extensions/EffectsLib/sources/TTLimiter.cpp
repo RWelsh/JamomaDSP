@@ -229,12 +229,13 @@ TTErr TTLimiter::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPt
 	dcBlocker->process(in, out);	// filter out DC-Offsets (unless it is bypassed)
 	preamp->process(out, in);		// copy output back to input for the rest of this process
 
-	for (i=0; i<vs; i++) {
+	for (i=1; i<=vs; i++) {
 		hotSample = 0.0;
 	
 		// Analysis Stage ...
-		for (channel=0; channel<numchannels; channel++) {
-			tempSample = in.mSampleVectors[channel][i];
+		for (channel=1; channel<=numchannels; channel++) {
+//			tempSample = in.mSampleVectors[channel][i];
+			in.get2d(i, channel, tempSample);
 			lookaheadBuffer[channel][lookaheadBufferIndex] = tempSample * attrPostamp;
 			tempSample = fabs(tempSample);
 			if (tempSample > hotSample)
@@ -286,8 +287,9 @@ TTErr TTLimiter::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPt
 		}
 		
 		// Actual application of the gain
-		for (channel=0; channel<numchannels; channel++) {
-			out.mSampleVectors[channel][i] = lookaheadBuffer[channel][lookaheadBufferPlayback] * gain[lookaheadBufferPlayback];
+		for (channel=1; channel<=numchannels; channel++) {
+			TTSampleValue s = lookaheadBuffer[channel][lookaheadBufferPlayback] * gain[lookaheadBufferPlayback];
+			out.set2d(i, channel, s);
 		}
 		
 		last = gain[lookaheadBufferIndex];

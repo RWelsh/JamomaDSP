@@ -20,22 +20,28 @@ TTErr TTThru::test(TTValue& returnedTestInfo)
 	TTObjectInstantiate(kTTSym_audiosignal, &input, 2);
 	TTObjectInstantiate(kTTSym_audiosignal, &output, 2);
 	
-	input->allocWithVectorSize(64);
-	output->allocWithVectorSize(64);
+	input->setVectorSizeWithInt(64);
+	output->setVectorSizeWithInt(64);
 	
-	for (int i=0; i<64; i++)
-		input->mSampleVectors[0][i] = TTRandom64();
+	for (int i=1; i<=64; i++)
+		input->set2d(i, 1, TTRandom64());
 	
 	this->process(input, output);
 	
-	int					validSampleCount = 0;
+	int validSampleCount = 0;
 	
-	for (int channel=0; channel<2; channel++) {
-		TTSampleValuePtr	inSamples = input->mSampleVectors[channel];
-		TTSampleValuePtr	outSamples = output->mSampleVectors[channel];
+	for (int channel=1; channel<=2; channel++) {
+//		TTSampleValuePtr	inSamples = input->mSampleVectors[channel];
+//		TTSampleValuePtr	outSamples = output->mSampleVectors[channel];
 
-		for (int i=0; i<64; i++) {
-			validSampleCount += TTTestFloatEquivalence(inSamples[i], outSamples[i]);
+		for (int i=1; i<=64; i++) {
+			TTSampleValue inSample;
+			TTSampleValue outSample;
+			
+			input->get2d(i, channel, inSample);
+			output->get2d(i, channel, outSample);
+			
+			validSampleCount += TTTestFloatEquivalence(inSample, outSample);
 		}
 	}
 	TTTestAssertion("input samples accurately copied to output samples", 

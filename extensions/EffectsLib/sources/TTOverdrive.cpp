@@ -119,9 +119,9 @@ TTErr TTOverdrive::processMode0(TTAudioSignalArrayPtr inputs, TTAudioSignalArray
 {
 	TTAudioSignal&	in = inputs->getSignal(0);
 	TTAudioSignal&	out = outputs->getSignal(0);
-	TTUInt16		vs;
-	TTSampleValue	*inSample,
-					*outSample;
+	TTUInt16		vs = in.getVectorSizeAsInt();
+	TTSampleValue	inSample,
+					outSample;
 	TTUInt16		numchannels = TTAudioSignal::getMinChannelCount(in, out);
 	TTUInt16		channel;
 	TTSampleValue	temp,
@@ -129,13 +129,10 @@ TTErr TTOverdrive::processMode0(TTAudioSignalArrayPtr inputs, TTAudioSignalArray
 
 	dcBlockerUnit->process(in, out);
 
-	for (channel=0; channel<numchannels; channel++) {
-		inSample = in.mSampleVectors[channel];
-		outSample = out.mSampleVectors[channel];
-		vs = in.getVectorSizeAsInt();
-		
-		while (vs--) {
-			temp = *inSample++ * mPreamp;
+	for (channel=1; channel <= numchannels; channel++) {
+		for (int i=1; i<=vs; i++) {
+			in.get2d(i, channel, inSample);
+			temp = inSample * mPreamp;
 			
 			// the equation only works in the positive quadrant...
 			// so we strip off the sign, apply the equation, and reapply the sign
@@ -147,9 +144,10 @@ TTErr TTOverdrive::processMode0(TTAudioSignalArrayPtr inputs, TTAudioSignalArray
 				sign = 1.0;
 
 			if (temp > 1.0)		// clip signal if it's out of range
-				*outSample++ = TTClip(temp * sign, TTSampleValue(-1.0), TTSampleValue(1.0));
+				outSample = TTClip(temp * sign, TTSampleValue(-1.0), TTSampleValue(1.0));
 			else
-				*outSample++ = sign * (1.0 - exp(mDrive * log(1.0 - temp)));
+				outSample = sign * (1.0 - exp(mDrive * log(1.0 - temp)));
+			out.set2d(i, channel, outSample);
 		}
 	}
 	return kTTErrNone;
@@ -160,9 +158,9 @@ TTErr TTOverdrive::processMode1(TTAudioSignalArrayPtr inputs, TTAudioSignalArray
 {
 	TTAudioSignal&	in = inputs->getSignal(0);
 	TTAudioSignal&	out = outputs->getSignal(0);
-	short			vs;
-	TTSampleValue	*inSample,
-					*outSample;
+	short			vs = in.getVectorSizeAsInt();
+	TTSampleValue	inSample,
+					outSample;
 	TTUInt16		numchannels = TTAudioSignal::getMinChannelCount(in, out);
 	TTUInt16		channel;
 	TTSampleValue	temp;
@@ -173,12 +171,9 @@ TTErr TTOverdrive::processMode1(TTAudioSignalArrayPtr inputs, TTAudioSignalArray
 	dcBlockerUnit->process(in, out);
 
 	for (channel=0; channel<numchannels; channel++) {
-		inSample = in.mSampleVectors[channel];
-		outSample = out.mSampleVectors[channel];
-		vs = in.getVectorSizeAsInt();
-		
-		while (vs--) {
-			temp = *inSample++ * mPreamp;			
+		for (int i=1; i<=vs; i++) {
+			in.get2d(i, channel, inSample);
+			temp = inSample * mPreamp;			
 			if (temp > b) 
 				temp = 1.0;
 			else if (temp < nb) 
@@ -202,7 +197,8 @@ TTErr TTOverdrive::processMode1(TTAudioSignalArrayPtr inputs, TTAudioSignalArray
 			else 
 				temp = sin(z * temp) * s;
 	#endif		
-			*outSample++ = temp * scale;				
+			outSample = temp * scale;
+			out.set2d(i, channel, outSample);
 		}
 	}
 	return kTTErrNone;

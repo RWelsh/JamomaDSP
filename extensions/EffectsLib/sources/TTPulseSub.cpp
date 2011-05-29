@@ -143,15 +143,10 @@ TTErr TTPulseSub::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayP
 {
 	TTAudioSignal&	in = inputs->getSignal(0);
 	TTAudioSignal&	out = outputs->getSignal(0);
-	TTSampleValue*	inSample;
-	TTSampleValue*	outSample;
 	TTUInt16		vs = in.getVectorSizeAsInt();
 
-	inSample = in.mSampleVectors[0];
-	outSample = out.mSampleVectors[0];
-	
-	sig1->allocWithVectorSize(vs);
-	sig2->allocWithVectorSize(vs);
+	sig1->setVectorSizeWithInt(vs);
+	sig2->setVectorSizeWithInt(vs);
 	
 	phasor->process(*sig1);					// ramp wave, stored in a temporary vector
 	offset->process(*sig1, *sig2);			// offset the ramp wave, effectively altering the duty cycle
