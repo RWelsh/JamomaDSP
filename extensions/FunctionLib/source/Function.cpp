@@ -147,8 +147,8 @@ TTErr TTFunction::processApply(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayP
 	TTAudioSignal&		in = inputs->getSignal(0);
 	TTAudioSignal&		out = outputs->getSignal(0);
 	TTUInt16			vs = in.getVectorSizeAsInt();
-	TTSampleValuePtr	inSample;
-	TTSampleValuePtr	outSample;
+	TTSampleValue		inSample;
+	TTSampleValue		outSample;
 	TTUInt16			numChannels = TTAudioSignal::getMinChannelCount(in, out);
 	TTUInt16			channel;
 	
@@ -157,12 +157,15 @@ TTErr TTFunction::processApply(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayP
 	if (vs != mNumPoints)
 		doSetNumPoints(vs);
 	
-	for (channel=0; channel<numChannels; channel++) {
-		inSample = in.mSampleVectors[channel];
-		outSample = out.mSampleVectors[channel];
+	for (channel=1; channel<=numChannels; channel++) {
+		//inSample = in.mSampleVectors[channel];
+		//outSample = out.mSampleVectors[channel];
 		
-		for (TTUInt32 i=0; i<vs; i++)
-			*outSample++ = (*inSample++) * mLookupTable[i];
+		for (TTUInt32 i=1; i<=vs; i++) {
+			in.get2d(i, channel, inSample);
+			outSample = inSample * mLookupTable[i];
+			out.set2d(i, channel, outSample);
+		}
 	}
 	return kTTErrNone;
 }

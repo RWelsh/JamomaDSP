@@ -87,22 +87,29 @@ TTErr PowerFunction::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArr
 {
 	TTAudioSignal&	in = inputs->getSignal(0);
 	TTAudioSignal&	out = outputs->getSignal(0);
-	TTUInt16		vs;
-	TTSampleValue*	inSample;
-	TTSampleValue*	outSample;
+	TTUInt16		vs = in.getVectorSizeAsInt();
+	TTSampleValue	inSample;
+	TTSampleValue	outSample;
 	TTUInt16		numchannels = TTAudioSignal::getMinChannelCount(in, out);
 	TTPtrSizedInt	channel;
 	
-	for (channel=0; channel<numchannels; channel++) {
-		inSample = in.mSampleVectors[channel];
-		outSample = out.mSampleVectors[channel];
-		vs = in.getVectorSizeAsInt();
+	for (channel=1; channel<=numchannels; channel++) {
+//		inSample = in.mSampleVectors[channel];
+//		outSample = out.mSampleVectors[channel];
+//		vs
 		
-		while (vs--) {
-			(this->*calculateMethod)(*outSample, *inSample, TTPtr(channel));
-			outSample++;
-			inSample++;
+//		while (vs--) {
+//			(this->*calculateMethod)(*outSample, *inSample, TTPtr(channel));
+//			outSample++;
+//			inSample++;
+//		}
+		
+		for (TTUInt32 i=1; i<=vs; i++) {
+			in.get2d(i, channel, inSample);
+			(this->*calculateMethod)(outSample, inSample, TTPtr(channel));
+			out.set2d(i, channel, outSample);
 		}
+
 	}
 	return kTTErrNone;
 }
