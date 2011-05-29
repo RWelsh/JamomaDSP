@@ -26,9 +26,6 @@ class TTDSP_EXPORT TTBuffer : public TTMatrix {
 
 	TTFloat64			mSampleRate;
 	
-	/**	Unit Tests	*/
-	virtual TTErr test(TTValue& returnedTestInfo);
-
 public:
 	/**	Attribute accessor: set the number of channels for this buffer.
 		@return Returns a TTErr error code.	*/

@@ -175,22 +175,20 @@ TTErr TTDelay::setInterpolation(const TTValue& newValue)
 	TTAudioSignal&		in = inputs->getSignal(0); \
 	TTAudioSignal&		out = outputs->getSignal(0); \
 	TTUInt16			vs; \
-	TTSampleValue*		inSample; \
-	TTSampleValue*		outSample; \
+	TTSampleValue		inSample; \
+	TTSampleValue		outSample; \
 	TTUInt16			numchannels = TTAudioSignal::getMinChannelCount(in, out); \
 	TTPtrSizedInt		channel; \
 	TTDelayBufferPtr	buffer; \
 	\
-	for (channel=0; channel<numchannels; channel++) { \
-		inSample = in.mSampleVectors[channel]; \
-		outSample = out.mSampleVectors[channel]; \
+	for (channel=1; channel<=numchannels; channel++) { \
 		vs = in.getVectorSizeAsInt(); \
 		buffer = &mBuffers[channel]; \
 		\
-		while (vs--) { \
-			methodName (*inSample, *outSample, buffer); \
-			outSample++; \
-			inSample++; \
+		for (int i=0; i<vs; i++) { \
+			in.get2d(i, channel, inSample);\
+			methodName (inSample, outSample, buffer); \
+			out.set2d(i, channel, outSample); \
 		} \
 	}\
 	return kTTErrNone;
@@ -289,98 +287,4 @@ TTErr TTDelay::processAudioCubicInterpolation(TTAudioSignalArrayPtr inputs, TTAu
 {
 	TTDELAY_WRAP_CALCULATE_METHOD(calculateCubicInterpolation);
 }
-
-
-
-
-
-
-
-// Process with a delay time set by a signal
-//TTErr TTDelay::processAudioNoInterpolationWithDelaySignal(TTAudioSignal& in, TTAudioSignal& delayIn, TTAudioSignal& out, TTAudioSignal&)
-//{
-	/*	temp_vs = in->vectorsize;
-
-	 // CALCULATE THE DELAY TIME
-	 delay_ms = *in2->vector;		// Because this is the Lo-Fi loop, just do this at the vector...
-	 fdelay_samples = delay_ms * m_sr;
-	 delay_samples = (tt_attribute_value_discrete)fdelay_samples;
-	 fractional_delay = fdelay_samples - delay_samples;
-
-	 while (temp_vs--) {
-	 *in_ptr++ = *in->vector++;		// Store Input
-	 *out->vector++ = *out_ptr++;	// Find Output
-
-	 if (in_ptr > end_ptr)	// Buffer Managment...
-	 in_ptr = buffer;
-	 if (out_ptr > end_ptr)
-	 out_ptr = buffer;
-	 }
-	 in->reset(); in2->reset(); out->reset();
-	 */
-//	return kTTErrNone;
-//}
-
-
-//TTErr TTDelay::processAudioLinearInterpolationWithDelaySignal(TTAudioSignal& in, TTAudioSignal& delayIn, TTAudioSignal& out, TTAudioSignal&)
-//{
-/*
- tt_sample_value	temp;
- tt_sample_value	*next;
-
- if (buffer == NULL)
- return;
-
- temp_vs = in1->vectorsize;
- while (temp_vs--) {
- *in_ptr = *in1->vector++;		// Store the audio input @ the record head
- delay_ms = *in2->vector++;		// Store the delay time input
- //		delay_ms = clip(*in2->vector++, 0.f, delay_ms_max);		// Store the delay time input
-
- // CALCULATE THE DELAY TIME
- // delay_samples = clip(long(delay_ms * m_sr), long(0), delay_samples_max);
- //		delay_samples = delay_ms * m_sr;
- fdelay_samples = delay_ms * m_sr;
- delay_samples = (tt_attribute_value_discrete)fdelay_samples;
- fractional_delay = fdelay_samples - delay_samples;
-
- //		end_ptr = buffer + delay_samples;					// set pointer to the end of the buffer
-
- // MOVE THE RECORD HEAD
- in_ptr++;
- if (in_ptr > end_ptr)
- in_ptr = buffer;
- //		*in_ptr = *in1->vector++;		// Store the audio input @ the record head
-
- // MOVE THE PLAY HEAD
- out_ptr = in_ptr - delay_samples;
- if (out_ptr > end_ptr)
- out_ptr = buffer + (out_ptr - end_ptr);
- else if (out_ptr < buffer)
- out_ptr = end_ptr + (out_ptr - buffer) + 1;
-
- // STORE THE VALUE OF THE NEXT SAMPLE IN THE BUFFER FOR INTERPOLATION
- next = out_ptr + 1;
- if (next > end_ptr)
- next = buffer + (next - end_ptr);
- else if (next < buffer)
- next = end_ptr + (next - buffer) + 1;
- temp = *next;
-
- // Interpolate between the play head value (from above) and the next value in the buffer
- *out->vector++ = (temp * (1.0 - fractional_delay)) + (*out_ptr * fractional_delay);
- }
- in1->reset(); in2->reset(); out->reset();
- //log_post("delay_signal_ms: %f, samples: %f (%i)", delay_ms, fdelay_samples, delay_samples);
- */
-//	return kTTErrNone;
-//}
-
-
-//TTErr TTDelay::processAudioCubicInterpolationWithDelaySignal(TTAudioSignal& in, TTAudioSignal& delayIn, TTAudioSignal& out, TTAudioSignal&)
-//{
-//	return kTTErrNone;
-//}
-
-
 

@@ -25,7 +25,8 @@ SKIP_INSTALL = YES
 INFOPLIST_FILE = $(SRCROOT)/Info.plist
 GCC_PREFIX_HEADER = $(SRCROOT)/../prefix.pch
 HEADER_SEARCH_PATHS = $(inherited) "$(SRCROOT)/../../../Foundation/library/includes" "$(SRCROOT)/../../library/includes"
-LIBRARY_SEARCH_PATHS = $(inherited) "$(SRCROOT)/../../../Foundation/library/build/UninstalledProducts" "$(SRCROOT)/../../library/build/UninstalledProducts"
+OTHER_LDFLAGS = /usr/local/lib/JamomaFoundation.dylib /usr/local/lib/JamomaDSP.dylib
+
 
 // Per architecture and deployment settings
 ARCHS = i386 x86_64

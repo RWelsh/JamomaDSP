@@ -20,12 +20,12 @@ TTErr TTDelay::test(TTValue& returnedTestInfo)
 	// create 1 channel audio signal objects
 	TTObjectInstantiate(kTTSym_audiosignal, &input, 1);
 	TTObjectInstantiate(kTTSym_audiosignal, &output, 1);
-	input->allocWithVectorSize(64);
-	output->allocWithVectorSize(64);
+	input->setVectorSizeWithInt(64);
+	output->setVectorSizeWithInt(64);
 	
 	// create an impulse
-	input->clear();						// set all samples to zero
-	input->mSampleVectors[0][0] = 1.0;	// set the first sample to 1
+	input->clear();				// set all samples to zero
+	input->set2d(0, 0, 1.0);	// set the first sample to 1
 	
 	// setup the delay
 	this->setAttributeValue(TT("delayMaxInSamples"), 64);
@@ -102,10 +102,14 @@ TTErr TTDelay::test(TTValue& returnedTestInfo)
 	};
 	
 	for (int i=0; i<64; i++) {
-		TTBoolean result = TTTestFloatEquivalence(output->mSampleVectors[0][i], expectedImpulseResponse[i]);
+		TTSampleValue	sample;
+		TTBoolean		result;
+		
+		output->get2d(i, 0, sample);
+		result = TTTestFloatEquivalence(sample, expectedImpulseResponse[i]);
 		badSampleCount += !result;
 		if (result)
-			TTTestLog("BAD SAMPLE @ i=%i  ( value=%.10f   expected=%.10f )", i, output->mSampleVectors[0][i], expectedImpulseResponse[i]);
+			TTTestLog("BAD SAMPLE @ i=%i  ( value=%.10f   expected=%.10f )", i, sample, expectedImpulseResponse[i]);
 	}
 
 	TTTestAssertion("Produces correct impulse response for a delay of 1 sample", 

@@ -29,6 +29,9 @@ TTBuffer::TTBuffer(TTValue& arguments) :
 	TTMatrix(arguments),
 	mSampleRate(44100.0)
 {
+	this->setType(TT("float64"));
+	this->setElementCount(1);
+
 	addAttributeWithGetterAndSetter(NumChannels,		kTypeUInt16);
 	addAttributeWithGetterAndSetter(Length,				kTypeFloat64);
 	addAttributeWithGetterAndSetter(LengthInSamples,	kTypeUInt64);

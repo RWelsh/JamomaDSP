@@ -34,7 +34,7 @@ public:
 			audioSignals[i]->clear();
 	}
 	
-	void		allocAllWithVectorSize(TTUInt16 vs);
+	void		setVectorSize(TTUInt16 vs);
 	TTUInt16	getVectorSize();
 	void		setAllMaxNumChannels(TTUInt16 newMaxNumChannels);
 	void		setAllNumChannels(TTUInt16 newNumChannels);

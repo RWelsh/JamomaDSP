@@ -26,38 +26,27 @@
 	Where speed is less critical, the preferred method of work with audio signals is the same as for other objects:
 	use the dynamic message passing interface.
 */
-class TTDSP_EXPORT TTAudioSignal : public TTDataObject {
+class TTDSP_EXPORT TTAudioSignal : public TTMatrix {
 	TTCLASS_SETUP(TTAudioSignal)
 
 private:
-	enum{
-		kExternallyOwned = 0,
-		kLocallyOwned = 1
-	};
-
-	TTBoolean		mIsLocallyOwned;
-	TTUInt16		mMaxNumChannels;	///< The number of audio channels for which memory has been allocated.
-	TTUInt16		mVectorSize;		///< Vector Size for this signal.  Every channel in a signal must have the same vector-size.
+//	TTUInt16		mMaxNumChannels;	///< The number of audio channels for which memory has been allocated.
+//	TTUInt16		mVectorSize;		///< Vector Size for this signal.  Every channel in a signal must have the same vector-size.
 	TTUInt16		mNumChannels;		///< The number of audio channels that have valid sample values stored in them.
-	TTUInt8			mBitdepth;			///< Currently supported bitdepths are 32 and 64. This is set by the setVector() method.
 	TTUInt32		mSampleRate;		///< Audio signal metadata, defined in Hertz or set to 0 if not available.
 
 public:
-	TTSampleValue**	mSampleVectors;		///< An array of pointers to the first sample in each vector. Declared Public for fast access.
-
-private:
-	/**	Internal method for freeing the vectors. */
-	void chuck();
-	
-public:
 	/**	Attribute accessor. */
+	TTErr setMaxNumChannelsWithInt(TTUInt16 newMaxNumChannels);
 	TTErr setMaxNumChannels(const TTValue& newMaxNumChannels);
-	
+	TTErr getMaxNumChannels(TTValue& returnedMaxNumChannels);
+
 	
 	void setSampleRate(const TTUInt32& newSampleRate)
 	{
 		mSampleRate = newSampleRate;
 	}
+	
 	
 	TTUInt32 getSampleRate()
 	{
@@ -85,53 +74,50 @@ public:
 	*/
 	TTErr setVector(const TTUInt16 channel, const TTUInt16 vectorSize, const TTFloat32* newVector);
 	TTErr setVector32(const TTValue& v);	// A version of the above used by the message passing interface.
-
 	
-	TTErr getVector(const TTUInt16 channel, const TTUInt16 vectorSize, TTSampleValue* returnedVector);
-	TTErr getVector64(TTValue& v);	// A version of the above used by the message passing interface.
+	TTErr getVectorCopy64(TTValue& v);	// A version of the above used by the message passing interface.
 	TTErr getVectorCopy(const TTUInt16 channel, const TTUInt16 theVectorSize, TTSampleValue* returnedVector); // version of getVector that copies
 	
-	TTErr getVector(const TTUInt16 channel, const TTUInt16 vectorSize, TTFloat32* returnedVector);
-	TTErr getVector32(TTValue& v);	// A version of the above used by the message passing interface.
+	TTErr getVectorCopy32(TTValue& v);	// A version of the above used by the message passing interface.
+	TTErr getVectorCopy(const TTUInt16 channel, const TTUInt16 vectorSize, TTFloat32* returnedVector);
 
-protected:	
+	
+
 	TTErr setVectorSize(const TTValue& newVectorSize)
 	{
-		mVectorSize = newVectorSize;
-		return kTTErrNone;
+		return setVectorSizeWithInt(TTUInt16(newVectorSize));
 	}
 
-public:
+	
 	TTErr setVectorSizeWithInt(const TTUInt16 newVectorSize)
 	{
-		mVectorSize = newVectorSize;
-		return kTTErrNone;
+		TTValue v(TTUInt32(newVectorSize), mDimensions[1]);
+		return setDimensions(v);
 	}
+	
 	
 	TTUInt16 getVectorSizeAsInt() const
 	{
-		return mVectorSize;
+		return mDimensions[0];
 	}
 	
-	TTErr changeVectorSize(const TTUInt16 newVectorSize)
+	
+	TTErr getVectorSize(TTValue& returnedMaxNumChannels) const
 	{
-		if (mIsLocallyOwned)
-			allocWithVectorSize(newVectorSize);
-		else
-			mVectorSize = newVectorSize;
+		returnedMaxNumChannels = getVectorSizeAsInt();
 		return kTTErrNone;
 	}
-	
 
+	
 	TTErr setNumChannels(const TTValue& newNumChannels)
 	{
-		mNumChannels = TTClip<TTUInt16>(newNumChannels, 0, mMaxNumChannels);
-		return kTTErrNone;
+		return setNumChannelsWithInt(TTUInt16(newNumChannels));
 	}
+	
 	
 	TTErr setNumChannelsWithInt(const TTUInt16 newNumChannels)
 	{
-		mNumChannels = TTClip<TTUInt16>(newNumChannels, 0, mMaxNumChannels);
+		mNumChannels = TTClip<TTUInt16>(newNumChannels, 0, getMaxNumChannelsAsInt());
 		return kTTErrNone;
 	}
 	
@@ -141,64 +127,10 @@ public:
 		return mNumChannels;
 	}
 	
-	TTUInt16 getMaxNumChannelsAsInt();
+	
+	TTUInt16 getMaxNumChannelsAsInt() const;
 
-	
-	TTBoolean getIsLocallyOwned()
-	{
-		return mIsLocallyOwned;
-	}
-	
-	/**	Allocate memory for all channels at the current vectorsize.
-	*/
-	TTErr alloc();
-	
-	
-	/**	Allocate memory for all channels at the specified vectorsize, 
-		if the vectorsize is different from the current state.
-	*/
-	TTErr allocWithVectorSize(const TTUInt16 newVectorSize);	
-	TTErr allocWithNewVectorSize(const TTValue& newVectorSize);
-	
-	
-	/**	Zero out all of the sample values in the audio signal.
-		@return An error code.	*/
-	TTErr clear()
-	{
-		if (!mSampleVectors)
-			return kTTErrGeneric;
 		
-		//	Ideally, we could do this:
-		//		memset(mSampleVectors, 0, sizeof(TTSampleValue) * mVectorSize * mNumChannels);
-		//	But, at the moment, we implement a vector of vectors rather than a block of memory that we index as a single chunk.
-		//	So we have to iterate like this:
-		
-		for (TTUInt16 channel=0; channel<mNumChannels; channel++)
-			memset(mSampleVectors[channel], 0, sizeof(TTSampleValue) * mVectorSize);
-		
-		return kTTErrNone;
-	}
-	
-	
-	TTErr fill(TTFloat64 aFillValue)
-	{
-		if (!mSampleVectors)
-			return kTTErrGeneric;
-		
-		//	Ideally, we could do this:
-		//		memset(mSampleVectors, 0, sizeof(TTSampleValue) * mVectorSize * mNumChannels);
-		//	But, at the moment, we implement a vector of vectors rather than a block of memory that we index as a single chunk.
-		//	So we have to iterate like this:
-		
-		for (TTUInt16 channel=0; channel<mNumChannels; channel++) {
-			for (int n=0; n<mVectorSize; n++)
-				mSampleVectors[channel][n] = aFillValue;
-		}
-		
-		return kTTErrNone;
-	}
-	
-	
 	/**	Copy the audio from one signal into another.	*/
 //	static TTErr copy(const TTAudioSignal& source, TTAudioSignal& dest);
 	
@@ -249,29 +181,35 @@ public:
 	TTAudioSignal& operator += (const TTAudioSignal& rightHandValue)
 	{
 		short			vs;
-		TTSampleValue*	inSample;
-		TTSampleValue*	outSample;
+		TTSampleValue	inSample;
+		TTSampleValue	outSample;
 		short			channelCount = getMaxChannelCount(*this, rightHandValue);
 		short			channel;
 		
-		if (channelCount > mMaxNumChannels)
-			channelCount = mMaxNumChannels;
-		if (channelCount > rightHandValue.mMaxNumChannels)
-			channelCount = rightHandValue.mMaxNumChannels;
+		if (channelCount > getMaxNumChannelsAsInt())
+			channelCount = getMaxNumChannelsAsInt();
+		if (channelCount > rightHandValue.getMaxNumChannelsAsInt())
+			channelCount = rightHandValue.getMaxNumChannelsAsInt();
 		
+		if (getVectorSizeAsInt() > rightHandValue.getVectorSizeAsInt())
+			vs = rightHandValue.getVectorSizeAsInt();
+		else
+			vs = getVectorSizeAsInt();
+
 		for (channel=0; channel<channelCount; channel++) {
-			inSample = rightHandValue.mSampleVectors[channel];
-			outSample = mSampleVectors[channel];
+			//inSample = rightHandValue.mSampleVectors[channel];
+			//outSample = mSampleVectors[channel];
 			
-			if (mVectorSize > rightHandValue.mVectorSize)
-				vs = rightHandValue.mVectorSize;
-			else
-				vs = mVectorSize;
-			
-			while (vs--) {
-				(*outSample) = (*outSample) + (*inSample);
-				outSample++;
-				inSample++;
+			for (int i=0; i<vs; i++) {
+				get2d(i, channel, inSample);
+				get2d(i, channel, outSample);
+				
+				//(*outSample) = (*outSample) + (*inSample);
+				outSample += inSample;
+				
+				//outSample++;
+				//inSample++;
+				set2d(i, channel, outSample);
 			}
 		}
 		return *this;
@@ -281,15 +219,10 @@ public:
 	/**	Assign another audio signal's samples and channel/vector configuration with this audio signal's samples. */
 	TTAudioSignal& operator = (const TTAudioSignal& rightHandValue)
 	{	
-		if (rightHandValue.mMaxNumChannels > mMaxNumChannels)
-			setMaxNumChannels(rightHandValue.mMaxNumChannels);
+		setMaxNumChannelsWithInt(rightHandValue.getMaxNumChannelsAsInt());
+		setVectorSizeWithInt(rightHandValue.getVectorSizeAsInt());
 		mNumChannels = rightHandValue.mNumChannels;
 		mSampleRate = rightHandValue.mSampleRate;
-		
-		setVectorSizeWithInt(rightHandValue.mVectorSize);
-		if (mIsLocallyOwned)
-			alloc();
-
 		TTAudioSignal::copy(rightHandValue, *this);
 		return *this;
 	}

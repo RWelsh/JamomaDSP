@@ -144,12 +144,10 @@ TTErr TTAudioEngine::initStream()
 	mInputBuffer->setMaxNumChannels(mNumInputChannels);
 	mInputBuffer->setNumChannels(mNumInputChannels);
 	mInputBuffer->setVectorSizeWithInt(mVectorSize);
-	mInputBuffer->alloc();
 
 	mOutputBuffer->setMaxNumChannels(mNumOutputChannels);
 	mOutputBuffer->setNumChannels(mNumOutputChannels);
 	mOutputBuffer->setVectorSizeWithInt(mVectorSize);
-	mOutputBuffer->alloc();
 
 	if (shouldRun)
 		start();
@@ -353,8 +351,11 @@ TTInt32 TTAudioEngine::callback(const TTFloat32*		input,
 	// right now we copy all of the channels, regardless of whether or not they are actually being used
 	// TODO: only copy the channels that actually contain new audio samples
 	for (unsigned int i=0; i<frameCount; i++) {
-		for (TTUInt16 channel=0; channel<mNumInputChannels; channel++)
-			mInputBuffer->mSampleVectors[channel][i] = *input++;
+		for (TTUInt16 channel=0; channel<mNumInputChannels; channel++) {
+			//mInputBuffer->mSampleVectors[channel][i] = *input++;
+			mInputBuffer->set2d(i, channel, *input);
+			input++;
+		}
     }
 
 	// notify any observers that we are about to process a vector
@@ -365,8 +366,12 @@ TTInt32 TTAudioEngine::callback(const TTFloat32*		input,
 	// right now we copy all of the channels, regardless of whether or not they are actually being used
 	// TODO: only copy the channels that actually contain new audio samples
 	for (unsigned int i=0; i<frameCount; i++) {
-		for (TTUInt16 channel=0; channel<mNumOutputChannels; channel++)
-			*output++ = TTClip(mOutputBuffer->mSampleVectors[channel][i], -1.0, 1.0);
+		for (TTUInt16 channel=0; channel<mNumOutputChannels; channel++) {
+			//*output++ = TTClip(mOutputBuffer->mSampleVectors[channel][i], -1.0, 1.0);
+			TTLimit(*output, -1.0f, 1.0f);
+			mOutputBuffer->get2d(i, channel, *output);
+			output++;
+		}
     }
     return 0;
 }

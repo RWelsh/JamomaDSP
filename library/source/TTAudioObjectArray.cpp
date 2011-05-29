@@ -149,11 +149,17 @@ TTErr TTAudioObjectArray::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSign
 	TTAudioSignal&	in = inputs->getSignal(0);
 	TTAudioSignal&	out = outputs->getSignal(0);
 	TTUInt16		channelCount = TTAudioSignal::getMinChannelCount(in, out);
-	TTUInt16		vs = in.getVectorSizeAsInt();
+//	TTUInt16		vs = in.getVectorSizeAsInt();
 
 	for (TTUInt16 channel=0; channel<channelCount; channel++) {
-		mInputChannelSignal->setVector(0, vs, in.mSampleVectors[channel]);
-		mOutputChannelSignal->setVector(0, vs, out.mSampleVectors[channel]);
+
+		
+// FIXME: COMMENTING OUT TEMPORARILY TO AVOID THIS ISSUE --
+// TODO: NEED TO BE ABLE TO REFERENCE SUBSETS OF CHANNELS WITHOUT COPYING!
+//		mInputChannelSignal->setVector(0, vs, in.mSampleVectors[channel]);
+//		mOutputChannelSignal->setVector(0, vs, out.mSampleVectors[channel]);
+
+		
 		mInstances[channel]->process(mInputChannelSignal, mOutputChannelSignal);
 	}
 	return kTTErrNone;

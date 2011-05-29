@@ -130,12 +130,12 @@ TTErr TTAudioObject::defaultCalculateMethod(const TTFloat64& x, TTFloat64& y, TT
 	TTObjectInstantiate(kTTSym_audiosignal, &in, kTTVal1);
 	TTObjectInstantiate(kTTSym_audiosignal, &out, kTTVal1);
 	
-	in->allocWithVectorSize(1);
-	out->allocWithVectorSize(1);
+	in->setVectorSizeWithInt(1);
+	out->setVectorSizeWithInt(1);
 	
-	in->mSampleVectors[0][0] = x;
+	in->set2d(0, 0, x);
 	err = process(in, out);
-	y = out->mSampleVectors[0][0];
+	out->get2d(0, 0, y);
 	
 	TTObjectRelease(&in);
 	TTObjectRelease(&out);
@@ -255,34 +255,6 @@ TTErr TTAudioObject::calculate(const TTValue& x, TTValue& y)
 		unlock();
 	}
 	return err;
-}
-
-
-// Note that we can implement this function here like this, but unforunately, due to the dynamic binding
-// it can't inline the calculate method, and thus it we lose all of the benefits of block processing.
-// Therefore, we have a version of this in macro form that can be used.
-TTErr TTAudioObject::calculateProcess(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPtr outputs)
-{
-	TTAudioSignal&	in = inputs->getSignal(0);
-	TTAudioSignal&	out = outputs->getSignal(0);
-	TTUInt16		vs;
-	TTSampleValue*	inSample;
-	TTSampleValue*	outSample;
-	TTUInt16		numchannels = TTAudioSignal::getMinChannelCount(in, out);
-	TTPtrSizedInt	channel;
-	
-	for (channel=0; channel<numchannels; channel++) {
-		inSample = in.mSampleVectors[channel];
-		outSample = out.mSampleVectors[channel];
-		vs = in.getVectorSizeAsInt();
-		
-		while (vs--) {
-			calculate(*inSample, *outSample);
-			outSample++;
-			inSample++;
-		}
-	}
-	return kTTErrNone;
 }
 
 

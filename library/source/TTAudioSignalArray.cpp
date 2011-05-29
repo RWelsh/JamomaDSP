@@ -54,10 +54,10 @@ void TTAudioSignalArray::releaseAll()
 		TTObjectRelease(&audioSignals[i]);
 }
 
-void TTAudioSignalArray::allocAllWithVectorSize(TTUInt16 vs)
+void TTAudioSignalArray::setVectorSize(TTUInt16 vs)
 {
 	for (TTUInt16 i=0; i<maxNumAudioSignals; i++)
-		audioSignals[i]->allocWithVectorSize(vs);
+		audioSignals[i]->setVectorSizeWithInt(vs);
 }
 
 TTUInt16 TTAudioSignalArray::getVectorSize()
