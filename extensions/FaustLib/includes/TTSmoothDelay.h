@@ -17,7 +17,7 @@ class TTSmoothDelay : TTAudioObject {
 	TTCLASS_SETUP(TTSmoothDelay)
 
 	TTFloat64			mInterpolation, mFeedback, mDelay, fSlow0, fSlow1, fSlow2, fSlow3, fSlow4, fSlow5, fSlow6, fConst0, fConst1;
-	//TTSampleVector		IOTA; // is there a TTSampleVector for ints?
+	TTUInt64			mDelayInSamples, mDelayMaxInSamples;
 	TTSampleVector		fRec11, fRec10;
 	TTSampleVector		fRec01;
 	TTSampleVector		fRec02;
@@ -28,7 +28,6 @@ class TTSmoothDelay : TTAudioObject {
 	TTSampleVector		fRec30;
 	TTSampleVector		fRec41;
 	TTSampleVector		fRec40;
-	TTUInt64			mDelayMaxInSamples;
 	TTDelayBufferVector	mBuffers;//IOTA;
 		
 	/**	Receives notifications when there are changes to the inherited 
@@ -44,7 +43,7 @@ class TTSmoothDelay : TTAudioObject {
 	
 	void calculateCoefficients();
     /**	Standard single value calculate method as used by DSP objects. */
-	inline TTErr calculateValue(const TTFloat64& input0, TTFloat64& output0, TTPtrSizedInt channel);
+	inline TTErr calculateValue(const TTFloat64& input0, TTFloat64& output0, TTDelayBufferPtr buffer, TTPtrSizedInt channel);
 	
 	/**	Standard audio processing method as used by TTBlue objects. */
 	TTErr processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPtr outputs);
@@ -52,6 +51,7 @@ class TTSmoothDelay : TTAudioObject {
 	/**	Setter for the frequency attribute. */
 	TTErr setFeedback(const TTValue& value);
 	TTErr setDelay(const TTValue& value);
+	TTErr setDelayInSamples(const TTValue& newValue);
 	TTErr setInterpolation(const TTValue& value);
 };
 

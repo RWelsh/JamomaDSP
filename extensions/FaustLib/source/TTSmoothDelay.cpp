@@ -1,5 +1,5 @@
 /* 
- * TTBlue Fourth-order CryBaby effect made using moog_vcf
+ *
  * Copyright © 2011, Nils Peters, ported from FAUST
  * 
  * License: This code is licensed under the terms of the "New BSD License"
@@ -20,6 +20,7 @@ mDelayMaxInSamples(524288)
 {  		
 	// register attributes
 	addAttributeWithSetter(Delay,				kTypeFloat64);
+	addAttributeWithSetter(DelayInSamples,		kTypeInt64);
 	addAttributeWithSetter(Feedback,			kTypeFloat64);
 	addAttributeWithSetter(Interpolation,		kTypeFloat64);
 	// register for notifications from the parent class so we can allocate memory as required
@@ -31,9 +32,10 @@ mDelayMaxInSamples(524288)
 
 	// Set Defaults...
 	setAttributeValue(kTTSym_maxNumChannels, arguments);		// This attribute is inherited
-	setAttributeValue(TT("delay"),			0.0);
-	setAttributeValue(TT("feedback"),		0.0);
-	setAttributeValue(TT("interpolation"),	0.0);
+	setAttributeValue(TT("delay"),				0.0);
+	setAttributeValue(TT("delayInSamples"),		0.0);
+	setAttributeValue(TT("feedback"),			0.0);
+	setAttributeValue(TT("interpolation"),		0.0);
 	setProcessMethod(processAudio);
 	setCalculateMethod(calculateValue);
 		
@@ -64,7 +66,7 @@ TTErr TTSmoothDelay::init(TTUInt64 newDelayMaxInSamples)
 	return kTTErrNone;
 }
 
-void TTDelay::reset()
+void TTSmoothDelay::reset()
 {
 	for (TTDelayBufferIter buffer = mBuffers.begin(); buffer != mBuffers.end(); ++buffer)
 		buffer->setDelay(mDelayInSamples);
@@ -89,17 +91,6 @@ TTErr TTSmoothDelay::updateMaxNumChannels(const TTValue& oldMaxNumChannels)
 	return init(mDelayMaxInSamples);
 }
 
-
-TTErr TTSmoothDelay::updateSampleRate(const TTValue& oldSampleRate)
-{
-	
-	fConst0 = (1e+03 / sr);
-	fConst1 = (0.001 * sr);
-	calculateCoefficients();
-	return kTTErrNone;
-}
-
-
 TTErr TTSmoothDelay::clear()
 {
 	fRec00.assign(maxNumChannels, 0.0);
@@ -119,26 +110,46 @@ TTErr TTSmoothDelay::clear()
 }
 
 
+TTErr TTSmoothDelay::updateSampleRate(const TTValue& oldSampleRate)
+{
+	
+	fConst0 = (1e+03 / sr);
+	fConst1 = (0.001 * sr);
+	setAttributeValue(TT("delayInSamples"),		mDelayInSamples);
+	calculateCoefficients();
+	return kTTErrNone;
+}
+
+TTErr TTSmoothDelay::setDelayInSamples(const TTValue& newValue)
+{
+	
+	mDelayInSamples = newValue;
+	calculateCoefficients();
+	return kTTErrNone;
+}
+
+
 TTErr TTSmoothDelay::setDelay(const TTValue& newValue)
 {
 	mDelay = newValue; //TODO: make sure value is in range 
-	//fslider2 = mPosition;
+	mDelayInSamples = mDelay * fConst1;
 	calculateCoefficients();
+	reset();
+	//fslider2 = mPosition;
+	
 	return kTTErrNone;
 }	
 
 TTErr TTSmoothDelay::setFeedback(const TTValue& newValue)
 {
-	mFeedback = newValue;
-	//fslider0 = mFeedback;
+	mFeedback = newValue;	//fslider0 = mFeedback;
 	calculateCoefficients();
 	return kTTErrNone;
 }
 
 TTErr TTSmoothDelay::setInterpolation(const TTValue& newValue)
 {
-	mInterpolation = newValue;
-	//fslider1 = mInterpolation;
+	mInterpolation = newValue;	//fslider1 = mInterpolation;
 	calculateCoefficients();
 	return kTTErrNone;
 }
@@ -151,19 +162,70 @@ void TTSmoothDelay::calculateCoefficients()
 	 	fSlow3 = (fConst1 * mDelay);
 }
 
-inline TTErr TTSmoothDelay::calculateValue(const TTFloat64& input0, TTFloat64& output0, TTPtrSizedInt channel)
-{  	/*
+
+#if 0
+#pragma mark -
+#pragma mark dsp routines
+#endif
+
+
+#define TTSMOOTHDELAY_WRAP_CALCULATE_METHOD(methodName) \
+TTAudioSignal&		in = inputs->getSignal(0); \
+TTAudioSignal&		out = outputs->getSignal(0); \
+TTUInt16			vs; \
+TTSampleValue*		inSample; \
+TTSampleValue*		outSample; \
+TTUInt16			numchannels = TTAudioSignal::getMinChannelCount(in, out); \
+TTPtrSizedInt		channel; \
+TTDelayBufferPtr	buffer; \
+\
+for (channel=0; channel<numchannels; channel++) { \
+inSample = in.mSampleVectors[channel]; \
+outSample = out.mSampleVectors[channel]; \
+vs = in.getVectorSizeAsInt(); \
+buffer = &mBuffers[channel]; \
+\
+while (vs--) { \
+methodName (*inSample, *outSample, buffer, channel); \
+outSample++; \
+inSample++; \
+} \
+}\
+return kTTErrNone;
+
+
+TTErr TTSmoothDelay::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPtr outputs)
+{
+	TTSMOOTHDELAY_WRAP_CALCULATE_METHOD(calculateValue);
+}
+
+
+inline TTErr TTSmoothDelay::calculateValue(const TTFloat64& input0, TTFloat64& output0, TTDelayBufferPtr buffer, TTPtrSizedInt channel)
+{  	
+	
+	TTSampleValue	a, b; 
+	
+	/*
 	*buffer->mWritePointer++ = x;		// write the input into our buffer
 	y = *buffer->mReadPointer++;		// fetch the output from our buffer
 	*/
-   	double fTemp0 = ((double)input0 + (fSlow0 * fRec01[channel]));
-	buffer->mWritePointer++ = fTemp0;
-	double fTemp1 = ((int((fRec11[channel] != 0.0)))?((int(((fRec21[channel] > 0.0) & (fRec21[channel] < 1.0))))?fRec11[channel]:0):((int(((fRec21[channel] == 0.0) & (fSlow3 != fRec31[channel]))))?fSlow1:((int(((fRec21[channel] == 1.0) & (fSlow3 != fRec41[channel]))))?fSlow2:0)));
+   	TTFloat64 fTemp0 = (input0 + (fSlow0 * fRec01[channel]));
+	*buffer->mWritePointer++ = fTemp0;
+	
+	if (buffer->mWritePointer > buffer->tail())
+		buffer->mWritePointer = buffer->head();
+	
+	// getting the right values from the delayline
+	a = *buffer->wrapPointer(buffer->mReadPointer -int(fRec40[channel]));
+	b = *buffer->wrapPointer(buffer->mReadPointer -int(fRec30[channel]));
+	
+	
+	TTFloat64 fTemp1 = ((int((fRec11[channel] != 0.0)))?((int(((fRec21[channel] > 0.0) & (fRec21[channel] < 1.0))))?fRec11[channel]:0):((int(((fRec21[channel] == 0.0) & (fSlow3 != fRec31[channel]))))?fSlow1:((int(((fRec21[channel] == 1.0) & (fSlow3 != fRec41[channel]))))?fSlow2:0)));
 	fRec10[channel] = fTemp1;
 	fRec20[channel] = max(0.0, min(1.0, (fRec21[channel] + fTemp1)));
 	fRec30[channel] = ((int(((fRec21[channel] >= 1.0) & (fRec41[channel] != fSlow3))))?fSlow3:fRec31[channel]);
 	fRec40[channel] = ((int(((fRec21[channel] <= 0.0) & (fRec31[channel] != fSlow3))))?fSlow3:fRec41[channel]);
-	fRec00[channel] = ((fRec20[channel] * mBuffers[(IOTA[channel]-int((int(fRec40[channel]) & 524287)))&524287]) + ((1.0 - fRec20[channel]) * mBuffers[(IOTA[channel]-int((int(fRec30[channel]) & 524287)))&524287]));
+	fRec00[channel] = (fRec20[channel] * a + ((1.0 - fRec20[channel]) * b));
 	output0 = fRec00[channel];
 	// post processing
 	fRec01[channel] = fRec00[channel];
@@ -171,15 +233,16 @@ inline TTErr TTSmoothDelay::calculateValue(const TTFloat64& input0, TTFloat64& o
 	fRec31[channel] = fRec30[channel];
 	fRec21[channel] = fRec20[channel];
 	fRec11[channel] = fRec10[channel];
-	//IOTA[channel] = IOTA[channel]+1;
+	
+	buffer->mReadPointer++;
+	if (buffer->mReadPointer > buffer->tail())
+		buffer->mReadPointer = buffer->head();
+	
 	return kTTErrNone;
 }
 
 
-TTErr TTSmoothDelay::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPtr outputs)
-{
-	TT_WRAP_CALCULATE_METHOD(calculateValue);
-}
+
 
 
 
@@ -266,6 +329,7 @@ public:
 			fRec3[0] = ((int(((fRec2[1] >= 1.0) & (fRec4[1] != fSlow3))))?fSlow3:fRec3[1]);
 			fRec4[0] = ((int(((fRec2[1] <= 0.0) & (fRec3[1] != fSlow3))))?fSlow3:fRec4[1]);
 			fRec0[0] = ((fRec2[0] * fVec0[(IOTA-int((int(fRec4[0]) & 524287)))&524287]) + ((1.0 - fRec2[0]) * fVec0[(IOTA-int((int(fRec3[0]) & 524287)))&524287]));
+ 
 			output0[i] = (FAUSTFLOAT)fRec0[0];
 			// post processing
 			fRec0[1] = fRec0[0];
