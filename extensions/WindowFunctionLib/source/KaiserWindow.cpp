@@ -17,6 +17,7 @@
 TT_AUDIO_CONSTRUCTOR
 {
 	addAttributeWithSetter(Beta, kTypeFloat64);
+	addAttributeWithSetter(Alpha, kTypeFloat64);
 	
 	setAttributeValue(TT("beta"), 6.0);
 
@@ -50,29 +51,41 @@ TTFloat64 KaiserWindow::BesselFunctionI0(TTFloat64 x)
 }
 
 
-TTErr KaiserWindow::setBeta(const TTValue& newValue)
+TTErr KaiserWindow::setAlpha(const TTValue& newValue)
 {
-	mBeta = newValue;
+	mAlpha = newValue;
+	mBeta = mAlpha * kTTPi;
 	mBesselIOofBeta = BesselFunctionI0(mBeta);
+	// the following 3 lines can be used for testing; comment out when not in use
+	//TTLogMessage("alpha: %f\n", mAlpha); 
+	//TTLogMessage("beta: %f\n", mBeta); 
+	//TTLogMessage("besselOfBeta: %f\n", mBesselIOofBeta); 
 	return kTTErrNone;
 }
 
+TTErr KaiserWindow::setBeta(const TTValue& newValue)
+{
+	mBeta = newValue;
+	mAlpha = mBeta / kTTPi;
+	mBesselIOofBeta = BesselFunctionI0(mBeta);
+	// the following 3 lines can be used for testing; comment out when not in use
+	//TTLogMessage("alpha: %f\n", mAlpha); 
+	//TTLogMessage("beta: %f\n", mBeta); 
+	//TTLogMessage("besselOfBeta: %f\n", mBesselIOofBeta); 
+	return kTTErrNone;
+}
 
-// hanning(x) = 0.5 + 0.5*cos(2*PI*(x-0.5))
 TTErr KaiserWindow::calculateValue(const TTFloat64& x, TTFloat64& y, TTPtrSizedInt data)
 {
-//	double wn;
-//	double two_n_over_m_minus_one;
-		
-//	for (i = 0; i < size; i++) {
-//		two_n_over_m_minus_one = ((2.0 * i) / (double)size) - 1;
-//		wn = buffer_besselfn_I0(beta * sqrt(1.0 - (two_n_over_m_minus_one * two_n_over_m_minus_one))) / mBesselIOofBeta;
-//		x->b_samples[i] *= wn;
-//	}
+	// rewritten on 26 April 2011 by Nathan Wolek
 	
-	y = BesselFunctionI0(mBeta * sqrt(1.0 - ((2.0*x) * (2.0*x))))   /   mBesselIOofBeta;
-	
-//	y = 0.54 + 0.46*cos(kTTTwoPi*(x-0.5));
+	TTFloat64	two_x_minusone = 2.0 * x - 1;
+	TTFloat64	temp = 1.0 - (two_x_minusone * two_x_minusone);
+	TTFloat64	temp2 = sqrt(temp);
+	TTFloat64	temp3 = mBeta * temp2;
+	TTFloat64	temp4 = BesselFunctionI0(temp3);
+
+	y = temp4 / mBesselIOofBeta;
 	return kTTErrNone;
 }
 

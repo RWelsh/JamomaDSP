@@ -18,7 +18,6 @@
 		22D8C6E1131479CA008F80C7 /* TTAllpass2b.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22D8C6D3131479CA008F80C7 /* TTAllpass2b.cpp */; };
 		22D8C6E2131479CA008F80C7 /* TTAllpass2c.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22D8C6D4131479CA008F80C7 /* TTAllpass2c.cpp */; };
 		22D8C6E3131479CA008F80C7 /* TTAllpass4a.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22D8C6D5131479CA008F80C7 /* TTAllpass4a.cpp */; };
-		22D8C6E4131479CA008F80C7 /* TTAverage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22D8C6D6131479CA008F80C7 /* TTAverage.cpp */; };
 		22D8C6E5131479CA008F80C7 /* TTBandpassButterworth2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22D8C6D7131479CA008F80C7 /* TTBandpassButterworth2.cpp */; };
 		22D8C6E6131479CA008F80C7 /* TTBandrejectButterworth2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22D8C6D8131479CA008F80C7 /* TTBandrejectButterworth2.cpp */; };
 		22D8C6E7131479CA008F80C7 /* TTDCBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22D8C6D9131479CA008F80C7 /* TTDCBlock.cpp */; };
@@ -48,10 +47,10 @@
 		22D8C719131479D7008F80C7 /* TTMirrorBandpass10.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22D8C6FF131479D7008F80C7 /* TTMirrorBandpass10.cpp */; };
 		22D8C71A131479D7008F80C7 /* TTOnePole.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22D8C700131479D7008F80C7 /* TTOnePole.cpp */; };
 		22D8C71B131479D7008F80C7 /* TTSvf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22D8C701131479D7008F80C7 /* TTSvf.cpp */; };
-		22D8C75D13147E96008F80C7 /* TTAllpass1-test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22D8C75C13147E96008F80C7 /* TTAllpass1-test.cpp */; };
 		22FA622E11E21BE20097F43B /* JamomaDSP.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA622D11E21BE20097F43B /* JamomaDSP.dylib */; };
 		22FA623311E21BE60097F43B /* JamomaFoundation.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA623211E21BE60097F43B /* JamomaFoundation.dylib */; };
 		22FD464F11E24714007BBF7E /* FilterLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FD464E11E24714007BBF7E /* FilterLib.cpp */; };
+		6641EB8E132CA1EE00CBB37B /* TTAllpass1.test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6641EB8D132CA1EE00CBB37B /* TTAllpass1.test.cpp */; };
 		D2AAC0B105546B7500DB518D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB77AAFE841565C02AAC07 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +67,6 @@
 		22D8C6A31314777F008F80C7 /* TTAllpass2b.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTAllpass2b.h; path = includes/TTAllpass2b.h; sourceTree = "<group>"; };
 		22D8C6A41314777F008F80C7 /* TTAllpass2c.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTAllpass2c.h; path = includes/TTAllpass2c.h; sourceTree = "<group>"; };
 		22D8C6A51314777F008F80C7 /* TTAllpass4a.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTAllpass4a.h; path = includes/TTAllpass4a.h; sourceTree = "<group>"; };
-		22D8C6A61314777F008F80C7 /* TTAverage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTAverage.h; path = includes/TTAverage.h; sourceTree = "<group>"; };
 		22D8C6A71314777F008F80C7 /* TTBandpassButterworth2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTBandpassButterworth2.h; path = includes/TTBandpassButterworth2.h; sourceTree = "<group>"; };
 		22D8C6A81314777F008F80C7 /* TTBandrejectButterworth2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTBandrejectButterworth2.h; path = includes/TTBandrejectButterworth2.h; sourceTree = "<group>"; };
 		22D8C6A91314777F008F80C7 /* TTDCBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTDCBlock.h; path = includes/TTDCBlock.h; sourceTree = "<group>"; };
@@ -109,7 +107,6 @@
 		22D8C6D3131479CA008F80C7 /* TTAllpass2b.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTAllpass2b.cpp; path = source/TTAllpass2b.cpp; sourceTree = "<group>"; };
 		22D8C6D4131479CA008F80C7 /* TTAllpass2c.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTAllpass2c.cpp; path = source/TTAllpass2c.cpp; sourceTree = "<group>"; };
 		22D8C6D5131479CA008F80C7 /* TTAllpass4a.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTAllpass4a.cpp; path = source/TTAllpass4a.cpp; sourceTree = "<group>"; };
-		22D8C6D6131479CA008F80C7 /* TTAverage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTAverage.cpp; path = source/TTAverage.cpp; sourceTree = "<group>"; };
 		22D8C6D7131479CA008F80C7 /* TTBandpassButterworth2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTBandpassButterworth2.cpp; path = source/TTBandpassButterworth2.cpp; sourceTree = "<group>"; };
 		22D8C6D8131479CA008F80C7 /* TTBandrejectButterworth2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTBandrejectButterworth2.cpp; path = source/TTBandrejectButterworth2.cpp; sourceTree = "<group>"; };
 		22D8C6D9131479CA008F80C7 /* TTDCBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTDCBlock.cpp; path = source/TTDCBlock.cpp; sourceTree = "<group>"; };
@@ -139,11 +136,11 @@
 		22D8C6FF131479D7008F80C7 /* TTMirrorBandpass10.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTMirrorBandpass10.cpp; path = source/TTMirrorBandpass10.cpp; sourceTree = "<group>"; };
 		22D8C700131479D7008F80C7 /* TTOnePole.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTOnePole.cpp; path = source/TTOnePole.cpp; sourceTree = "<group>"; };
 		22D8C701131479D7008F80C7 /* TTSvf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTSvf.cpp; path = source/TTSvf.cpp; sourceTree = "<group>"; };
-		22D8C75C13147E96008F80C7 /* TTAllpass1-test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "TTAllpass1-test.cpp"; path = "tests/TTAllpass1-test.cpp"; sourceTree = "<group>"; };
 		22FA622D11E21BE20097F43B /* JamomaDSP.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = JamomaDSP.dylib; path = ../../library/build/UninstalledProducts/JamomaDSP.dylib; sourceTree = SOURCE_ROOT; };
 		22FA623211E21BE60097F43B /* JamomaFoundation.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = JamomaFoundation.dylib; path = ../../../Foundation/library/build/UninstalledProducts/JamomaFoundation.dylib; sourceTree = SOURCE_ROOT; };
 		22FA632311E230D10097F43B /* JamomaDSPExtensions.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = JamomaDSPExtensions.xcconfig; path = ../JamomaDSPExtensions.xcconfig; sourceTree = SOURCE_ROOT; };
 		22FD464E11E24714007BBF7E /* FilterLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FilterLib.cpp; sourceTree = "<group>"; };
+		6641EB8D132CA1EE00CBB37B /* TTAllpass1.test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTAllpass1.test.cpp; path = tests/TTAllpass1.test.cpp; sourceTree = "<group>"; };
 		D2AAC09D05546B4700DB518D /* FilterLib.ttdylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = FilterLib.ttdylib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -210,8 +207,8 @@
 				22D8C6CC131479CA008F80C7 /* TTAllpass.cpp */,
 				22D8C69D1314777F008F80C7 /* TTAllpass1.h */,
 				22D8C6CD131479CA008F80C7 /* TTAllpass1.cpp */,
-				22D8C75C13147E96008F80C7 /* TTAllpass1-test.cpp */,
 				22D8C69E1314777F008F80C7 /* TTAllpass1a.h */,
+				6641EB8D132CA1EE00CBB37B /* TTAllpass1.test.cpp */,
 				22D8C6CE131479CA008F80C7 /* TTAllpass1a.cpp */,
 				22D8C69F1314777F008F80C7 /* TTAllpass1aCascade2.h */,
 				22D8C6CF131479CA008F80C7 /* TTAllpass1aCascade2.cpp */,
@@ -285,8 +282,6 @@
 		226C949B1203A399009E0717 /* Other Filters */ = {
 			isa = PBXGroup;
 			children = (
-				22D8C6A61314777F008F80C7 /* TTAverage.h */,
-				22D8C6D6131479CA008F80C7 /* TTAverage.cpp */,
 				22D8C6A91314777F008F80C7 /* TTDCBlock.h */,
 				22D8C6D9131479CA008F80C7 /* TTDCBlock.cpp */,
 				22D8C6AE1314777F008F80C7 /* TTHighMidLowShelf.h */,
@@ -380,7 +375,6 @@
 				22D8C6E1131479CA008F80C7 /* TTAllpass2b.cpp in Sources */,
 				22D8C6E2131479CA008F80C7 /* TTAllpass2c.cpp in Sources */,
 				22D8C6E3131479CA008F80C7 /* TTAllpass4a.cpp in Sources */,
-				22D8C6E4131479CA008F80C7 /* TTAverage.cpp in Sources */,
 				22D8C6E5131479CA008F80C7 /* TTBandpassButterworth2.cpp in Sources */,
 				22D8C6E6131479CA008F80C7 /* TTBandrejectButterworth2.cpp in Sources */,
 				22D8C6E7131479CA008F80C7 /* TTDCBlock.cpp in Sources */,
@@ -410,7 +404,7 @@
 				22D8C719131479D7008F80C7 /* TTMirrorBandpass10.cpp in Sources */,
 				22D8C71A131479D7008F80C7 /* TTOnePole.cpp in Sources */,
 				22D8C71B131479D7008F80C7 /* TTSvf.cpp in Sources */,
-				22D8C75D13147E96008F80C7 /* TTAllpass1-test.cpp in Sources */,
+				6641EB8E132CA1EE00CBB37B /* TTAllpass1.test.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
