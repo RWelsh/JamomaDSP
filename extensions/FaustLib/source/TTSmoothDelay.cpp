@@ -47,7 +47,7 @@ TTSmoothDelay::~TTSmoothDelay()
 	;
 }
 
-TTErr TTSmoothDelay::init(TTUInt64 newDelayMaxInSamples)
+TTErr TTSmoothDelay::init(const TTValue& newDelayMaxInSamples)
 {
 	// This is called every time that:
 	// 1. maxNumChannels changes
@@ -122,10 +122,10 @@ TTErr TTSmoothDelay::updateSampleRate(const TTValue& oldSampleRate)
 
 TTErr TTSmoothDelay::setDelayInSamples(const TTValue& newValue)
 {
-	
-	mDelayInSamples = newValue;
-	calculateCoefficients();
-	return kTTErrNone;
+	 //TODO: make sure value is in range 
+	 //mDelayInSamples = newValue;
+	mDelay = ((TTFloat64)newValue) / fConst1;
+	return setDelay(mDelay);	
 }
 
 
@@ -158,7 +158,7 @@ void TTSmoothDelay::calculateCoefficients()
 {
 	 	fSlow0 = (0.01 * mFeedback);
 	 	fSlow1 = (fConst0 / mInterpolation);
-	 	fSlow2 = (0 - fSlow1);
+	 	fSlow2 = (0.0 - fSlow1);
 	 	fSlow3 = (fConst1 * mDelay);
 }
 

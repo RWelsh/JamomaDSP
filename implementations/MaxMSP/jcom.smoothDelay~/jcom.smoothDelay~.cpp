@@ -15,6 +15,6 @@
 int TTCLASSWRAPPERMAX_EXPORT main(void)
 {
 	TTDSPInit();
-	return wrapTTClassAsMaxClass(TT("smoothdelay"), "jcom.smoothDelay~", NULL);
+	return wrapTTClassAsMaxClass(TT("smoothDelay"), "jcom.smoothDelay~", NULL);
 }
 

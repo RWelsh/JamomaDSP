@@ -35,7 +35,7 @@ class TTSmoothDelay : TTAudioObject {
 	 so that each channel's previous values are remembered.		*/
 	TTErr updateMaxNumChannels(const TTValue& oldMaxNumChannels);
 	// internal - set up the buffer memory
-	TTErr init(TTUInt64 newDelayMaxInSamples);	
+	TTErr init(const TTValue& newDelayMaxInSamples);	
 	// internal - position the buffer pointers
 	void reset();
 	TTErr updateSampleRate(const TTValue& oldSampleRate);
