@@ -133,6 +133,8 @@ TTErr TTSmoothDelay::setDelay(const TTValue& newValue)
 {
 	mDelay = newValue; //TODO: make sure value is in range 
 	mDelayInSamples = mDelay * fConst1;
+	mDelayInSamples = TTClip(mDelayInSamples, (TTUInt64) 0, mDelayMaxInSamples);
+	mDelay = mDelayInSamples / fConst1;
 	calculateCoefficients();
 	reset();
 	//fslider2 = mPosition;
