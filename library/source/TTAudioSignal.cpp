@@ -207,6 +207,13 @@ TTErr TTAudioSignal::copy(const TTAudioSignal& source, TTAudioSignal& dest, TTUI
 			//*outSample++ = *inSample++;
 			source.get2d(i, channel, sample);
 			dest.set2d(i, TTClip(channel+channelOffset, 0, maxDestChannels-1), sample);
+
+
+//		//while (vs--)
+//		//	*outSample++ = *inSample++;
+//		
+//		memcpy(outSample, inSample, sizeof(TTSampleValue) * vs);
+
 		}
 	}
 	for (/*channel*/; channel<(numchannels+additionalOutputChannels-channelOffset); channel++) {
@@ -215,6 +222,11 @@ TTErr TTAudioSignal::copy(const TTAudioSignal& source, TTAudioSignal& dest, TTUI
 		vs = dest.getVectorSizeAsInt();
 		for (int i=1; i<=vs; i++)
 			dest.set2d(i, channel, sample); //*outSample++ = 0.0;
+
+//		memset(outSample, 0, sizeof(TTSampleValue) * vs);
+//		//while (vs--)
+//		//	*outSample++ = 0.0;
+
 	}
 	return kTTErrNone;
 }
