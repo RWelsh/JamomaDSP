@@ -77,12 +77,6 @@ TTErr TTAudioSignal::setMaxNumChannels(const TTValue& newMaxNumChannels)
 }
 
 
-TTUInt16 TTAudioSignal::getMaxNumChannelsAsInt() const
-{
-	return mDimensions[1];
-}
-
-
 TTErr TTAudioSignal::getMaxNumChannels(TTValue& returnedMaxNumChannels)
 {
 	returnedMaxNumChannels = getMaxNumChannelsAsInt();

@@ -154,6 +154,11 @@ public:
 	}
 	
 	
+	TTUInt16 getMaxNumChannelsAsInt() const
+	{
+		return mDimensions[1];
+	}
+	
 	TTBoolean getIsLocallyOwned()
 	{
 		return mIsLocallyOwned;
