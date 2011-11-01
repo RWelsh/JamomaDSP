@@ -10,6 +10,8 @@
 #include "TTDSP.h"
 #include "TTSoundfilePlayer.h"
 #include "TTSoundfileRecorder.h"
+#include "TTSoundfileRecorder2.h"
+
 
 
 extern "C" TT_EXTENSION_EXPORT TTErr TTLoadJamomaExtension_SoundfileLib(void)
@@ -18,6 +20,7 @@ extern "C" TT_EXTENSION_EXPORT TTErr TTLoadJamomaExtension_SoundfileLib(void)
 	
 	TTSoundfilePlayer::registerClass();
 	TTSoundfileRecorder::registerClass();
+	TTSoundfileRecorder2::registerClass();
 	
 	return kTTErrNone;
 }

@@ -21,6 +21,10 @@
 		22FD477B11E24913007BBF7E /* TTSoundfilePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FD477711E24913007BBF7E /* TTSoundfilePlayer.cpp */; };
 		22FD477C11E24913007BBF7E /* TTSoundfileRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 22FD477811E24913007BBF7E /* TTSoundfileRecorder.h */; };
 		22FD477D11E24913007BBF7E /* TTSoundfileRecorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22FD477911E24913007BBF7E /* TTSoundfileRecorder.cpp */; };
+		66140FB41458888C0002B798 /* TTSoundfileRecorder2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66140FB21458888C0002B798 /* TTSoundfileRecorder2.cpp */; };
+		66140FB51458888C0002B798 /* TTSoundfileRecorder2.h in Headers */ = {isa = PBXBuildFile; fileRef = 66140FB31458888C0002B798 /* TTSoundfileRecorder2.h */; };
+		66140FB8145888960002B798 /* sigproc_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 66140FB6145888960002B798 /* sigproc_util.c */; };
+		66140FB9145888960002B798 /* sigproc_util.h in Headers */ = {isa = PBXBuildFile; fileRef = 66140FB7145888960002B798 /* sigproc_util.h */; };
 		D2AAC0B105546B7500DB518D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB77AAFE841565C02AAC07 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +45,10 @@
 		22FD477711E24913007BBF7E /* TTSoundfilePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTSoundfilePlayer.cpp; sourceTree = "<group>"; };
 		22FD477811E24913007BBF7E /* TTSoundfileRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSoundfileRecorder.h; sourceTree = "<group>"; };
 		22FD477911E24913007BBF7E /* TTSoundfileRecorder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTSoundfileRecorder.cpp; sourceTree = "<group>"; };
+		66140FB21458888C0002B798 /* TTSoundfileRecorder2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TTSoundfileRecorder2.cpp; sourceTree = "<group>"; };
+		66140FB31458888C0002B798 /* TTSoundfileRecorder2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTSoundfileRecorder2.h; sourceTree = "<group>"; };
+		66140FB6145888960002B798 /* sigproc_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sigproc_util.c; sourceTree = "<group>"; };
+		66140FB7145888960002B798 /* sigproc_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sigproc_util.h; sourceTree = "<group>"; };
 		D2AAC09D05546B4700DB518D /* SoundfileLib.ttdylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = SoundfileLib.ttdylib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -112,6 +120,10 @@
 		2217FAAA0E4F284D00806778 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				66140FB6145888960002B798 /* sigproc_util.c */,
+				66140FB7145888960002B798 /* sigproc_util.h */,
+				66140FB21458888C0002B798 /* TTSoundfileRecorder2.cpp */,
+				66140FB31458888C0002B798 /* TTSoundfileRecorder2.h */,
 				22FD477611E24913007BBF7E /* TTSoundfilePlayer.h */,
 				22FD477711E24913007BBF7E /* TTSoundfilePlayer.cpp */,
 				22FD477811E24913007BBF7E /* TTSoundfileRecorder.h */,
@@ -130,6 +142,8 @@
 				22FD477211E248FE007BBF7E /* sndfile.h in Headers */,
 				22FD477A11E24913007BBF7E /* TTSoundfilePlayer.h in Headers */,
 				22FD477C11E24913007BBF7E /* TTSoundfileRecorder.h in Headers */,
+				66140FB51458888C0002B798 /* TTSoundfileRecorder2.h in Headers */,
+				66140FB9145888960002B798 /* sigproc_util.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +217,8 @@
 				22FD477311E248FE007BBF7E /* SoundfileLib.cpp in Sources */,
 				22FD477B11E24913007BBF7E /* TTSoundfilePlayer.cpp in Sources */,
 				22FD477D11E24913007BBF7E /* TTSoundfileRecorder.cpp in Sources */,
+				66140FB41458888C0002B798 /* TTSoundfileRecorder2.cpp in Sources */,
+				66140FB8145888960002B798 /* sigproc_util.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
