@@ -151,6 +151,19 @@ TTErr TTAudioSignal::setVector64Copy(const TTUInt16 channel, const TTUInt16 vect
 	return kTTErrNone;
 }
 
+TTErr TTAudioSignal::setClearVector(const TTUInt16 channel, const TTUInt16 vectorSize)
+{   
+	if (mBitdepth != 64 || !mIsLocallyOwned || vectorSize != mVectorSize) {
+		mBitdepth = 64;
+		mVectorSize = vectorSize;
+		alloc();
+	}
+	memset(mSampleVectors[channel],0,sizeof(TTSampleValue) * mVectorSize);	
+	//memcpy(mSampleVectors[channel], newVector, sizeof(TTSampleValue) * mVectorSize);		
+	
+	return kTTErrNone;
+}
+
 /*
 	It sucks if someone sets a 32-bit audio vector, since we have translate it into a 64-bit buffer.
 	There may be a better way to do this...

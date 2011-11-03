@@ -80,6 +80,8 @@ public:
 	TTErr setVector(const TTUInt16 channel, const TTUInt16 vectorSize, const TTSampleValuePtr newVector);
 	TTErr setVector64(const TTValue& v);	// A version of the above used by the message passing interface.
 	TTErr setVector64Copy(const TTUInt16 channel, const TTUInt16 vectorSize, const TTSampleValuePtr newVector);
+	TTErr setClearVector(const TTUInt16 channel, const TTUInt16 vectorSize);
+
 	/**	This version handles vector assignments from 32-bit vectors.
 	*/
 	TTErr setVector(const TTUInt16 channel, const TTUInt16 vectorSize, const TTFloat32* newVector);
@@ -187,7 +189,6 @@ public:
 		
 		return kTTErrNone;
 	}
-	
 	
 	TTErr fill(TTFloat64 aFillValue)
 	{
