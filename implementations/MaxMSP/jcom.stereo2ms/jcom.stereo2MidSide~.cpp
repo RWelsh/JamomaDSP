@@ -10,6 +10,10 @@
 
 int TTCLASSWRAPPERMAX_EXPORT main(void)
 {
+    WrappedClassOptionsPtr	options = new WrappedClassOptions;    
+    TTValue value(2);
+    options->append(TT("fixedNumChannels"), value);
+    
     TTDSPInit();
-	return wrapTTClassAsMaxClass(TT("stereo2MidSide"), "jcom.stereo2MidSide~", NULL);
+	return wrapTTClassAsMaxClass(TT("stereo2MidSide"), "jcom.stereo2MidSide~", NULL, options);
 }
