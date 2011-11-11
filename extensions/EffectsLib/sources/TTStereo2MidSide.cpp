@@ -6,10 +6,10 @@
  * http://creativecommons.org/licenses/BSD/
  */
 
-#include "TTStereo2ms.h"
+#include "TTStereo2MidSide.h"
 
-#define thisTTClass			TTStereo2ms
-#define thisTTClassName		"stereo2ms"
+#define thisTTClass			TTStereo2MidSide
+#define thisTTClassName		"stereo2MidSide"
 #define thisTTClassTags		"audio, processor, stereo"
 
 
@@ -19,14 +19,14 @@ TT_AUDIO_CONSTRUCTOR
 }
 
 
-TTStereo2ms::~TTStereo2ms()
+TTStereo2MidSide::~TTStereo2MidSide()
 {
 	;
 }
 
 
 
-TTErr TTStereo2ms::updateMaxNumChannels(const TTValue& oldMaxNumChannels, TTValue&)
+TTErr TTStereo2MidSide::updateMaxNumChannels(const TTValue& oldMaxNumChannels, TTValue&)
 {
     // Two channels is the only option that makes sense for this unit
     maxNumChannels = 2;
@@ -36,7 +36,7 @@ TTErr TTStereo2ms::updateMaxNumChannels(const TTValue& oldMaxNumChannels, TTValu
 
 
 
-TTErr TTStereo2ms::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPtr outputs)
+TTErr TTStereo2MidSide::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPtr outputs)
 {
 	TTAudioSignal&	in = inputs->getSignal(0);
 	TTAudioSignal&	out = outputs->getSignal(0);

@@ -6,15 +6,15 @@
  * http://creativecommons.org/licenses/BSD/
  */
 
-#ifndef __TT_STEREO2MS_H__
-#define __TT_STEREO2MS_H__
+#ifndef __TT_STEREO2MIDSIDE_H__
+#define __TT_STEREO2MIDSIDE_H__
 
 #include "TTDSP.h"
 
 
-/**	TTStereo2ms is an exceptionally simple audio processor scales an input audio signal */
-class TTStereo2ms : public TTAudioObject {
-	TTCLASS_SETUP(TTStereo2ms)
+/**	TTStereo2MidSide is an exceptionally simple audio processor scales an input audio signal */
+class TTStereo2MidSide : public TTAudioObject {
+	TTCLASS_SETUP(TTStereo2MidSide)
 
     /**	Setter for the inherited maxNumChannels attribute.		*/
 	TTErr updateMaxNumChannels(const TTValue& oldMaxNumChannels, TTValue&);
@@ -27,4 +27,4 @@ class TTStereo2ms : public TTAudioObject {
 };
 
 
-#endif // __TT_STEREO2MS_H__
+#endif // __TT_STEREO2MIDSIDE_H__

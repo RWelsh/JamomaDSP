@@ -6,10 +6,10 @@
  * http://creativecommons.org/licenses/BSD/
  */
 
-#include "TTStereo2ms.h"
+#include "TTStereo2MidSide.h"
 
 
-TTErr TTStereo2ms::test(TTValue& returnedTestInfo)
+TTErr TTStereo2MidSide::test(TTValue& returnedTestInfo)
 {
 	// preliminary setup
 	
