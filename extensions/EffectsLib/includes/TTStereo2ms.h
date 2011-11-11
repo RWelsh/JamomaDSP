@@ -16,6 +16,9 @@
 class TTStereo2ms : public TTAudioObject {
 	TTCLASS_SETUP(TTStereo2ms)
 
+    /**	Setter for the inherited maxNumChannels attribute.		*/
+	TTErr updateMaxNumChannels(const TTValue& oldMaxNumChannels, TTValue&);
+    
 	/**	A standard audio processing method as used by TTBlue objects.*/
 	TTErr processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPtr outputs);
 
