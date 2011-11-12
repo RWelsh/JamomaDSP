@@ -79,13 +79,15 @@ TTErr TTWavetable::setMode(const TTValue& newValue)
 
 TTErr TTWavetable::setInterpolation(const TTValue& newValue)
 {
-	mMode = newValue;
-	if (mMode == TT("linear"))
+	mInterpolation = newValue;
+	if (mInterpolation == TT("linear"))
 		setProcessMethod(processWithLinearInterpolation);
-	else if (mMode == TT("lfo"))
+	else if (mInterpolation == TT("lfo"))
 		setProcessMethod(processAsLFO);
-	else
+	else {
+		mInterpolation = TT("none");
 		setProcessMethod(processWithNoInterpolation);
+	}
 	return kTTErrNone;
 }
 
