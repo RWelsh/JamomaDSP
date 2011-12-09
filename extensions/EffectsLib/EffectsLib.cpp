@@ -16,6 +16,7 @@
 #include "TTPulseSub.h"
 #include "TTstereo2MidSide.h"
 #include "TTThru.h"
+#include "TTWaveshaper.h"
 
 
 extern "C" TT_EXTENSION_EXPORT TTErr TTLoadJamomaExtension_EffectsLib(void)
@@ -30,6 +31,7 @@ extern "C" TT_EXTENSION_EXPORT TTErr TTLoadJamomaExtension_EffectsLib(void)
 	TTPulseSub::registerClass();
     TTStereo2MidSide::registerClass();
 	TTThru::registerClass();	
+	TTWaveshaper::registerClass();	
 	
 	return kTTErrNone;
 }
