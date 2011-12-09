@@ -9,8 +9,10 @@ sources:
   - sources/TTPulseSub.cpp    
   - sources/TTThru.cpp  
   - sources/TTWaveshaper.cpp
+  - sources/TTStereo2MidSide.cpp
   - tests/TTGain.test.cpp
   - tests/TTThru.test.cpp
+  - tests/TTStereo2MidSide.test.cpp
   
 includes:
   - "includes"

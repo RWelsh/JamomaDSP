@@ -26,6 +26,8 @@
 		666CF859131B426A0003D7E2 /* TTLimiter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666CF852131B426A0003D7E2 /* TTLimiter.cpp */; };
 		666CF85A131B426A0003D7E2 /* TTOverdrive.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666CF853131B426A0003D7E2 /* TTOverdrive.cpp */; };
 		666CF85B131B426A0003D7E2 /* TTPulseSub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 666CF854131B426A0003D7E2 /* TTPulseSub.cpp */; };
+		667BC81C14928DE600443D31 /* TTWaveshaper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 667BC81B14928DE600443D31 /* TTWaveshaper.cpp */; };
+		667BC81E14928DEE00443D31 /* TTWaveshaper.h in Headers */ = {isa = PBXBuildFile; fileRef = 667BC81D14928DEE00443D31 /* TTWaveshaper.h */; };
 		A7B7A4A4146D332D008BA94A /* TTstereo2MidSide.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B7A4A3146D332D008BA94A /* TTstereo2MidSide.h */; };
 		A7B7A4A6146D3335008BA94A /* TTstereo2MidSide.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7B7A4A5146D3335008BA94A /* TTstereo2MidSide.cpp */; };
 		A7B7A4A8146D333C008BA94A /* TTstereo2MidSide.test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A7B7A4A7146D333C008BA94A /* TTstereo2MidSide.test.cpp */; };
@@ -54,6 +56,8 @@
 		666CF852131B426A0003D7E2 /* TTLimiter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTLimiter.cpp; path = sources/TTLimiter.cpp; sourceTree = "<group>"; };
 		666CF853131B426A0003D7E2 /* TTOverdrive.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTOverdrive.cpp; path = sources/TTOverdrive.cpp; sourceTree = "<group>"; };
 		666CF854131B426A0003D7E2 /* TTPulseSub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTPulseSub.cpp; path = sources/TTPulseSub.cpp; sourceTree = "<group>"; };
+		667BC81B14928DE600443D31 /* TTWaveshaper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTWaveshaper.cpp; path = sources/TTWaveshaper.cpp; sourceTree = "<group>"; };
+		667BC81D14928DEE00443D31 /* TTWaveshaper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTWaveshaper.h; path = includes/TTWaveshaper.h; sourceTree = "<group>"; };
 		A7B7A4A3146D332D008BA94A /* TTstereo2MidSide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTstereo2MidSide.h; path = includes/TTstereo2MidSide.h; sourceTree = "<group>"; };
 		A7B7A4A5146D3335008BA94A /* TTstereo2MidSide.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTstereo2MidSide.cpp; path = sources/TTstereo2MidSide.cpp; sourceTree = "<group>"; };
 		A7B7A4A7146D333C008BA94A /* TTstereo2MidSide.test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TTstereo2MidSide.test.cpp; path = tests/TTstereo2MidSide.test.cpp; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 				22994089134ACEAF0068439F /* TTThru.h */,
 				2299408B134ACEB80068439F /* TTThru.cpp */,
 				2299408D134AD05B0068439F /* TTThru.test.cpp */,
+				667BC81B14928DE600443D31 /* TTWaveshaper.cpp */,
+				667BC81D14928DEE00443D31 /* TTWaveshaper.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -153,6 +159,7 @@
 				666CF84D131B42620003D7E2 /* TTPulseSub.h in Headers */,
 				2299408A134ACEAF0068439F /* TTThru.h in Headers */,
 				A7B7A4A4146D332D008BA94A /* TTstereo2MidSide.h in Headers */,
+				667BC81E14928DEE00443D31 /* TTWaveshaper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +245,7 @@
 				2299408E134AD05B0068439F /* TTThru.test.cpp in Sources */,
 				A7B7A4A6146D3335008BA94A /* TTstereo2MidSide.cpp in Sources */,
 				A7B7A4A8146D333C008BA94A /* TTstereo2MidSide.test.cpp in Sources */,
+				667BC81C14928DE600443D31 /* TTWaveshaper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
