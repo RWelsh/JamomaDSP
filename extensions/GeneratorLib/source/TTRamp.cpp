@@ -23,6 +23,8 @@ TT_AUDIO_CONSTRUCTOR
 	
 	addMessage(Stop);
 	addMessage(RampTimeInSamples);
+	addMessageWithArguments(messageOut);
+		addMessageProperty(messageOut, hidden, YES);
 
 	setAttributeValue(TT("mode"), TT("vector"));
 }
@@ -32,6 +34,16 @@ TTRamp::~TTRamp()
 {
 	;
 }
+
+TTErr TTRamp::messageOut(const TTValue& message)
+{   
+	TTValue news;
+	news = message;
+	news.toString(); 
+	this->sendNotification(TT("receivedMessage"), news);
+	return kTTErrNone;
+}
+
 
 
 TTErr TTRamp::RampTimeInSamples(const TTValue& newValue)
@@ -71,6 +83,7 @@ TTErr TTRamp::setRampTime(const TTValue& newValue)
 TTErr TTRamp::setMode(const TTValue& newValue)
 {
 	attrMode = newValue;
+	messageOut(TT("grrr"));
 	setupProcess();
 	return kTTErrNone;
 }
@@ -119,6 +132,10 @@ TTErr TTRamp::processVectorAccurateDown(TTAudioSignalArrayPtr inputs, TTAudioSig
 				attrCurrentValue = attrDestinationValue;	// clamp
 			}
 		}
+		/*else {
+			//TTLogMessage("done");
+			messageOut(TT("done"), kTTValNONE);			
+		}*/
 		*outSample = attrCurrentValue;
 	}
 	return kTTErrNone;
@@ -137,10 +154,14 @@ TTErr TTRamp::processVectorAccurateUp(TTAudioSignalArrayPtr inputs, TTAudioSigna
 		if (step) {
 			attrCurrentValue += (step * out.getVectorSizeAsInt());
 			if (attrCurrentValue >= attrDestinationValue) {
-				step = 0;
+				step = 0;				
 				attrCurrentValue = attrDestinationValue;	// clamp
 			}
-		}
+		} 
+		/*else {
+		 //TTLogMessage("done");
+		 messageOut(TT("done"), kTTValNONE);			
+		 }*/
 		*outSample = attrCurrentValue;
 	}
 	return kTTErrNone;
@@ -166,6 +187,10 @@ TTErr TTRamp::processSampleAccurateDown(TTAudioSignalArrayPtr inputs, TTAudioSig
 					attrCurrentValue = attrDestinationValue; // clamp
 				}
 			}
+			/*else {
+			 //TTLogMessage("done");
+			 messageOut(TT("done"), kTTValNONE);			
+			 }*/
 			*outSample++ = attrCurrentValue;	
 		}
 	}
@@ -192,6 +217,10 @@ TTErr TTRamp::processSampleAccurateUp(TTAudioSignalArrayPtr inputs, TTAudioSigna
 					attrCurrentValue = attrDestinationValue; // clamp
 				}
 			}
+			/*else {
+			 //TTLogMessage("done");
+			 messageOut(TT("done"), kTTValNONE);			
+			 }*/		
 			*outSample++ = attrCurrentValue;	
 		}
 	}
