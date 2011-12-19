@@ -1,0 +1,16 @@
+
+sources:
+  - FaustLib.cpp
+  - sources/TTCryBaby.cpp
+  - sources/TTDistortion.cpp
+  - sources/TTSmoothDelay.cpp
+  - sources/TTWah.cpp
+  
+includes:
+  - "includes"
+  - "../../library/includes"
+  - "../../../Foundation/library/includes"
+
+libraries:
+  - FOUNDATION
+  - DSP
