@@ -73,7 +73,7 @@ protected:
 	TTFloat64				srInv;						///< 1.0 over the current sample rate (inverse)
 	TTFloat64				srMill;						///< 1/1000 of the current sample rate (samples per millisecond)
 	TTUInt16				maxNumChannels;				///< This is the maximum number of channels that can be guaranteed to work
-	TTBoolean				attrProcessInPlace;			///< This flag indicates that the object should process the samples "in-place", such that the processed samples are actually in the input
+	TTBoolean				unused;						// old var that is not used anymore, but we want to keep the struct size the same
 	TTBoolean				attrBypass;					///< Are we bypassing the processMethod?
 	TTBoolean				attrMute;					///< Mute the processMethod.
 	TTProcessMethod			processMethod;				///< This function pointer points to the active (non-bypass) processing routine.
@@ -99,7 +99,7 @@ protected:
 	TTErr resetBenchmarking();
 	
 	/**	Return the average time spent by this object processing audio since the last reset.					*/
-	TTErr getProcessingBenchmark(TTValueRef v);
+	TTErr getProcessingBenchmark(TTValueConstRef, TTValueRef v);
 	
 public:
 	/** Mute the audio processing routine and zero all output.												*/
@@ -147,7 +147,7 @@ public:
 	 */
 	TTErr calculate(const TTFloat64& x, TTFloat64& y);
 	TTErr calculate(const TTValue& x, TTValue& y);
-	TTErr calculateMessage(TTValue& v);
+	TTErr calculateMessage(TTValueConstRef input, TTValueRef output);
 
 	
 	/**	A process method that may be used by subclasses to wrap a calculate method in a semi-standard way.

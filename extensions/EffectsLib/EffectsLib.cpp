@@ -14,8 +14,10 @@
 #include "TTGain.h"
 #include "TTLimiter.h"
 #include "TTOverdrive.h"
+#include "TTPanorama.h"
 #include "TTPulseSub.h"
 #include "TTThru.h"
+#include "TTWaveshaper.h"
 
 
 extern "C" TT_EXTENSION_EXPORT TTErr TTLoadJamomaExtension_EffectsLib(void)
@@ -27,8 +29,10 @@ extern "C" TT_EXTENSION_EXPORT TTErr TTLoadJamomaExtension_EffectsLib(void)
 	TTGain::registerClass();	
 	TTLimiter::registerClass();	
 	TTOverdrive::registerClass();	
+	TTPanorama::registerClass();
 	TTPulseSub::registerClass();	
 	TTThru::registerClass();	
+	TTWaveshaper::registerClass();	
 	
 	return kTTErrNone;
 }

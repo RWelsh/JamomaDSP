@@ -27,7 +27,7 @@ TT_AUDIO_CONSTRUCTOR,
 	addAttributeWithSetter(Mode, kTypeSymbol);		
 	addAttributeWithSetter(Frequency, kTypeFloat64);
 	addMessage(clear);
-	addUpdate(MaxNumChannels);
+	addUpdates(MaxNumChannels);
 
 	err = TTObjectInstantiate(TT("allpass.2a"), (TTObjectPtr*)&mF0, initialMaxNumChannels);
 	err = TTObjectInstantiate(TT("allpass.1a"), (TTObjectPtr*)&mF1, initialMaxNumChannels);
@@ -47,9 +47,11 @@ TTMirror5::~TTMirror5()
 }
 
 
-TTErr TTMirror5::updateMaxNumChannels(const TTValue& oldMaxNumChannels)
+TTErr TTMirror5::updateMaxNumChannels(const TTValue& oldMaxNumChannels, TTValue&)
 {
-	// TODO: update internal filters
+	mF0->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
+	mF1->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
+	mF2->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
 	clear();
 	return kTTErrNone;
 }
@@ -57,7 +59,9 @@ TTErr TTMirror5::updateMaxNumChannels(const TTValue& oldMaxNumChannels)
 
 TTErr TTMirror5::clear()
 {
-	// TODO: update internal filters
+	mF0->sendMessage(kTTSym_clear);
+	mF1->sendMessage(kTTSym_clear);
+	mF2->sendMessage(kTTSym_clear);
 	return kTTErrNone;
 }
 

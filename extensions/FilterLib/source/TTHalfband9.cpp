@@ -32,7 +32,7 @@ TT_AUDIO_CONSTRUCTOR,
 
 	addAttributeWithSetter(Mode, kTypeSymbol);		
 	addMessage(clear);
-	addUpdate(MaxNumChannels);
+	addUpdates(MaxNumChannels);
 
 	err = TTObjectInstantiate(TT("allpass.1b"), (TTObjectPtr*)&mF0, initialMaxNumChannels);
 	err = TTObjectInstantiate(TT("allpass.1b"), (TTObjectPtr*)&mF1, initialMaxNumChannels);
@@ -84,10 +84,19 @@ TTHalfband9::~TTHalfband9()
 }
 
 
-TTErr TTHalfband9::updateMaxNumChannels(const TTValue& oldMaxNumChannels)
+TTErr TTHalfband9::updateMaxNumChannels(const TTValue& oldMaxNumChannels, TTValue&)
 {
-	// TODO: update internal filters
-
+	// update internal filters
+	mF0->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
+	mF1->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
+	mF2->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
+	mF3->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
+	mR0->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
+	mR1->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
+	mR2->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
+	mR3->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
+	mDelay->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
+	
 	mRSwitch.resize(maxNumChannels);
 	mRSwitch.assign(maxNumChannels, 0.0);
 	
@@ -103,7 +112,15 @@ TTErr TTHalfband9::updateMaxNumChannels(const TTValue& oldMaxNumChannels)
 
 TTErr TTHalfband9::clear()
 {
-	// TODO: update internal filters
+	mF0->sendMessage(kTTSym_clear);
+	mF1->sendMessage(kTTSym_clear);
+	mF2->sendMessage(kTTSym_clear);
+	mF3->sendMessage(kTTSym_clear);
+	mR0->sendMessage(kTTSym_clear);
+	mR1->sendMessage(kTTSym_clear);
+	mR2->sendMessage(kTTSym_clear);
+	mR3->sendMessage(kTTSym_clear);
+	mDelay->sendMessage(kTTSym_clear);
 	return kTTErrNone;
 }
 

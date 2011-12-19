@@ -22,7 +22,7 @@ TT_AUDIO_CONSTRUCTOR
 	
 	// Messages
 	addMessage(Clear);
-	addMessageWithArgument(updateMaxNumChannels);
+	addUpdates(MaxNumChannels);
 	
 	// Set Defaults
 	setAttributeValue(TT("MaxNumChannels"),	initialMaxNumChannels);
@@ -38,7 +38,7 @@ TTZerocross::~TTZerocross()
 }
 
 
-TTErr TTZerocross::updateMaxNumChannels(const TTValue& oldMaxNumChannels)
+TTErr TTZerocross::updateMaxNumChannels(const TTValue& oldMaxNumChannels, TTValue&)
 {
 	return Clear();
 }
@@ -87,7 +87,8 @@ TTErr TTZerocross::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignalArray
 		analysisLocation++;
 		
 		if (analysisLocation >= mSize) {
-			finalCount = ((sr * counter) * rSize) * srInv;
+			//finalCount = ((sr * counter) * rSize) * srInv;
+			finalCount = counter * rSize; //that's the same that the line above 
 			analysisLocation = 0;
 			counter = 0;
 		}
