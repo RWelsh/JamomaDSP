@@ -13,6 +13,7 @@
 #include "TTGain.h"
 #include "TTLimiter.h"
 #include "TTOverdrive.h"
+#include "TTPanorama.h"
 #include "TTPulseSub.h"
 #include "TTstereo2MidSide.h"
 #include "TTThru.h"
@@ -28,8 +29,9 @@ extern "C" TT_EXTENSION_EXPORT TTErr TTLoadJamomaExtension_EffectsLib(void)
 	TTGain::registerClass();	
 	TTLimiter::registerClass();	
 	TTOverdrive::registerClass();	
+	TTPanorama::registerClass();
 	TTPulseSub::registerClass();
-    TTStereo2MidSide::registerClass();
+	TTStereo2MidSide::registerClass();
 	TTThru::registerClass();	
 	TTWaveshaper::registerClass();	
 	
