@@ -31,6 +31,7 @@ extern "C" TT_EXTENSION_EXPORT TTErr TTLoadJamomaExtension_EffectsLib(void)
 	TTOverdrive::registerClass();	
 	TTPanorama::registerClass();
 	TTPulseSub::registerClass();	
+	TTStereo2MidSide::registerClass();
 	TTThru::registerClass();	
 	TTWaveshaper::registerClass();	
 	
