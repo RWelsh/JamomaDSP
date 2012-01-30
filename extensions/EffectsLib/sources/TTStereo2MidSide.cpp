@@ -53,17 +53,18 @@ TTErr TTStereo2MidSide::processAudio(TTAudioSignalArrayPtr inputs, TTAudioSignal
         side  = out.mSampleVectors[1];
 		vs = in.getVectorSizeAsInt();
 		while (vs--) {
-			*mid++  = 0.5*(*left + *right);
-        *side++ = 0.5*(*right++ - *left++);
+			*mid++  = 0.5*(*left    + *right);
+			*side++ = 0.5*(*right++ - *left++);
         }        
     }
     // If not 2 channels, then silence
     else {
-        for (channel=0; channel<numchannels; channel++) {
-            vs = in.getVectorSizeAsInt();
+		vs = in.getVectorSizeAsInt();
+        for (channel=0; channel<numchannels; channel++) {            
             outSample = out.mSampleVectors[channel];
-            while (vs--)
-                *outSample++ = 0.;
+			memset(outSample,0,sizeof(TTSampleValue)*vs);
+            /*while (vs--)
+                *outSample++ = 0.;*/
         }
 	}
 	return kTTErrNone;
