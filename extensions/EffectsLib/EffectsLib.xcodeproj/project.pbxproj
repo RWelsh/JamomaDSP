@@ -134,8 +134,11 @@
 				666CF852131B426A0003D7E2 /* TTLimiter.cpp */,
 				666CF846131B42620003D7E2 /* TTOverdrive.h */,
 				666CF853131B426A0003D7E2 /* TTOverdrive.cpp */,
+				661D49341497C28C006E553C /* TTPanorama.cpp */,
+				661D49361497C294006E553C /* TTPanorama.h */,
 				666CF847131B42620003D7E2 /* TTPulseSub.h */,
 				666CF854131B426A0003D7E2 /* TTPulseSub.cpp */,
+<<<<<<< HEAD
 <<<<<<< HEAD
 				A7B7A4A3146D332D008BA94A /* TTstereo2MidSide.h */,
 				A7B7A4A5146D3335008BA94A /* TTstereo2MidSide.cpp */,
@@ -144,6 +147,11 @@
 				661D49341497C28C006E553C /* TTPanorama.cpp */,
 				661D49361497C294006E553C /* TTPanorama.h */,
 >>>>>>> master
+=======
+				A7B7A4A3146D332D008BA94A /* TTstereo2MidSide.h */,
+				A7B7A4A5146D3335008BA94A /* TTstereo2MidSide.cpp */,
+				A7B7A4A7146D333C008BA94A /* TTstereo2MidSide.test.cpp */,
+>>>>>>> 07fafaf41f1229272a8e77322f3eba9bb1256b5a
 				22994089134ACEAF0068439F /* TTThru.h */,
 				2299408B134ACEB80068439F /* TTThru.cpp */,
 				2299408D134AD05B0068439F /* TTThru.test.cpp */,
@@ -165,15 +173,21 @@
 				666CF84A131B42620003D7E2 /* TTGain.h in Headers */,
 				666CF84B131B42620003D7E2 /* TTLimiter.h in Headers */,
 				666CF84C131B42620003D7E2 /* TTOverdrive.h in Headers */,
+				661D49371497C294006E553C /* TTPanorama.h in Headers */,
 				666CF84D131B42620003D7E2 /* TTPulseSub.h in Headers */,
+<<<<<<< HEAD
 				2299408A134ACEAF0068439F /* TTThru.h in Headers */,
 <<<<<<< HEAD
-				A7B7A4A4146D332D008BA94A /* TTstereo2MidSide.h in Headers */,
-				667BC81E14928DEE00443D31 /* TTWaveshaper.h in Headers */,
 =======
+>>>>>>> 07fafaf41f1229272a8e77322f3eba9bb1256b5a
+				A7B7A4A4146D332D008BA94A /* TTstereo2MidSide.h in Headers */,
+				2299408A134ACEAF0068439F /* TTThru.h in Headers */,
 				66AEA86B1485FF8A00FD0234 /* TTWaveshaper.h in Headers */,
+<<<<<<< HEAD
 				661D49371497C294006E553C /* TTPanorama.h in Headers */,
 >>>>>>> master
+=======
+>>>>>>> 07fafaf41f1229272a8e77322f3eba9bb1256b5a
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,17 +268,24 @@
 				666CF858131B426A0003D7E2 /* TTGain.test.cpp in Sources */,
 				666CF859131B426A0003D7E2 /* TTLimiter.cpp in Sources */,
 				666CF85A131B426A0003D7E2 /* TTOverdrive.cpp in Sources */,
+				661D49351497C28C006E553C /* TTPanorama.cpp in Sources */,
 				666CF85B131B426A0003D7E2 /* TTPulseSub.cpp in Sources */,
+<<<<<<< HEAD
 				2299408C134ACEB80068439F /* TTThru.cpp in Sources */,
 				2299408E134AD05B0068439F /* TTThru.test.cpp in Sources */,
 <<<<<<< HEAD
+=======
+>>>>>>> 07fafaf41f1229272a8e77322f3eba9bb1256b5a
 				A7B7A4A6146D3335008BA94A /* TTstereo2MidSide.cpp in Sources */,
 				A7B7A4A8146D333C008BA94A /* TTstereo2MidSide.test.cpp in Sources */,
-				667BC81C14928DE600443D31 /* TTWaveshaper.cpp in Sources */,
-=======
+				2299408C134ACEB80068439F /* TTThru.cpp in Sources */,
+				2299408E134AD05B0068439F /* TTThru.test.cpp in Sources */,
 				66AEA8691485FF8400FD0234 /* TTWaveshaper.cpp in Sources */,
+<<<<<<< HEAD
 				661D49351497C28C006E553C /* TTPanorama.cpp in Sources */,
 >>>>>>> master
+=======
+>>>>>>> 07fafaf41f1229272a8e77322f3eba9bb1256b5a
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
