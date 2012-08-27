@@ -8,7 +8,7 @@
 
 #define thisTTClass			TTHighMidLowShelf 
 #define thisTTClassName		"highmidlowshelf"
-#define thisTTClassTags		"audio, processor, filter"
+#define thisTTClassTags		"audio, processor, threebandfilter"
 
 
 TT_AUDIO_CONSTRUCTOR
@@ -35,9 +35,9 @@ TT_AUDIO_CONSTRUCTOR
 	addAttributeProperty(GainH,					rangeChecking,	TT("clip"));
 	
 	// register for notifications from the parent class so we can allocate memory as required
-	addUpdate(MaxNumChannels);
+	addUpdates(MaxNumChannels);
 	// register for notifications from the parent class so we can recalculate coefficients as required
-	addUpdate(SampleRate);
+	addUpdates(SampleRate);
 	// make the clear method available to the outside world
 	addMessage(clear);
 
@@ -60,7 +60,7 @@ TTHighMidLowShelf::~TTHighMidLowShelf()
 }
 
 
-TTErr TTHighMidLowShelf::updateMaxNumChannels(const TTValue& oldMaxNumChannels)
+TTErr TTHighMidLowShelf::updateMaxNumChannels(const TTValue& oldMaxNumChannels, TTValue&)
 {
 
 	mX1.resize(maxNumChannels);
@@ -71,7 +71,7 @@ TTErr TTHighMidLowShelf::updateMaxNumChannels(const TTValue& oldMaxNumChannels)
 }
 
 
-TTErr TTHighMidLowShelf::updateSampleRate(const TTValue& oldSampleRate)
+TTErr TTHighMidLowShelf::updateSampleRate(const TTValue& oldSampleRate, TTValue&)
 { 
 	return calculateCoefficients();
 }

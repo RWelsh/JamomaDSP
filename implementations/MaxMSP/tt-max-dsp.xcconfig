@@ -8,4 +8,4 @@
 
 #include "../../../supports/max/tt-max.xcconfig"
 
-OTHER_LDFLAGS = /usr/local/lib/JamomaFoundation.dylib /usr/local/lib/JamomaDSP.dylib
+OTHER_LDFLAGS = "$(FOUNDATION)/library/build"/JamomaFoundation.dylib "$(DSPLIB)/library/build"/JamomaDSP.dylib

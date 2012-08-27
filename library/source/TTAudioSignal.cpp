@@ -43,11 +43,14 @@ TTAudioSignal::TTAudioSignal(TTValue& arguments) :
 	
 	addMessage(clear);
 	
+	// addMessage(alloc);
 	addMessageWithArgument(setVector32);
 	addMessageWithArgument(getVectorCopy32);
 	addMessageWithArgument(setVector64);
 	addMessageWithArgument(getVectorCopy64);
 	
+	// addMessageProperty(alloc,					hidden, YES);
+	// addMessageProperty(allocWithNewVectorSize,	hidden, YES);
 	addMessageProperty(setVector32,		hidden, YES);
 	addMessageProperty(getVectorCopy32,	hidden, YES);
 	addMessageProperty(setVector64,		hidden, YES);
@@ -92,8 +95,7 @@ TTErr TTAudioSignal::setVector(const TTUInt16 channel, const TTUInt16 newVectorS
 	return kTTErrNone;
 }
 
-
-TTErr TTAudioSignal::setVector64(const TTValue& v)
+TTErr TTAudioSignal::setVector64(const TTValue& v, TTValue&)
 {
 	TTUInt16		channel;
 	TTUInt16		newVectorSize;
@@ -108,6 +110,17 @@ TTErr TTAudioSignal::setVector64(const TTValue& v)
 	return kTTErrWrongNumValues;
 }
 
+TTErr TTAudioSignal::setVector64Copy(const TTUInt16 channel, const TTUInt16 vectorSize, const TTSampleValuePtr newVector)
+{   
+	if (mBitdepth != 64 || !mIsLocallyOwned || vectorSize != mVectorSize) {
+		mBitdepth = 64;
+		mVectorSize = vectorSize;
+		alloc();
+	}
+	memcpy(mSampleVectors[channel], newVector, sizeof(TTSampleValue) * mVectorSize);		
+	
+	return kTTErrNone;
+}
 
 TTErr TTAudioSignal::setVector(const TTUInt16 channel, const TTUInt16 newVectorSize, const TTFloat32* newVector)
 {
@@ -117,8 +130,7 @@ TTErr TTAudioSignal::setVector(const TTUInt16 channel, const TTUInt16 newVectorS
 	return kTTErrNone;
 }
 
-
-TTErr TTAudioSignal::setVector32(const TTValue& v)
+TTErr TTAudioSignal::setVector32(const TTValue& v, TTValue&)
 {
 	TTUInt16		channel;
 	TTUInt16		newVectorSize;
@@ -142,7 +154,7 @@ TTErr TTAudioSignal::getVectorCopy(const TTUInt16 channel, const TTUInt16 theVec
 }
 
 
-TTErr TTAudioSignal::getVectorCopy64(TTValue& v)
+TTErr TTAudioSignal::getVector64(TTValue&, TTValue& v)
 {
 	TTUInt16		channel;
 	TTUInt16		theVectorSize;
@@ -165,8 +177,7 @@ TTErr TTAudioSignal::getVectorCopy(const TTUInt16 channel, const TTUInt16 theVec
 	return kTTErrNone;
 }
 
-
-TTErr TTAudioSignal::getVectorCopy32(TTValue& v)
+TTErr TTAudioSignal::getVectorCopy32(TTValue&, TTValue& v)
 {
 	TTUInt16		channel;
 	TTUInt16		theVectorSize;
@@ -180,6 +191,64 @@ TTErr TTAudioSignal::getVectorCopy32(TTValue& v)
 	}
 	return kTTErrWrongNumValues;
 }
+
+#if THIS_CAME_IN_FROM_A_MERGE_CONFLICT
+
+TTErr TTAudioSignal::alloc()
+{
+	TTUInt32	i;
+	if (mIsLocallyOwned) {
+		for (i=0; i<mMaxNumChannels; i++) {
+			TTFree16(mSampleVectors[i]);
+			mSampleVectors[i] = NULL;
+		}
+	}
+
+	for (i=0; i<mMaxNumChannels; i++) {
+		mSampleVectors[i] = (TTSampleValue*)TTMalloc16(sizeof(TTSampleValue) * mVectorSize);
+	}
+	mIsLocallyOwned = mMaxNumChannels > 0 ? true : false;
+	// we can't do this here!  we are called by the setVector method for 32bit signals!
+	//bitdepth = 64;
+	return kTTErrNone;
+}
+
+
+TTErr TTAudioSignal::allocWithVectorSize(const TTUInt16 newVectorSize)
+{
+	// NOTE: we once tried removing the check for !mIsLocallyOwned
+	// doing so causes Plugtastic plug-ins to crash in auval
+	if ((newVectorSize != mVectorSize) || !mIsLocallyOwned) {
+		mVectorSize = newVectorSize;
+		return alloc();
+	}
+	else
+		return kTTErrNone;
+}
+
+TTErr TTAudioSignal::allocWithNewVectorSize(const TTValue& newVectorSize, TTValue&)
+{
+	return allocWithVectorSize(TTUInt16(newVectorSize));
+}
+
+
+TTErr TTAudioSignal::reference(const TTAudioSignal& source, TTAudioSignal& dest)
+{
+	dest.chuck(); // sets isLocallyOwned to false
+	dest.mSampleVectors = source.mSampleVectors;
+	
+	dest.mVectorSize = source.mVectorSize;
+	dest.mMaxNumChannels = source.mMaxNumChannels;
+	dest.mNumChannels = source.mNumChannels;
+	dest.mBitdepth = source.mBitdepth;
+	dest.mSampleRate = source.mSampleRate;
+	
+	return kTTErrNone;
+}
+
+
+
+#endif // #if THIS_CAME_IN_FROM_A_MERGE_CONFLICT
 
 
 TTErr TTAudioSignal::copy(const TTAudioSignal& source, TTAudioSignal& dest, TTUInt16 channelOffset)

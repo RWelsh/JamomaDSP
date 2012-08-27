@@ -31,10 +31,10 @@
 class TT_OVERDRIVE_EXPORT TTOverdrive : public TTAudioObject {
 	TTCLASS_SETUP(TTOverdrive)
 
-	TTFloat64			mDrive;			///< Attribute:
-	TTBoolean			mDcBlocker;		///< Attribute:
-	TTUInt8				mMode;			///< Attribute:
-	TTFloat64			mPreamp;			///< Attribute: linear gain for preamp (attr setter sets it in dB)
+	TTFloat64			mDrive;			///< Attribute: The amount of saturation to apply
+	TTBoolean			mDcBlocker;		///< Attribute: Pass processed signal through a DC blocking filter?
+	TTBoolean			mMode;			///< Attribute: What distortion function to use
+	TTFloat64			mPreamp;		///< Attribute: linear gain for preamp (attr setter sets it in dB)
 	TTFloat64			s,
 						b,
 						nb,
@@ -43,7 +43,7 @@ class TT_OVERDRIVE_EXPORT TTOverdrive : public TTAudioObject {
 	TTAudioObjectPtr	dcBlockerUnit;	///< A TTDCBlock object
 
 	/**	This method gets called when the inherited maxNumChannels attribute is changed. */
-	TTErr updateMaxNumChannels(const TTValue& oldMaxNumChannels);
+	TTErr updateMaxNumChannels(const TTValue& oldMaxNumChannels, TTValue&);
 
 	/**	Process method when mode == 0	*/
 	TTErr processMode0(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPtr outputs);

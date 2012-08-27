@@ -34,8 +34,8 @@ TT_AUDIO_CONSTRUCTOR,
 	registerAttribute(TT("length"),		kTypeFloat64,	&attrLength,	(TTSetterMethod)&TTPulseSub::setLength);
 
 	// register for notifications
-	addUpdate(MaxNumChannels);
-	addUpdate(SampleRate);
+	addUpdates(MaxNumChannels);
+	addUpdates(SampleRate);
 
 	TTObjectInstantiate(kTTSym_adsr, &env_gen, initialMaxNumChannels);
 	TTObjectInstantiate(kTTSym_phasor, &phasor, initialMaxNumChannels);
@@ -67,17 +67,17 @@ TTPulseSub::~TTPulseSub()
 }
 
 
-TTErr TTPulseSub::updateSampleRate(const TTValue& oldSampleRate)
+TTErr TTPulseSub::updateSampleRate(const TTValue& oldSampleRate, TTValue&)
 {
-	phasor->setAttributeValue(kTTSym_sampleRate, (uint)sr);
-	offset->setAttributeValue(kTTSym_sampleRate, (uint)sr);
-	env_gen->setAttributeValue(kTTSym_sampleRate, (uint)sr);
-	scaler->setAttributeValue(kTTSym_sampleRate, (uint)sr);
+	phasor->setAttributeValue(kTTSym_sampleRate, (unsigned int)sr);
+	offset->setAttributeValue(kTTSym_sampleRate, (unsigned int)sr);
+	env_gen->setAttributeValue(kTTSym_sampleRate, (unsigned int)sr);
+	scaler->setAttributeValue(kTTSym_sampleRate, (unsigned int)sr);
 	return kTTErrNone;
 }
 
 
-TTErr TTPulseSub::updateMaxNumChannels(const TTValue& oldMaxNumChannels)
+TTErr TTPulseSub::updateMaxNumChannels(const TTValue& oldMaxNumChannels, TTValue&)
 {
 	phasor->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
 	offset->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);

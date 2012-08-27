@@ -55,13 +55,13 @@ public:
 			if (err == kTTErrInvalidAttribute)
 				err = mActualFilterObject->setAttributeValue(TT("resonance"), mQ);
 			mActualFilterObject->setAttributeValue(TT("bypass"), this->attrBypass);
-			mActualFilterObject->setAttributeValue(kTTSym_sampleRate, (uint)sr);
+			mActualFilterObject->setAttributeValue(kTTSym_sampleRate, (unsigned int)sr);
 		}
 		return err;
 	}
 	
 	
-	TTErr getTypes(TTValue& listOfFilterTypesToReturn)
+	TTErr getTypes(const TTValue&, TTValue& listOfFilterTypesToReturn)
 	{
 		return TTGetRegisteredClassNamesForTags(listOfFilterTypesToReturn, TT("filter"));
 	}
@@ -73,7 +73,7 @@ public:
 	}
 	
 	
-	TTErr mode(const TTValue& newMode)
+	TTErr mode(const TTValue& newMode, TTValue&)
 	{
 		if (mActualFilterObject)
 			return mActualFilterObject->setAttributeValue(TT("mode"), const_cast<TTValue&>(newMode));
@@ -82,7 +82,7 @@ public:
 	}
 	
 	
-	TTErr updateMaxNumChannels(const TTValue& oldMaxNumChannels)
+	TTErr updateMaxNumChannels(const TTValue& oldMaxNumChannels, TTValue&)
 	{
 		if (mActualFilterObject)
 			return mActualFilterObject->setAttributeValue(kTTSym_maxNumChannels, maxNumChannels);
@@ -91,9 +91,9 @@ public:
 	}
 	
 	
-	TTErr updateSampleRate(const TTValue& oldSampleRate)
+	TTErr updateSampleRate(const TTValue& oldSampleRate, TTValue&)
 	{
-		return mActualFilterObject->setAttributeValue(kTTSym_sampleRate, (uint)sr);
+		return mActualFilterObject->setAttributeValue(kTTSym_sampleRate, (unsigned int)sr);
 	}
 	
 	

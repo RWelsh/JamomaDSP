@@ -1,5 +1,5 @@
 /* 
- * TTBlue Wavetable Oscillator
+ * Jamoma DSP  Wavetable Oscillator
  * Copyright © 2003, Timothy Place
  * 
  * License: This code is licensed under the terms of the "New BSD License"
@@ -18,18 +18,18 @@
 class TTWavetable : TTAudioObject {
 	TTCLASS_SETUP(TTWavetable)
 
-	TTSymbol*			mMode;
+	TTSymbolPtr			mMode;
 	TTFloat64			mFrequency;
 	TTFloat64			mGain;
 	TTFloat64			mLinearGain;
-	TTSymbol*			mInterpolation;	///< should be none, linear, or eventually something better...
-	TTUInt64			mSize;			///< how many samples in the wave table
+	TTSymbolPtr			mInterpolation;	///< should be none, linear, or eventually something better...
+	TTUInt32			mSize;			///< how many samples in the wave table
 	TTFloat64			mIndex;
 	TTFloat64			mIndexDelta;
 	TTBuffer*			mWavetable;
 	
 	/**	This method gets called when the inherited sample-rate attribute is changed. */
-	TTErr updateSampleRate(const TTValue&);
+	TTErr updateSampleRate(const TTValue&, TTValue&);
 	
 	/**	Process method 	*/
 	TTErr processAsLFO(TTAudioSignalArrayPtr, TTAudioSignalArrayPtr outputs);

@@ -108,6 +108,7 @@ TTErr TTDelay::test(TTValue& returnedTestInfo)
 		output->get2d(i, 0, sample);
 		result = TTTestFloatEquivalence(sample, expectedImpulseResponse[i]);
 		badSampleCount += !result;
+// TODO: This test may be bogus -- there was a conflict in a merge resolution here… [tap]
 		if (result)
 			TTTestLog("BAD SAMPLE @ i=%i  ( value=%.10f   expected=%.10f )", i, sample, expectedImpulseResponse[i]);
 	}

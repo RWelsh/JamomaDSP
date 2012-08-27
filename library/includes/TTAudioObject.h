@@ -1,6 +1,6 @@
 /* 
- * TTBlue Audio Object Base Class
- * Copyright © 2008, Timothy Place
+ * Jamoma DSP Audio Object Base Class
+ * Copyright 2008, Timothy Place
  * 
  * License: This code is licensed under the terms of the "New BSD License"
  * http://creativecommons.org/licenses/BSD/
@@ -27,9 +27,11 @@ typedef TTErr (TTAudioObject::*TTCalculateMethod)(const TTFloat64& x, TTFloat64&
 
 
 /**	A convenience macro to be used by subclasses for setting the process method.
- @param	methodName	The name of the method to use for processing audio vectors.
- */
+	 @param	methodName	The name of the method to use for processing audio vectors.	*/
 #define setProcessMethod(methodName)				setProcess((TTProcessMethod)& thisTTClass ::methodName )
+
+/**	A convenience macro to be used by subclasses for setting the calculate method.
+	@param	methodName	The name of the method to use for processing individual audio samples.	*/
 #define setCalculateMethod(methodName)				setCalculate((TTCalculateMethod)& thisTTClass ::methodName )
 
 
@@ -58,7 +60,7 @@ return kTTErrNone;
 /****************************************************************************************************/
 // Class Specification
 
-/**	TTAudioObject is the base class for all audio generating and processing objects in TTBlue.
+/**	TTAudioObject is the base class for all audio generating and processing objects in Jamoma DSP.
  *	
  *	The theory of operation is that this class handles the public interface to any subclass,
  *	including the main processing method, which calls an appropriate method through a function pointer.
@@ -71,7 +73,7 @@ protected:
 	TTFloat64				srInv;						///< 1.0 over the current sample rate (inverse)
 	TTFloat64				srMill;						///< 1/1000 of the current sample rate (samples per millisecond)
 	TTUInt16				maxNumChannels;				///< This is the maximum number of channels that can be guaranteed to work
-	TTBoolean				attrProcessInPlace;			///< This flag indicates that the object should process the samples "in-place", such that the processed samples are actually in the input
+	TTBoolean				unused;						// old var that is not used anymore, but we want to keep the struct size the same
 	TTBoolean				attrBypass;					///< Are we bypassing the processMethod?
 	TTBoolean				attrMute;					///< Mute the processMethod.
 	TTProcessMethod			processMethod;				///< This function pointer points to the active (non-bypass) processing routine.
@@ -97,7 +99,7 @@ protected:
 	TTErr resetBenchmarking();
 	
 	/**	Return the average time spent by this object processing audio since the last reset.					*/
-	TTErr getProcessingBenchmark(TTValueRef v);
+	TTErr getProcessingBenchmark(TTValueConstRef, TTValueRef v);
 	
 public:
 	/** Mute the audio processing routine and zero all output.												*/
@@ -123,7 +125,7 @@ public:
 	TTErr setSampleRate(const TTUInt32& newSampleRate)
 	{
 		if (newSampleRate && newSampleRate != sr)
-			return setAttributeValue(kTTSym_sampleRate, (uint)newSampleRate);
+			return setAttributeValue(kTTSym_sampleRate, (unsigned int)newSampleRate);
 		else
 			return kTTErrNone;
 	}
@@ -145,14 +147,14 @@ public:
 	 */
 	TTErr calculate(const TTFloat64& x, TTFloat64& y);
 	TTErr calculate(const TTValue& x, TTValue& y);
-	TTErr calculateMessage(TTValue& v);
+	TTErr calculateMessage(TTValueConstRef input, TTValueRef output);
 
 	
 	/** Process the input signal, resulting in an output signal. This method wraps the actual process method
 	 	that will be called.
 	 	@param in	The input signal.
 	 	@param out	The output signal.
-	 	@return 	A TTBlue error code.							*/
+	 	@return 	An error code.							*/
 	TTErr process(TTAudioSignal& in, TTAudioSignal& out);
 	
 	// shortcut for when the caller is using pointers
@@ -166,7 +168,7 @@ public:
 	 	that will be called.
 	 	@param in	The input signal.
 	 	@param out	The output signal.
-	 	@return 	A TTBlue error code.							*/
+	 	@return 	An error code.							*/
 	TTErr process(TTAudioSignal& out);
 
 	// shortcut for when the caller is using pointers
@@ -181,7 +183,7 @@ public:
 	 	@param in2	A secondary or sidechain input signal.
 	 	@param in1	The main output signal.
 	 	@param in2	A secondary or sidechain output signal.
-	 	@return 	A TTBlue error code.							*/
+	 	@return 	An error code.							*/
 	TTErr process(TTAudioSignal& in1, TTAudioSignal& in2, TTAudioSignal& out1, TTAudioSignal& out2);
 
 	// shortcut for when the caller is using pointers
@@ -195,7 +197,7 @@ public:
 	 	@param in1	The main input signal.
 	 	@param in2	A secondary or sidechain input signal.
 	 	@param out	The output signal.
-	 	@return 	A TTBlue error code.							*/
+	 	@return 	An error code.							*/
 	TTErr process(TTAudioSignal& in1, TTAudioSignal& in2, TTAudioSignal& out);
 
 	// shortcut for when the caller is using pointers

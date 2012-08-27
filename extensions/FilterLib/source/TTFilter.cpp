@@ -11,7 +11,7 @@
 
 #define thisTTClass			TTFilter
 #define thisTTClassName		"filter"
-#define thisTTClassTags		"audio, processor, filter"
+#define thisTTClassTags		"audio, processor"
 
 
 TT_AUDIO_CONSTRUCTOR,
@@ -24,15 +24,16 @@ TT_AUDIO_CONSTRUCTOR,
 	addAttributeWithSetter(Q, kTypeFloat64);
 	addAttributeWithSetter(Type, kTypeSymbol);
 	
-	addMessageWithArgument(getTypes);
+	addMessageWithArguments(getTypes);
 	addMessage(clear);
-	addMessageWithArgument(mode);	// some filters have a 'mode' attribute, some don't, so this is a message instead of an attribute 
+	addMessageWithArguments(mode);	// some filters have a 'mode' attribute, some don't, so this is a message instead of an attribute 
 	
-	addUpdate(SampleRate);
-	addUpdate(MaxNumChannels);
+	addUpdates(SampleRate);
+	addUpdates(MaxNumChannels);
 	
 	setAttributeValue(kTTSym_maxNumChannels, arguments);
 	setAttributeValue(TT("type"), TT("lowpass.1"));
+	setAttributeValue(TT("mode"), TT("lowpass"));
 	setAttributeValue(TT("frequency"), 1000.0);
 	setAttributeValue(TT("q"), 1.0);
 	setProcessMethod(processAudio);

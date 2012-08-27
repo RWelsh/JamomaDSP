@@ -1,6 +1,6 @@
 /* 
- * TTBlue Audio Object Base Class
- * Copyright © 2008, Timothy Place
+ * Jamoma DSP Audio Object Base Class
+ * Copyright 2008, Timothy Place
  * 
  * License: This code is licensed under the terms of the "New BSD License"
  * http://creativecommons.org/licenses/BSD/
@@ -8,16 +8,9 @@
 
 #include "TTDSP.h"
 #include "TTAudioObject.h"
+#include "TTEnvironment.h"
 #include "TTUnitTest.h"
 
-
-// This coeff is used in GainDataspace mapping MIDI to and from linear gain 
-// so that MIDI=100 equals 0 dB and MIDI = 127 equals +10 dB
-static const double kGainMidiPower = log(pow(10.,10./20.))/log(127./100.);
-static const double kGainMidiPowerInv = 1./kGainMidiPower;
-
-
-/****************************************************************************************************/
 
 TTAudioObject::TTAudioObject(TTValue& arguments) : 
 	TTObject(arguments), 
@@ -34,8 +27,6 @@ TTAudioObject::TTAudioObject(TTValue& arguments) :
 	registerAttribute(kTTSym_sampleRate,	kTypeUInt32,	&sr,				(TTSetterMethod)&TTAudioObject::setSr);
 	registerAttribute(TT("bypass"),			kTypeBoolean,	&attrBypass,		(TTSetterMethod)&TTAudioObject::setBypass);
 	registerAttribute(TT("mute"),			kTypeBoolean,	&attrMute,			(TTSetterMethod)&TTAudioObject::setMute);
-	registerAttribute(TT("processInPlace"), kTypeBoolean,	&attrProcessInPlace);
-	addAttributeProperty(processInPlace,	hidden,	YES);
 	
 	registerMessage(TT("calculate"), (TTMethod)&TTAudioObject::calculateMessage);
 	registerMessage(TT("test"), TTMethod(&TTObject::test));
@@ -47,11 +38,10 @@ TTAudioObject::TTAudioObject(TTValue& arguments) :
 
 	// Set Defaults...
 		
-	setAttributeValue(kTTSym_sampleRate,	(uint)ttEnvironment->mSampleRate);
+	setAttributeValue(kTTSym_sampleRate,	(unsigned int)ttEnvironment->mSampleRate);
 	setProcess(&TTAudioObject::bypassProcess);
     setCalculate(&TTAudioObject::defaultCalculateMethod);
-	setAttributeValue(TT("bypass"),			kTTBoolNo);
-	setAttributeValue(TT("processInPlace"), kTTBoolNo);
+	setAttributeValue(TT("bypass"),			kTTBoolNo);	
 }
 
 
@@ -68,7 +58,7 @@ TTErr TTAudioObject::setMaxNumChannels(const TTValue& newValue)
 		TTValue	oldMaxNumChannels = maxNumChannels;
 		
 		maxNumChannels = newValue;
-		sendMessage(TT("updateMaxNumChannels"), oldMaxNumChannels);
+		sendMessage(TT("updateMaxNumChannels"), oldMaxNumChannels, kTTValNONE);
 	}
 	return kTTErrNone;
 }
@@ -81,7 +71,7 @@ TTErr TTAudioObject::setSr(const TTValue& newValue)
 	sr = newValue;
 	srInv = 1.0/sr;
 	srMill = sr * 0.001;
-	sendMessage(TT("updateSampleRate"), oldSampleRate);
+	sendMessage(TT("updateSampleRate"), oldSampleRate, kTTValNONE);
 	return kTTErrNone;
 }
 
@@ -204,14 +194,14 @@ TTErr TTAudioObject::setMute(const TTValue& value)
 }
 
 
-TTErr TTAudioObject::calculateMessage(TTValue& v)
+TTErr TTAudioObject::calculateMessage(TTValueConstRef input, TTValue& output)
 {
-	TTFloat64	x = v;
+	TTFloat64	x = input;
 	TTFloat64	y;
 	TTErr		err;
 	
 	err = calculate(x, y);
-	v = y;
+	output = y;
 	return err;
 }
 
@@ -269,10 +259,14 @@ TTErr TTAudioObject::process(TTAudioSignal& in, TTAudioSignal& out)
 		outputArray->numAudioSignals = 1;
 		outputArray->setSignal(0, &out);
 		out.setSampleRate(sr);
-		startProcessingTime = TTGetTimeInMicroseconds();
-		err = (this->*currentProcessMethod)(inputArray, outputArray);
-		accumulatedProcessingTime += (TTGetTimeInMicroseconds() - startProcessingTime);
-		accumulatedProcessingCalls++;
+		if (!ttEnvironment->mBenchmarking)
+			err = (this->*currentProcessMethod)(inputArray, outputArray);
+		else {
+			startProcessingTime = TTGetTimeInMicroseconds();
+			err = (this->*currentProcessMethod)(inputArray, outputArray);
+			accumulatedProcessingTime += (TTGetTimeInMicroseconds() - startProcessingTime);
+			accumulatedProcessingCalls++;
+			}
 		unlock();
 	}
 	return err;
@@ -289,10 +283,14 @@ TTErr TTAudioObject::process(TTAudioSignal& out)
 		outputArray->numAudioSignals = 1;
 		outputArray->setSignal(0, &out);
 		out.setSampleRate(sr);
-		startProcessingTime = TTGetTimeInMicroseconds();
-		err = (this->*currentProcessMethod)(inputArray, outputArray);
-		accumulatedProcessingTime += (TTGetTimeInMicroseconds() - startProcessingTime);
-		accumulatedProcessingCalls++;
+		if (!ttEnvironment->mBenchmarking)
+			err = (this->*currentProcessMethod)(inputArray, outputArray);
+		else{
+			startProcessingTime = TTGetTimeInMicroseconds();
+			err = (this->*currentProcessMethod)(inputArray, outputArray);
+			accumulatedProcessingTime += (TTGetTimeInMicroseconds() - startProcessingTime);
+			accumulatedProcessingCalls++;
+		}
 		unlock();
 	}
 	return err;
@@ -313,10 +311,14 @@ TTErr TTAudioObject::process(TTAudioSignal& in1, TTAudioSignal& in2, TTAudioSign
 		outputArray->setSignal(1, &out2);
 		out1.setSampleRate(sr);
 		out2.setSampleRate(sr);
-		startProcessingTime = TTGetTimeInMicroseconds();
-		err = (this->*currentProcessMethod)(inputArray, outputArray);
-		accumulatedProcessingTime += (TTGetTimeInMicroseconds() - startProcessingTime);
-		accumulatedProcessingCalls++;
+		if (!ttEnvironment->mBenchmarking)
+			err = (this->*currentProcessMethod)(inputArray, outputArray);
+		else{
+			startProcessingTime = TTGetTimeInMicroseconds();
+			err = (this->*currentProcessMethod)(inputArray, outputArray);
+			accumulatedProcessingTime += (TTGetTimeInMicroseconds() - startProcessingTime);
+			accumulatedProcessingCalls++;
+		}
 		unlock();
 	}
 	return err;
@@ -335,10 +337,14 @@ TTErr TTAudioObject::process(TTAudioSignal& in1, TTAudioSignal& in2, TTAudioSign
 		outputArray->numAudioSignals = 1;
 		outputArray->setSignal(0, &out);
 		out.setSampleRate(sr);
-		startProcessingTime = TTGetTimeInMicroseconds();
-		err = (this->*currentProcessMethod)(inputArray, outputArray);
-		accumulatedProcessingTime += (TTGetTimeInMicroseconds() - startProcessingTime);
-		accumulatedProcessingCalls++;
+		if (!ttEnvironment->mBenchmarking)
+			err = (this->*currentProcessMethod)(inputArray, outputArray);
+		else{
+			startProcessingTime = TTGetTimeInMicroseconds();
+			err = (this->*currentProcessMethod)(inputArray, outputArray);
+			accumulatedProcessingTime += (TTGetTimeInMicroseconds() - startProcessingTime);
+			accumulatedProcessingCalls++;
+		}
 		unlock();
 	}
 	return err;
@@ -352,10 +358,14 @@ TTErr TTAudioObject::process(TTAudioSignalArrayPtr inputs, TTAudioSignalArrayPtr
 	if (valid) {
 		lock();
 		outputs->setAllSampleRates(sr);
-		startProcessingTime = TTGetTimeInMicroseconds();
-		err = (this->*currentProcessMethod)(inputs, outputs);
-		accumulatedProcessingTime += (TTGetTimeInMicroseconds() - startProcessingTime);
-		accumulatedProcessingCalls++;
+		if (!ttEnvironment->mBenchmarking)
+			err = (this->*currentProcessMethod)(inputs, outputs);
+		else{
+			startProcessingTime = TTGetTimeInMicroseconds();
+			err = (this->*currentProcessMethod)(inputs, outputs);
+			accumulatedProcessingTime += (TTGetTimeInMicroseconds() - startProcessingTime);
+			accumulatedProcessingCalls++;
+		}
 		unlock();
 	}
 	return err;
@@ -371,7 +381,7 @@ TTErr TTAudioObject::resetBenchmarking()
 }
 
 
-TTErr TTAudioObject::getProcessingBenchmark(TTValueRef v)
+TTErr TTAudioObject::getProcessingBenchmark(TTValueConstRef, TTValueRef v)
 {
 	v = accumulatedProcessingTime / accumulatedProcessingCalls;
 	return kTTErrNone;
@@ -387,26 +397,28 @@ TTErr TTAudioObject::getProcessingBenchmark(TTValueRef v)
 // hz-to-radians conversion
 TTFloat64 TTAudioObject::hertzToRadians(const TTFloat64 hz)			// NOTE: Be sure to set the sr before calling this function
 {
-	return(hz * (kTTPi / (sr * 0.5)));
+	return(hz * kTTTwoPi / sr);
 }
 
 // radians-to-hz conversion
 TTFloat64 TTAudioObject::radiansToHertz(const TTFloat64 radians)	// NOTE: Be sure to set the sr before calling this function
 {
-	return((radians * sr) / kTTTwoPi);
+	return(radians * sr / kTTTwoPi);
 }
 
 // degrees-to-radians conversion
 TTFloat64 TTAudioObject::degreesToRadians(const TTFloat64 degrees)
 {
-	return((degrees * kTTPi) / 180.);
+	//return((degrees * kTTPi) / 180.);
+	return (degrees * kTTDegreesToRadians);
 }
 
 // radians-to-degrees conversion
 TTFloat64 TTAudioObject::radiansToDegrees(const TTFloat64 radians)
 {
-	return((radians * 180.) / kTTPi);	
-}
+	//return((radians * 180.) / kTTPi);	
+	return (radians * kTTRadiansToDegrees);
+} 
 
 
 // Decay Time (seconds) to feedback coefficient conversion
@@ -471,18 +483,18 @@ TTFloat64 TTAudioObject::dbToLinear(TTFloat64 value)
 
 TTFloat64 TTAudioObject::midiToLinearGain(TTFloat64 value)
 {
-	return pow(value * 0.01, kGainMidiPower);
+	return pow(value * 0.01, kTTGainMidiPower);
 }
 
 TTFloat64 TTAudioObject::linearGainToMidi(TTFloat64 value)
 {
-	return 100.0 * pow(value, kGainMidiPowerInv);
+	return 100.0 * pow(value, kTTGainMidiPowerInv);
 }
 
 
 // Deviate
 TTFloat64 TTAudioObject::deviate(TTFloat64 value)
-{
+{   //TODO use Mersedian Twister for rand-generatior
 	value += (2.0 * (TTFloat32(rand()) / TTFloat32(RAND_MAX))) - 1.0;	// randomize input with +1 to -1 ms
 	value = value * 0.001 * sr;											// convert from ms to samples
 	value = (TTFloat32)prime(TTUInt32(value));							// find the nearest prime number (in samples)
