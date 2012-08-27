@@ -99,14 +99,14 @@ public:
 	}
 
 	
-	TTErr getVector(const TTUInt16 channel, const TTUInt16 vectorSize, TTSampleValue* returnedVector);
-	TTErr getVector64(TTValue&, TTValue& v);	// A version of the above used by the message passing interface.
+	//TTErr getVector(const TTUInt16 channel, const TTUInt16 vectorSize, TTSampleValue* returnedVector);
+	//TTErr getVector64(TTValue&, TTValue& v);	// A version of the above used by the message passing interface.
 	TTErr getVectorCopy(const TTUInt16 channel, const TTUInt16 theVectorSize, TTSampleValue* returnedVector); // version of getVector that copies
-	TTErr getVectorCopy64(TTValue& v);	// A version of the above used by the message passing interface.
+	TTErr getVectorCopy64(TTValue&, TTValue& v);	// A version of the above used by the message passing interface.
 	
 	//TTErr getVector(const TTUInt16 channel, const TTUInt16 vectorSize, TTFloat32* returnedVector);
 	//TTErr getVector32(TTValue&, TTValue& v);	// A version of the above used by the message passing interface.
-	TTErr getVectorCopy32(TTValue& v);	// A version of the above used by the message passing interface.
+	TTErr getVectorCopy32(TTValue&, TTValue& v);	// A version of the above used by the message passing interface.
 	TTErr getVectorCopy(const TTUInt16 channel, const TTUInt16 vectorSize, TTFloat32* returnedVector);
 
 	
